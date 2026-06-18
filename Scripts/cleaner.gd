@@ -27,8 +27,8 @@ func get_mediatrix_data() -> mediatrix_data:
 	current_mediatrix_data.mediatrixV2 = position + forward_vec * ((collider.shape.get_rect().size.y * global_scale.y) / 2)
 	current_mediatrix_data.mediatrixH1 = position + up_vec * ((collider.shape.get_rect().size.x * global_scale.x) / 2)
 	current_mediatrix_data.mediatrixH2 = position - up_vec * ((collider.shape.get_rect().size.x * global_scale.x) / 2)
-	print("H1: ", current_mediatrix_data.mediatrixH1)
-	print("H2: ", current_mediatrix_data.mediatrixH2)
-	print("V1: ", current_mediatrix_data.mediatrixV1)
-	print("V2: ", current_mediatrix_data.mediatrixV2)
+	#print("H1: ", current_mediatrix_data.mediatrixH1)
+	#print("H2: ", current_mediatrix_data.mediatrixH2)
+	#print("V1: ", current_mediatrix_data.mediatrixV1)
+	#print("V2: ", current_mediatrix_data.mediatrixV2)
 	return current_mediatrix_data

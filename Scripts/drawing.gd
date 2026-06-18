@@ -37,26 +37,26 @@ func _ready() -> void:
 	collision.scale = Vector2(image_size.x / 20.0, image_size.y /20.0)
 
 func _paint_texture(pos: Vector2, body : Node2D) -> void:
-	
 	var mediatrix_data : Cleaner.mediatrix_data = body.get_mediatrix_data()
-	var up = mediatrix_data.mediatrixV2 - mediatrix_data.mediatrixV1 
+	var up = mediatrix_data.mediatrixV2 - mediatrix_data.mediatrixV1
 	var down = -up
 	var right = mediatrix_data.mediatrixH1 - mediatrix_data.mediatrixH2
 	var left = -right
-	print ("right ",right.normalized())
-	print ("left ",left.normalized())
-	print ("up ",up.normalized())
-	print ("down ",down.normalized())
+	#print ("right ",right.normalized())
+	#print ("left ",left.normalized())
+	#print ("up ",up.normalized())
+	#print ("down ",down.normalized())
 	print("pos", pos)
+	print(body.global_position)
 	var J : int
-	J = 80
+	J = 1
 	#if is_point_in_front(Vector2(I * super_pixels_interval.x, J * super_pixels_interval.y), up, pos - up.normalized() * 20):	
 	for columna in super_pixels_per_side:
 		for fila in super_pixels_per_side:
-			if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(up.x, -up.y), pos - Vector2(up.normalized().x, -up.normalized().y) * J) && \
-			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(down.x, -down.y), pos - Vector2(down.normalized().x, -down.normalized().y) * J) && \
-			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(right.x, -right.y), pos - Vector2(right.normalized().x, -right.normalized().y) * J) && \
-			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(left.x, -left.y), pos - Vector2(left.normalized().x, -left.normalized().y) * J):
+			if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(up.x, -up.y), pos - Vector2(up.x, -up.y) / 2.0) && \
+			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(down.x, -down.y), pos - Vector2(down.x, -down.y) / 2.0) && \
+			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(right.x, -right.y), pos - Vector2(right.x, -right.y) / 2.0) && \
+			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(left.x, -left.y), pos - Vector2(left.x, -left.y) / 2.0):
 				image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
 			#if up.dot(Vector2(fila, columna) - mediatrix_data.mediatrixV1)
 	#image.fill_rect(Rect2i(pos.x,pos.y,brush_size,brush_size), Color.LIGHT_BLUE)
