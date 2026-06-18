@@ -30,7 +30,7 @@ scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2146928479]
-position = Vector2(0, -1300)
+position = Vector2(0, -788)
 zoom = Vector2(0.25, 0.25)
 
 [node name="WindowSquare" parent="." unique_id=955874070 instance=ExtResource("2_qxrlw")]

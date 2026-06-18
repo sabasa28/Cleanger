@@ -4,3 +4,4 @@
 
 [node name="Drawing" type="Sprite2D" unique_id=609080944]
 script = ExtResource("1_711xb")
+brush_size = 30

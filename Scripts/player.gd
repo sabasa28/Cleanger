@@ -2,7 +2,8 @@ extends RigidBody2D
 
 const BASE_STRENGHT = 100000.0
 
-var swipeCooldown = 0.2
+@export var strenght_modifier = 1.0
+@export var swipeCooldown = 0.2
 var swipeCurrentCooldown = 0.0
 var cleaning = false
 @export var cleanerPivot : Node2D
@@ -14,7 +15,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if cleaning:
 		if swipeCurrentCooldown <= 0:
-			apply_force((global_position - get_global_mouse_position()).normalized() * BASE_STRENGHT)
+			apply_force((global_position - get_global_mouse_position()).normalized() * BASE_STRENGHT * strenght_modifier)
 			swipeCurrentCooldown = swipeCooldown
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
