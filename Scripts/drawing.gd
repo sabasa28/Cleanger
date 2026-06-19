@@ -48,8 +48,7 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 	#print ("down ",down.normalized())
 	print("pos", pos)
 	print(body.global_position)
-	var J : int
-	J = 1
+
 	#if is_point_in_front(Vector2(I * super_pixels_interval.x, J * super_pixels_interval.y), up, pos - up.normalized() * 20):	
 	for columna in super_pixels_per_side:
 		for fila in super_pixels_per_side:

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bde6dgx3iqq1m"]
 
 [ext_resource type="PackedScene" uid="uid://dnjup7k62u75i" path="res://Scenes/player.tscn" id="1_ebmjs"]
-[ext_resource type="PackedScene" uid="uid://cdr73n5qjk6q2" path="res://Scenes/window_square.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://g8wpn202bavb" path="res://Scenes/stage_spawner.tscn" id="3_wrm1d"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ebmjs"]
 distance = -1.3
@@ -9,7 +9,7 @@ distance = -1.3
 [node name="Game" type="Node2D" unique_id=2052166346]
 
 [node name="Player" parent="." unique_id=1559178234 instance=ExtResource("1_ebmjs")]
-position = Vector2(0, -833)
+position = Vector2(0, -456)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1917489261]
 
@@ -30,8 +30,7 @@ scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2146928479]
-position = Vector2(0, -788)
+position = Vector2(0, -1049)
 zoom = Vector2(0.25, 0.25)
 
-[node name="WindowSquare" parent="." unique_id=955874070 instance=ExtResource("2_qxrlw")]
-position = Vector2(-527, -384)
+[node name="stage_spawner" parent="." unique_id=1041670152 instance=ExtResource("3_wrm1d")]

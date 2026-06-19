@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://g8wpn202bavb"]
+
+[ext_resource type="Script" uid="uid://cgqxoft07lot0" path="res://Scripts/stage_spawner.gd" id="1_dwc7r"]
+
+[node name="stage_spawner" type="Node2D" unique_id=1041670152]
+script = ExtResource("1_dwc7r")
+window_spawn_origin = Vector2(-1280, -256)
