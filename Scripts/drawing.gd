@@ -11,11 +11,27 @@ var initialImage : Image
 var imageToPutOver : Image
 var imageToPutOverMask : Image
 var super_pixels_interval : Vector2i
+var super_pixels_state : Array[bool]
+var super_pixels_cleaned : int
+var min_super_pixels_to_clear : int
+@export var amount_of_window_before_fullclean : float
 @export var super_pixels_per_side : int
 var half_super_pixels_per_side : int
+var cleaned = false
 
+class limit:
+	var pos : Vector2
+	var dot : float
+
+var aux_limits : Array[limit]
 
 func _ready() -> void:
+	aux_limits.resize(4)
+	for i in aux_limits.size():
+		aux_limits[i] = limit.new()
+	super_pixels_cleaned = 0
+	min_super_pixels_to_clear = (super_pixels_per_side * super_pixels_per_side) * amount_of_window_before_fullclean
+	super_pixels_state.resize(super_pixels_per_side * super_pixels_per_side)
 	super_pixels_interval = image_size / super_pixels_per_side
 	half_super_pixels_per_side = super_pixels_per_side / 2
 	texture = ImageTexture.create_from_image(Image.create_empty(image_size.x,image_size.y,false, Image.FORMAT_RGBA8))
@@ -29,35 +45,175 @@ func _ready() -> void:
 	image.fill_rect(Rect2i(5,5,20,20),Color.RED)
 	texture.set_image(image)
 	var comparisonDict = image.compute_image_metrics(initialImage, false)
-	print(comparisonDict.get("max"))
-	print(comparisonDict.get("mean"))
-	print(comparisonDict.get("mean_squared"))
-	print(comparisonDict.get("root_mean_squared"))
-	print(comparisonDict.get("peak_snr"))
+	#print(comparisonDict.get("max"))
+	#print(comparisonDict.get("mean"))
+	#print(comparisonDict.get("mean_squared"))
+	#print(comparisonDict.get("root_mean_squared"))
+	#print(comparisonDict.get("peak_snr"))
 	collision.scale = Vector2(image_size.x / 20.0, image_size.y /20.0)
 
 func _paint_texture(pos: Vector2, body : Node2D) -> void:
 	var mediatrix_data : Cleaner.mediatrix_data = body.get_mediatrix_data()
-	var up = mediatrix_data.mediatrixV2 - mediatrix_data.mediatrixV1
-	var down = -up
-	var right = mediatrix_data.mediatrixH1 - mediatrix_data.mediatrixH2
-	var left = -right
+	var up = Vector2 (mediatrix_data.up.x, mediatrix_data.up.y)
+	var down = Vector2 (mediatrix_data.down.x, mediatrix_data.down.y)
+	var right = Vector2 (mediatrix_data.right.x, mediatrix_data.right.y)
+	var left = Vector2 (mediatrix_data.left.x, mediatrix_data.left.y)
+	
+	var up_limit = pos - up / 2.0
+	var down_limit = pos - down / 2.0
+	var right_limit = pos - right / 2.0
+	var left_limit = pos - left / 2.0
+	#ESTO PODRIA SER 2 ESQUINAS EN VEZ DE 4 LADOS
+	
+	#var interp_up 
+	#var interp_down 
+	#var interp_left
+	#var interp_right 
+	var last_pos : Vector2 = body.last_pos - global_position - offset + get_rect().size/2.0 #puede ponerse en una variable en el cleaner probly
+	var pos_frame_delta = (pos - last_pos).normalized()
+	
+	var limit1_options : Array[limit]
+	var limit2_options : Array[limit]
+	
+	var limit1_curr : limit
+	var limit2_curr : limit
+	var limit1_prev : limit
+	var limit2_prev : limit
+	
+	var dir1 : Vector2
+	var dir2 : Vector2
+	var dir3 : Vector2
+	var dir4 : Vector2
+	
+	if !body.first_frame_cleaning and pos != last_pos:
+		var side_checker_dir = (pos - last_pos).normalized()
+		side_checker_dir = Vector2(side_checker_dir.y, -side_checker_dir.x)
+		
+		aux_limits[0].pos = pos + mediatrix_data.cornerH1V1
+		aux_limits[1].pos = pos + mediatrix_data.cornerH1V2
+		aux_limits[2].pos = pos + mediatrix_data.cornerH2V1
+		aux_limits[3].pos = pos + mediatrix_data.cornerH2V2
+		
+		for i in aux_limits.size(): #ASEGURARSE DE QUE HAYAN 2 COSAS EN CADA LIMITE
+			aux_limits[i].dot = pos_frame_delta.dot(aux_limits[i].pos - last_pos)
+			if is_point_in_front(aux_limits[i].pos, side_checker_dir, last_pos):
+				limit1_options.append(aux_limits[i])
+			else:
+				limit2_options.append(aux_limits[i])
+		
+		limit1_curr = limit1_options[0] if limit1_options[0].dot < limit1_options[1].dot else limit1_options[1]
+		limit2_curr = limit2_options[0] if limit2_options[0].dot < limit2_options[1].dot else limit2_options[1]
+		
+		print("limit curr 1", limit1_curr.pos)
+		print("limit curr 2", limit2_curr.pos)
+		
+		limit1_options.clear()
+		limit2_options.clear()
+		
+		pos_frame_delta = -pos_frame_delta
+		aux_limits[0].pos = last_pos + mediatrix_data.last_cornerH1V1
+		aux_limits[1].pos = last_pos + mediatrix_data.last_cornerH1V2
+		aux_limits[2].pos = last_pos + mediatrix_data.last_cornerH2V1
+		aux_limits[3].pos = last_pos + mediatrix_data.last_cornerH2V2
+		
+		for i in aux_limits.size(): #ASEGURARSE DE QUE HAYAN 2 COSAS EN CADA LIMITE
+			aux_limits[i].dot = pos_frame_delta.dot(aux_limits[i].pos - pos)
+			if is_point_in_front(aux_limits[i].pos, side_checker_dir, last_pos): #deberia ser lo mismo last_pos y pos porque estan en la misma linea
+				limit1_options.append(aux_limits[i])
+			else:
+				limit2_options.append(aux_limits[i])
+		
+		limit1_prev = limit1_options[0] if limit1_options[0].dot < limit1_options[1].dot else limit1_options[1]
+		limit2_prev = limit2_options[0] if limit2_options[0].dot < limit2_options[1].dot else limit2_options[1]
+		
+		print("limit prev 1", limit1_prev)
+		print("limit prev 2", limit2_prev)
+		print("-")
+		
+		dir1 = limit1_curr.pos - limit1_prev.pos
+		dir1 = Vector2(-dir1.y, dir1.x)
+		dir2 = limit2_curr.pos - limit2_prev.pos
+		dir2 = Vector2(dir2.y, -dir2.x)
+		dir3 = limit1_curr.pos - limit2_curr.pos
+		dir3 = Vector2(dir3.y, -dir3.x)
+		dir4 = limit1_prev.pos - limit2_prev.pos
+		dir4 = Vector2(dir4.y, -dir4.x)
+		if (pos_frame_delta.dot(dir3) < 0):
+			dir3 = -dir3
+			dir4 = -dir4
+		
+		
+		
+		#ESTAN CALCULANDOSE MAL LOS LIMITES, prev agarra un lado y curr agarra otro
+		#LOS DOS DE UN LADO ESTAN A MENOR ANGULO QUE LOS CUALQUIERA DEL OTRO, TENGO QUE
+		#VER CUALES ESTAN DE CADA LADO Y CHECKEAR EL DOTS ENTRE LOS DOS DEL MISMO LADO
+		image.fill_rect(Rect2i(limit1_curr.pos, super_pixels_interval), Color.LIGHT_BLUE)
+		image.fill_rect(Rect2i(limit2_curr.pos, super_pixels_interval), Color.LIGHT_BLUE)
+		image.fill_rect(Rect2i(limit1_prev.pos, super_pixels_interval), Color.LIGHT_BLUE)
+		image.fill_rect(Rect2i(limit2_prev.pos, super_pixels_interval), Color.LIGHT_BLUE)
+	
+	#SACAR LAS DIRS Y VER COMO SABER DESDE QUE LADO IR PARA QUE LADO
+	
+	#if abs(dotH1) > abs(dotH2):
+		#if unomayor que otro limit1 sino 2 y el otro 1
+			#limit1_curr = (last_pos + mediatrix_data.cornerH1)
+			#limit2_curr = (last_pos + mediatrix_data.cornerH1)
+		#
+	
+	
+	#var interp_limit_prev_1 = last_pos + mediatrix_data.cornerH1 if 
+	
+
+	#var interp_up_limit = pos - up / 2.0
+	#var interp_down_limit = pos - down / 2.0
+	#var interp_right_limit = pos - right / 2.0
+	#var interp_left_limit = pos - left / 2.0
+	
 	#print ("right ",right.normalized())
 	#print ("left ",left.normalized())
 	#print ("up ",up.normalized())
 	#print ("down ",down.normalized())
-	print("pos", pos)
-	print(body.global_position)
+	#print("pos", pos)
+	#print(body.global_position)
+	
 
 	#if is_point_in_front(Vector2(I * super_pixels_interval.x, J * super_pixels_interval.y), up, pos - up.normalized() * 20):	
 	for columna in super_pixels_per_side:
 		for fila in super_pixels_per_side:
-			if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(up.x, -up.y), pos - Vector2(up.x, -up.y) / 2.0) && \
-			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(down.x, -down.y), pos - Vector2(down.x, -down.y) / 2.0) && \
-			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(right.x, -right.y), pos - Vector2(right.x, -right.y) / 2.0) && \
-			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),Vector2(left.x, -left.y), pos - Vector2(left.x, -left.y) / 2.0):
+			var super_pixel_num = columna * super_pixels_per_side + fila
+			if super_pixels_state[super_pixel_num] == true:
+				continue
+			if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),up, up_limit) && \
+			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),down, down_limit) && \
+			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), right, right_limit) && \
+			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), left, left_limit):
 				image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
-			#if up.dot(Vector2(fila, columna) - mediatrix_data.mediatrixV1)
+				super_pixels_state.set(super_pixel_num, true)
+				super_pixels_cleaned += 1
+				if super_pixels_cleaned > min_super_pixels_to_clear:
+					image.fill(Color.LIGHT_BLUE)
+					cleaned = true
+					break
+				continue
+			
+			if body.first_frame_cleaning or pos == last_pos:
+				continue
+			
+			#ACA CAMBIAR LOS LIMITES SEGUN LA DIR, EL LADO DE ENFRENTE DEL FRAME PASADO Y EL DE ATRAS DEL ACTUAL
+			if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir2, limit1_prev.pos) && \
+			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir1, limit2_prev.pos) && \
+			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir3, limit1_curr.pos) && \
+			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir4, limit1_prev.pos):
+				image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
+				super_pixels_state.set(super_pixel_num, true)
+				super_pixels_cleaned += 1
+				if super_pixels_cleaned > min_super_pixels_to_clear:
+					image.fill(Color.LIGHT_BLUE)
+					cleaned = true
+					break
+		if cleaned:
+			break
+		
 	#image.fill_rect(Rect2i(pos.x,pos.y,brush_size,brush_size), Color.LIGHT_BLUE)
 	#image.fill_rect(Rect2i(pos.x,pos.y ,brush_size,brush_size), Color.LIGHT_BLUE)
 	#image.fill_rect(Rect2i(pos + Vector2(up.normalized().x, -up.normalized().y) * 100, Vector2(brush_size,brush_size)), Color.LIGHT_BLUE)
@@ -69,25 +225,22 @@ func is_point_in_front(point : Vector2, dir : Vector2, orig : Vector2) -> bool:
 func _paint_zone(v_normal1 : Vector2, v_normal2 : Vector2, h_normal1 : Vector2, h_normal2 : Vector2) -> void:
 	pass
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Cleaner"):
-		body_inside.append(body)
-		
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.is_in_group("Cleaner"):
-		body_inside.remove_at(body_inside.find(body))
-
 func _process(delta: float) -> void:
+	if cleaned:
+		return
 	for i in body_inside:
-		var pos = i.global_position - global_position - offset + get_rect().size/2.0
-		_paint_texture(pos, i)
+		if i.cleaning == true:
+			var pos = i.global_position - global_position - offset + get_rect().size/2.0
+			_paint_texture(pos, i)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	if cleaned:
+		return
 	if area.is_in_group("Cleaner"):
 		body_inside.append(area)
-		print("adsfasdfs")
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
+	if cleaned:
+		return
 	if area.is_in_group("Cleaner"):
 		body_inside.remove_at(body_inside.find(area))
