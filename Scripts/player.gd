@@ -6,7 +6,7 @@ const BASE_STRENGHT = 100000.0
 @export var swipeCooldown = 0.2
 var swipeCurrentCooldown = 0.0
 var swiping = false
-const time_cleaning_after_swipe = 0.5
+@export var time_cleaning_after_swipe = 0.5
 var cleaning_timer = 0.0
 @export var cleanerPivot : Node2D
 @export var cleaner : Cleaner

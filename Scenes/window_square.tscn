@@ -10,7 +10,7 @@
 
 [node name="Drawing" parent="." unique_id=609080944 node_paths=PackedStringArray("collision") instance=ExtResource("1_mrasg")]
 image_size = Vector2i(512, 512)
-brush_size = null
+brush_size = 60
 collision = NodePath("../Area2D/CollisionShape2D")
 textureToPutOver = ExtResource("2_8ltg5")
 textureForMask = ExtResource("3_okk06")

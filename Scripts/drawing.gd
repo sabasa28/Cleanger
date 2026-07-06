@@ -41,8 +41,8 @@ func _ready() -> void:
 	image.blend_rect(imageToPutOver, Rect2i(0,0,image_size.x,image_size.y),Vector2i(0,0))
 	initialImage = Image.create_empty(image_size.x, image_size.y, false, Image.FORMAT_RGBA8)
 	initialImage.copy_from(image)
-	image.fill(Color.BLUE)
-	image.fill_rect(Rect2i(5,5,20,20),Color.RED)
+	image.fill(Color.SADDLE_BROWN)
+	#image.fill_rect(Rect2i(5,5,20,20),Color.RED)
 	texture.set_image(image)
 	var comparisonDict = image.compute_image_metrics(initialImage, false)
 	#print(comparisonDict.get("max"))
@@ -69,21 +69,29 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 	#var interp_down 
 	#var interp_left
 	#var interp_right 
+	var body_globalpos = body.global_position
+	var pos_test : Vector2 = body.curr_pos - global_position - offset + get_rect().size/2.0
+	var poss_test : Vector2 = body.global_position - global_position - offset + get_rect().size/2.0
 	var last_pos : Vector2 = body.last_pos - global_position - offset + get_rect().size/2.0 #puede ponerse en una variable en el cleaner probly
 	var pos_frame_delta = (pos - last_pos).normalized()
 	
 	var limit1_options : Array[limit]
 	var limit2_options : Array[limit]
 	
-	var limit1_curr : limit
-	var limit2_curr : limit
-	var limit1_prev : limit
-	var limit2_prev : limit
+	var limit1_curr : Vector2
+	var limit2_curr : Vector2
+	var limit1_prev : Vector2
+	var limit2_prev : Vector2
 	
 	var dir1 : Vector2
 	var dir2 : Vector2
 	var dir3 : Vector2
 	var dir4 : Vector2
+	
+	var curr_mediatrix0 : Vector2
+	var curr_mediatrix1 : Vector2
+	var curr_mediatrix2 : Vector2
+	var curr_mediatrix3 : Vector2
 	
 	if !body.first_frame_cleaning and pos != last_pos:
 		var side_checker_dir = (pos - last_pos).normalized()
@@ -93,6 +101,17 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 		aux_limits[1].pos = pos + mediatrix_data.cornerH1V2
 		aux_limits[2].pos = pos + mediatrix_data.cornerH2V1
 		aux_limits[3].pos = pos + mediatrix_data.cornerH2V2
+		curr_mediatrix0 = aux_limits[0].pos
+		curr_mediatrix1 = aux_limits[1].pos
+		curr_mediatrix2 = aux_limits[2].pos
+		curr_mediatrix3 = aux_limits[3].pos
+		
+		
+		#image.fill_rect(Rect2i(aux_limits[0].pos, super_pixels_interval), Color.DEEP_PINK)
+		#image.fill_rect(Rect2i(aux_limits[1].pos, super_pixels_interval), Color.DEEP_PINK)
+		#image.fill_rect(Rect2i(aux_limits[2].pos, super_pixels_interval), Color.DEEP_PINK)
+		#image.fill_rect(Rect2i(aux_limits[3].pos, super_pixels_interval), Color.DEEP_PINK)
+		
 		
 		for i in aux_limits.size(): #ASEGURARSE DE QUE HAYAN 2 COSAS EN CADA LIMITE
 			aux_limits[i].dot = pos_frame_delta.dot(aux_limits[i].pos - last_pos)
@@ -101,11 +120,11 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 			else:
 				limit2_options.append(aux_limits[i])
 		
-		limit1_curr = limit1_options[0] if limit1_options[0].dot < limit1_options[1].dot else limit1_options[1]
-		limit2_curr = limit2_options[0] if limit2_options[0].dot < limit2_options[1].dot else limit2_options[1]
+		limit1_curr = limit1_options[0].pos if limit1_options[0].dot < limit1_options[1].dot else limit1_options[1].pos
+		limit2_curr = limit2_options[0].pos if limit2_options[0].dot < limit2_options[1].dot else limit2_options[1].pos
 		
-		print("limit curr 1", limit1_curr.pos)
-		print("limit curr 2", limit2_curr.pos)
+		print("limit curr 1", limit1_curr)
+		print("limit curr 2", limit2_curr)
 		
 		limit1_options.clear()
 		limit2_options.clear()
@@ -118,66 +137,41 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 		
 		for i in aux_limits.size(): #ASEGURARSE DE QUE HAYAN 2 COSAS EN CADA LIMITE
 			aux_limits[i].dot = pos_frame_delta.dot(aux_limits[i].pos - pos)
-			if is_point_in_front(aux_limits[i].pos, side_checker_dir, last_pos): #deberia ser lo mismo last_pos y pos porque estan en la misma linea
+			if is_point_in_front(aux_limits[i].pos, side_checker_dir, pos): #deberia ser lo mismo last_pos y pos porque estan en la misma linea
 				limit1_options.append(aux_limits[i])
 			else:
 				limit2_options.append(aux_limits[i])
 		
-		limit1_prev = limit1_options[0] if limit1_options[0].dot < limit1_options[1].dot else limit1_options[1]
-		limit2_prev = limit2_options[0] if limit2_options[0].dot < limit2_options[1].dot else limit2_options[1]
+		limit1_prev = limit1_options[0].pos if limit1_options[0].dot < limit1_options[1].dot else limit1_options[1].pos
+		limit2_prev = limit2_options[0].pos if limit2_options[0].dot < limit2_options[1].dot else limit2_options[1].pos
 		
 		print("limit prev 1", limit1_prev)
 		print("limit prev 2", limit2_prev)
 		print("-")
 		
-		dir1 = limit1_curr.pos - limit1_prev.pos
+		dir1 = (limit1_curr - limit1_prev).normalized()
 		dir1 = Vector2(-dir1.y, dir1.x)
-		dir2 = limit2_curr.pos - limit2_prev.pos
+		dir2 = (limit2_curr - limit2_prev).normalized()
 		dir2 = Vector2(dir2.y, -dir2.x)
-		dir3 = limit1_curr.pos - limit2_curr.pos
-		dir3 = Vector2(dir3.y, -dir3.x)
-		dir4 = limit1_prev.pos - limit2_prev.pos
+		dir3 = (limit1_curr - limit2_curr).normalized()
+		dir3 = Vector2(-dir3.y, dir3.x)
+		dir4 = (limit1_prev - limit2_prev).normalized()
 		dir4 = Vector2(dir4.y, -dir4.x)
-		if (pos_frame_delta.dot(dir3) < 0):
+		if (pos_frame_delta.dot(dir3) < 0): #necesario o podria invertirlos de una? minimo que empiecen al reves e invertir la condicion
 			dir3 = -dir3
 			dir4 = -dir4
+		print("dir 1", dir1)
+		print("dir 2", dir2)
+		print("dir 3", dir3)
+		print("dir 4", dir4)
 		
+		#image.fill_rect(Rect2i(limit1_curr, super_pixels_interval), Color.YELLOW)
+		#image.fill_rect(Rect2i(limit2_curr, super_pixels_interval), Color.YELLOW)
+		#image.fill_rect(Rect2i(limit1_prev, super_pixels_interval), Color.GREEN)
+		#image.fill_rect(Rect2i(limit2_prev, super_pixels_interval), Color.GREEN)
+		#image.fill_rect(Rect2i(pos, super_pixels_interval), Color.YELLOW)
+		#image.fill_rect(Rect2i(last_pos, super_pixels_interval), Color.GREEN)
 		
-		
-		#ESTAN CALCULANDOSE MAL LOS LIMITES, prev agarra un lado y curr agarra otro
-		#LOS DOS DE UN LADO ESTAN A MENOR ANGULO QUE LOS CUALQUIERA DEL OTRO, TENGO QUE
-		#VER CUALES ESTAN DE CADA LADO Y CHECKEAR EL DOTS ENTRE LOS DOS DEL MISMO LADO
-		image.fill_rect(Rect2i(limit1_curr.pos, super_pixels_interval), Color.LIGHT_BLUE)
-		image.fill_rect(Rect2i(limit2_curr.pos, super_pixels_interval), Color.LIGHT_BLUE)
-		image.fill_rect(Rect2i(limit1_prev.pos, super_pixels_interval), Color.LIGHT_BLUE)
-		image.fill_rect(Rect2i(limit2_prev.pos, super_pixels_interval), Color.LIGHT_BLUE)
-	
-	#SACAR LAS DIRS Y VER COMO SABER DESDE QUE LADO IR PARA QUE LADO
-	
-	#if abs(dotH1) > abs(dotH2):
-		#if unomayor que otro limit1 sino 2 y el otro 1
-			#limit1_curr = (last_pos + mediatrix_data.cornerH1)
-			#limit2_curr = (last_pos + mediatrix_data.cornerH1)
-		#
-	
-	
-	#var interp_limit_prev_1 = last_pos + mediatrix_data.cornerH1 if 
-	
-
-	#var interp_up_limit = pos - up / 2.0
-	#var interp_down_limit = pos - down / 2.0
-	#var interp_right_limit = pos - right / 2.0
-	#var interp_left_limit = pos - left / 2.0
-	
-	#print ("right ",right.normalized())
-	#print ("left ",left.normalized())
-	#print ("up ",up.normalized())
-	#print ("down ",down.normalized())
-	#print("pos", pos)
-	#print(body.global_position)
-	
-
-	#if is_point_in_front(Vector2(I * super_pixels_interval.x, J * super_pixels_interval.y), up, pos - up.normalized() * 20):	
 	for columna in super_pixels_per_side:
 		for fila in super_pixels_per_side:
 			var super_pixel_num = columna * super_pixels_per_side + fila
@@ -200,17 +194,17 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 				continue
 			
 			#ACA CAMBIAR LOS LIMITES SEGUN LA DIR, EL LADO DE ENFRENTE DEL FRAME PASADO Y EL DE ATRAS DEL ACTUAL
-			if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir2, limit1_prev.pos) && \
-			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir1, limit2_prev.pos) && \
-			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir3, limit1_curr.pos) && \
-			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir4, limit1_prev.pos):
-				image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
-				super_pixels_state.set(super_pixel_num, true)
-				super_pixels_cleaned += 1
-				if super_pixels_cleaned > min_super_pixels_to_clear:
-					image.fill(Color.LIGHT_BLUE)
-					cleaned = true
-					break
+			if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir3, limit1_curr):
+				if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir4, limit1_prev):
+					if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir1, limit1_prev):
+						if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir2, limit2_prev):
+							image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
+							super_pixels_state.set(super_pixel_num, true)
+							super_pixels_cleaned += 1
+							if super_pixels_cleaned > min_super_pixels_to_clear:
+								image.fill(Color.LIGHT_BLUE)
+								cleaned = true
+								break
 		if cleaned:
 			break
 		

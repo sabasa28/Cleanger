@@ -27,6 +27,7 @@ var current_mediatrix_data : mediatrix_data
 var cleaning = false
 var first_frame_cleaning = false
 var last_pos : Vector2
+var curr_pos : Vector2
 var player_dir : Vector2
 var mediatrix_data_updated : bool
 
@@ -38,6 +39,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	mediatrix_data_updated = false
 	last_pos = global_position
+	curr_pos = global_position
 	if cleaning:
 		first_frame_cleaning = false
 		#set_cleaner_dir()

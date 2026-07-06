@@ -16,8 +16,9 @@ gravity_scale = 7.0
 lock_rotation = true
 linear_damp = 5.0
 script = ExtResource("1_cvnsp")
-strenght_modifier = 8.0
+strenght_modifier = 4.0
 swipeCooldown = 0.3
+time_cleaning_after_swipe = 0.1
 cleanerPivot = NodePath("Node2D")
 cleaner = NodePath("Node2D/Sprite2D2/Area2D2")
 
