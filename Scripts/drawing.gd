@@ -18,6 +18,7 @@ var min_super_pixels_to_clear : int
 @export var super_pixels_per_side : int
 var half_super_pixels_per_side : int
 var cleaned = false
+@export var window : WindowParent
 
 class limit:
 	var pos : Vector2
@@ -42,7 +43,7 @@ func _ready() -> void:
 	initialImage = Image.create_empty(image_size.x, image_size.y, false, Image.FORMAT_RGBA8)
 	initialImage.copy_from(image)
 	image.fill(Color.SADDLE_BROWN)
-	#image.fill_rect(Rect2i(5,5,20,20),Color.RED)
+	image.fill_rect(Rect2i(5,5,20,20),Color.RED)
 	texture.set_image(image)
 	var comparisonDict = image.compute_image_metrics(initialImage, false)
 	#print(comparisonDict.get("max"))
@@ -65,10 +66,6 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 	var left_limit = pos - left / 2.0
 	#ESTO PODRIA SER 2 ESQUINAS EN VEZ DE 4 LADOS
 	
-	#var interp_up 
-	#var interp_down 
-	#var interp_left
-	#var interp_right 
 	var body_globalpos = body.global_position
 	var pos_test : Vector2 = body.curr_pos - global_position - offset + get_rect().size/2.0
 	var poss_test : Vector2 = body.global_position - global_position - offset + get_rect().size/2.0
@@ -123,8 +120,8 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 		limit1_curr = limit1_options[0].pos if limit1_options[0].dot < limit1_options[1].dot else limit1_options[1].pos
 		limit2_curr = limit2_options[0].pos if limit2_options[0].dot < limit2_options[1].dot else limit2_options[1].pos
 		
-		print("limit curr 1", limit1_curr)
-		print("limit curr 2", limit2_curr)
+		#print("limit curr 1", limit1_curr)
+		#print("limit curr 2", limit2_curr)
 		
 		limit1_options.clear()
 		limit2_options.clear()
@@ -145,9 +142,9 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 		limit1_prev = limit1_options[0].pos if limit1_options[0].dot < limit1_options[1].dot else limit1_options[1].pos
 		limit2_prev = limit2_options[0].pos if limit2_options[0].dot < limit2_options[1].dot else limit2_options[1].pos
 		
-		print("limit prev 1", limit1_prev)
-		print("limit prev 2", limit2_prev)
-		print("-")
+		#print("limit prev 1", limit1_prev)
+		#print("limit prev 2", limit2_prev)
+		#print("-")
 		
 		dir1 = (limit1_curr - limit1_prev).normalized()
 		dir1 = Vector2(-dir1.y, dir1.x)
@@ -160,10 +157,10 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 		if (pos_frame_delta.dot(dir3) < 0): #necesario o podria invertirlos de una? minimo que empiecen al reves e invertir la condicion
 			dir3 = -dir3
 			dir4 = -dir4
-		print("dir 1", dir1)
-		print("dir 2", dir2)
-		print("dir 3", dir3)
-		print("dir 4", dir4)
+		#print("dir 1", dir1)
+		#print("dir 2", dir2)
+		#print("dir 3", dir3)
+		#print("dir 4", dir4)
 		
 		#image.fill_rect(Rect2i(limit1_curr, super_pixels_interval), Color.YELLOW)
 		#image.fill_rect(Rect2i(limit2_curr, super_pixels_interval), Color.YELLOW)
@@ -184,9 +181,7 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 				image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
 				super_pixels_state.set(super_pixel_num, true)
 				super_pixels_cleaned += 1
-				if super_pixels_cleaned > min_super_pixels_to_clear:
-					image.fill(Color.LIGHT_BLUE)
-					cleaned = true
+				if try_clean_window():
 					break
 				continue
 			
@@ -194,17 +189,15 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 				continue
 			
 			#ACA CAMBIAR LOS LIMITES SEGUN LA DIR, EL LADO DE ENFRENTE DEL FRAME PASADO Y EL DE ATRAS DEL ACTUAL
-			if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir3, limit1_curr):
-				if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir4, limit1_prev):
-					if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir1, limit1_prev):
-						if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir2, limit2_prev):
-							image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
-							super_pixels_state.set(super_pixel_num, true)
-							super_pixels_cleaned += 1
-							if super_pixels_cleaned > min_super_pixels_to_clear:
-								image.fill(Color.LIGHT_BLUE)
-								cleaned = true
-								break
+			if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir3, limit1_curr) && \
+				is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir4, limit1_prev) && \
+				is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir1, limit1_prev) && \
+				is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir2, limit2_prev):
+					image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
+					super_pixels_state.set(super_pixel_num, true)
+					super_pixels_cleaned += 1
+					if try_clean_window():
+						break
 		if cleaned:
 			break
 		
@@ -216,8 +209,14 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 func is_point_in_front(point : Vector2, dir : Vector2, orig : Vector2) -> bool:
 	return dir.dot((point - orig).normalized()) > 0
 
-func _paint_zone(v_normal1 : Vector2, v_normal2 : Vector2, h_normal1 : Vector2, h_normal2 : Vector2) -> void:
-	pass
+func try_clean_window() -> bool:
+	if super_pixels_cleaned > min_super_pixels_to_clear:
+		image.fill(Color.LIGHT_BLUE)
+		cleaned = true
+		window.on_window_cleaned()
+		return true
+	else:
+		return false
 
 func _process(delta: float) -> void:
 	if cleaned:

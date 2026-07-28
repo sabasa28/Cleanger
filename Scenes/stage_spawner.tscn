@@ -6,4 +6,4 @@
 script = ExtResource("1_dwc7r")
 window_interval = Vector2(512, 512)
 window_spawn_origin = Vector2(-1280, -512)
-rowsAndColumns = Vector2i(6, 10)
+columns_and_rows = Vector2i(6, 10)

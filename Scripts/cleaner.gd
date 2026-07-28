@@ -30,6 +30,8 @@ var last_pos : Vector2
 var curr_pos : Vector2
 var player_dir : Vector2
 var mediatrix_data_updated : bool
+signal on_stuck_on_spot
+signal on_unstuck_from_spot
 
 func _ready() -> void:
 	collider = get_node("CollisionShape2D")
@@ -106,3 +108,10 @@ func start_cleaning() -> void:
 	first_frame_cleaning = true
 	#set_cleaner_dir()
 	get_mediatrix_data()
+
+func start_cleaning_dirty_spot() -> float:
+	on_stuck_on_spot.emit()
+	return Stats.get_time_to_clean_spot()
+
+func finish_cleaning_dirty_spot() -> void:
+	on_unstuck_from_spot.emit()

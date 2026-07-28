@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://4miicpvealls"]
+
+[ext_resource type="Script" uid="uid://72ek2s18hya7" path="res://Scripts/dirty_spot.gd" id="1_2joo6"]
+[ext_resource type="Texture2D" uid="uid://dwnhiu17klgj5" path="res://Assets/tilemap.png" id="2_2egfs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8yxx"]
+radius = 13.341664
+
+[node name="dirty_spot" type="Node2D" unique_id=1862778030]
+script = ExtResource("1_2joo6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=430201969]
+texture = ExtResource("2_2egfs")
+region_enabled = true
+region_rect = Rect2(35, 134, 28, 28)
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=2140299950]
+z_index = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=610631947]
+shape = SubResource("CircleShape2D_m8yxx")
+
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

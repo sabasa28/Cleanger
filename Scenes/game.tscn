@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dnjup7k62u75i" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://g8wpn202bavb" path="res://Scenes/stage_spawner.tscn" id="3_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://6hewuwb4fk7i" path="res://Scenes/gameplay_controller.tscn" id="4_3dryh"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ebmjs"]
 distance = -1.3
@@ -12,6 +13,8 @@ distance = -1.3
 position = Vector2(0, -456)
 gravity_scale = 2.0
 strenght_modifier = 2.0
+swipeCooldown = 0.5
+height_checking_cooldown = 0.5
 time_cleaning_after_swipe = 0.5
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2146928479]
@@ -39,3 +42,5 @@ scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
 [node name="stage_spawner" parent="." unique_id=1041670152 instance=ExtResource("3_wrm1d")]
+
+[node name="GameplayController" parent="." unique_id=216072137 instance=ExtResource("4_3dryh")]

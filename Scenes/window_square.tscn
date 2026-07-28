@@ -1,14 +1,17 @@
 [gd_scene format=3 uid="uid://cdr73n5qjk6q2"]
 
+[ext_resource type="Script" uid="uid://h1asw5c5is2j" path="res://Scripts/window.gd" id="1_a0uui"]
 [ext_resource type="PackedScene" uid="uid://jfghx83mtrou" path="res://Scenes/drawing.tscn" id="1_mrasg"]
 [ext_resource type="Texture2D" uid="uid://cw3cb6agskpum" path="res://Assets/gorrito 1.png" id="2_8ltg5"]
 [ext_resource type="Texture2D" uid="uid://bcv02p7pg1e40" path="res://Assets/Char_mainbody.png" id="3_okk06"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okk06"]
 
-[node name="WindowSquare" type="Node2D" unique_id=1723022974]
+[node name="WindowSquare" type="Node2D" unique_id=1723022974 node_paths=PackedStringArray("window_ref")]
+script = ExtResource("1_a0uui")
+window_ref = NodePath("Drawing")
 
-[node name="Drawing" parent="." unique_id=609080944 node_paths=PackedStringArray("collision") instance=ExtResource("1_mrasg")]
+[node name="Drawing" parent="." unique_id=609080944 node_paths=PackedStringArray("collision", "window") instance=ExtResource("1_mrasg")]
 image_size = Vector2i(512, 512)
 brush_size = 60
 collision = NodePath("../Area2D/CollisionShape2D")
@@ -16,6 +19,7 @@ textureToPutOver = ExtResource("2_8ltg5")
 textureForMask = ExtResource("3_okk06")
 amount_of_window_before_fullclean = 0.9
 super_pixels_per_side = 32
+window = NodePath("..")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=451895026]
 
@@ -24,5 +28,3 @@ shape = SubResource("RectangleShape2D_okk06")
 
 [connection signal="area_entered" from="Area2D" to="Drawing" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="Drawing" method="_on_area_2d_area_exited"]
-[connection signal="body_entered" from="Area2D" to="Drawing" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="Drawing" method="_on_area_2d_body_exited"]

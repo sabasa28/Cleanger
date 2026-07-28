@@ -15,6 +15,17 @@ run/main_scene="uid://bde6dgx3iqq1m"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+InGameUi="*uid://ioajbp0h84d5"
+Objectives="*uid://ceapmndublf88"
+Stats="*uid://dkv08nr88gc0w"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [input]
 
 clean={
