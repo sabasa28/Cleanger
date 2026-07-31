@@ -21,3 +21,6 @@ func _ready() -> void:
 
 func on_window_cleaned() -> void:
 	stage_manager.on_window_cleaned(window_num)
+
+func delete_window() -> void:
+	queue_free()

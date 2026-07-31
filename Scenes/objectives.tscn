@@ -5,44 +5,78 @@
 
 [sub_resource type="Resource" id="Resource_2s8qj"]
 script = ExtResource("2_whe8l")
-text = "Clean the first 3 floors"
+text = "Clean 15 windows"
 metadata/_custom_type_script = "uid://h15t1q12cytw"
 
 [sub_resource type="Resource" id="Resource_whe8l"]
 script = ExtResource("2_whe8l")
-text = "Reach the floor 20"
+text = "Clean 15 dirty spots"
 condition = 1
 metadata/_custom_type_script = "uid://h15t1q12cytw"
 
 [sub_resource type="Resource" id="Resource_1lemk"]
 script = ExtResource("2_whe8l")
-text = "Clean 100 windows"
+text = "Clean 10 windows in one day"
 condition = 2
 metadata/_custom_type_script = "uid://h15t1q12cytw"
 
 [sub_resource type="Resource" id="Resource_7fe5c"]
 script = ExtResource("2_whe8l")
-text = "Clean 50 dirty spots in one day"
+text = "Clean the first 3 floors"
 condition = 3
+is_mayor = true
 metadata/_custom_type_script = "uid://h15t1q12cytw"
 
 [sub_resource type="Resource" id="Resource_7nu0l"]
 script = ExtResource("2_whe8l")
-text = "DEBUG end of objs"
+text = "Collect 100 coins"
+condition = 4
 metadata/_custom_type_script = "uid://h15t1q12cytw"
 
 [sub_resource type="Resource" id="Resource_o6n2p"]
 script = ExtResource("2_whe8l")
+text = "Clean 40 windows"
+condition = 5
 metadata/_custom_type_script = "uid://h15t1q12cytw"
 
 [sub_resource type="Resource" id="Resource_3o6yc"]
 script = ExtResource("2_whe8l")
+text = "Climb 100 meters"
+condition = 6
 metadata/_custom_type_script = "uid://h15t1q12cytw"
 
 [sub_resource type="Resource" id="Resource_rbh1s"]
 script = ExtResource("2_whe8l")
+text = "Collect 200 coins in one day"
+condition = 7
+is_mayor = true
+metadata/_custom_type_script = "uid://h15t1q12cytw"
+
+[sub_resource type="Resource" id="Resource_883fa"]
+script = ExtResource("2_whe8l")
+text = "Clean 80 windows"
+condition = 8
+metadata/_custom_type_script = "uid://h15t1q12cytw"
+
+[sub_resource type="Resource" id="Resource_ie2xj"]
+script = ExtResource("2_whe8l")
+text = "Reach floor 50"
+condition = 9
+metadata/_custom_type_script = "uid://h15t1q12cytw"
+
+[sub_resource type="Resource" id="Resource_k6euy"]
+script = ExtResource("2_whe8l")
+text = "Clean 50 dirty spots"
+condition = 10
+metadata/_custom_type_script = "uid://h15t1q12cytw"
+
+[sub_resource type="Resource" id="Resource_f6eqc"]
+script = ExtResource("2_whe8l")
+text = "END OF OBJECTIVES"
+condition = 21
+is_mayor = true
 metadata/_custom_type_script = "uid://h15t1q12cytw"
 
 [node name="Objectives" type="Node" unique_id=687341925]
 script = ExtResource("1_2s8qj")
-objectives = Array[ExtResource("2_whe8l")]([SubResource("Resource_2s8qj"), SubResource("Resource_whe8l"), SubResource("Resource_1lemk"), SubResource("Resource_7fe5c"), SubResource("Resource_7nu0l"), SubResource("Resource_o6n2p"), SubResource("Resource_3o6yc"), SubResource("Resource_rbh1s")])
+objectives = Array[ExtResource("2_whe8l")]([SubResource("Resource_2s8qj"), SubResource("Resource_whe8l"), SubResource("Resource_1lemk"), SubResource("Resource_7fe5c"), SubResource("Resource_7nu0l"), SubResource("Resource_o6n2p"), SubResource("Resource_3o6yc"), SubResource("Resource_rbh1s"), SubResource("Resource_883fa"), SubResource("Resource_ie2xj"), SubResource("Resource_k6euy"), SubResource("Resource_f6eqc")])

@@ -7,24 +7,11 @@ var window_prefab = preload("res://Scenes/window_square.tscn")
 var windows_state : Array[bool]
 var floors_state : Array[bool]
 
+signal on_reset_windows
+
 func _ready() -> void:
-	var spawned_window : Node2D
 	Objectives.window_height = window_interval.y
 	Objectives.window_spawn_y = window_spawn_origin.y
-	windows_state.resize(columns_and_rows.x * columns_and_rows.y + columns_and_rows.x)
-	floors_state.resize(columns_and_rows.y)
-	for floor in floors_state:
-		floor = false
-	for rows in columns_and_rows.y:
-		for columns in columns_and_rows.x:
-			spawned_window = window_prefab.instantiate()
-			spawned_window.has_spot = true
-			add_child(spawned_window)
-			spawned_window.global_position = window_spawn_origin + Vector2 (window_interval.x * columns, -window_interval.y * rows)
-			spawned_window.stage_manager = self
-			var current_window_num = rows * columns_and_rows.x + columns
-			spawned_window.window_num = current_window_num
-			windows_state[current_window_num] = false
 
 func on_window_cleaned(window_num : int) -> void:
 	windows_state[window_num] = true
@@ -39,5 +26,23 @@ func on_window_cleaned(window_num : int) -> void:
 		floors_state[floor] = true
 		Stats.add_floor_cleaned(floor)
 
-func _process(delta: float) -> void:
-	pass
+func reset_windows() -> void:
+	on_reset_windows.emit()
+	windows_state.clear()
+	floors_state.clear()
+	var spawned_window : Node2D
+	windows_state.resize(columns_and_rows.x * columns_and_rows.y + columns_and_rows.x)
+	floors_state.resize(columns_and_rows.y)
+	for floor in floors_state:
+		floor = false
+	for rows in columns_and_rows.y:
+		for columns in columns_and_rows.x:
+			spawned_window = window_prefab.instantiate()
+			on_reset_windows.connect(spawned_window.delete_window) 
+			spawned_window.has_spot = randi() % 2
+			add_child(spawned_window)
+			spawned_window.global_position = window_spawn_origin + Vector2 (window_interval.x * columns, -window_interval.y * rows)
+			spawned_window.stage_manager = self
+			var current_window_num = rows * columns_and_rows.x + columns
+			spawned_window.window_num = current_window_num
+			windows_state[current_window_num] = false
