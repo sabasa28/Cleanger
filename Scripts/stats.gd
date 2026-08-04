@@ -7,6 +7,7 @@ signal on_window_cleaned(run_windows_cleaned)
 signal on_spot_cleaned
 signal on_run_started
 signal on_run_ended
+signal on_rotation_speed_changed(current_rot_speed)
 
 var total_coins : int
 var floors_cleaned : int
@@ -20,9 +21,14 @@ var floor_value : float = 0.1
 var base_time_to_clean_spot : float = 1.0
 var cleaning_power : float = 1.0
 var time_to_clean_spot
+var rotation_speed : float = 0.15
 
 func _ready() -> void: #calculate vars
 	time_to_clean_spot = base_time_to_clean_spot / cleaning_power
+
+func start_run() -> void:
+	on_run_started.emit()
+	InGameUi.reset_ui()
 
 func end_run() -> void:
 	add_run_coins_to_total()
@@ -31,6 +37,7 @@ func end_run() -> void:
 	windows_cleaned = 0
 	spots_cleaned = 0
 	golden_spots_cleaned = 0
+	on_run_ended.emit()
 
 func add_run_coins_to_total() -> void:
 	var coins_earned = windows_cleaned * window_value * (1.0 + floors_cleaned * floor_value) #aca se multiplicaria con el multiplicador
@@ -39,10 +46,12 @@ func add_run_coins_to_total() -> void:
 
 func add_floor_cleaned(floor_cleaned : int) -> void:
 	floors_cleaned += 1
+	InGameUi.update_floor_multiplier_label(1.0 + floors_cleaned * floor_value, floor_value)
 	on_floor_cleaned.emit(floor_cleaned, floors_cleaned)
 
 func add_window_cleaned() -> void:
 	windows_cleaned += 1
+	InGameUi.update_windows_label(windows_cleaned, 1)
 	on_window_cleaned.emit(windows_cleaned)
 
 func check_height(player_height : float, last_player_height : float) -> void:
@@ -58,3 +67,7 @@ func update_cleaning_power(new_cleaning_power : float) -> void:
 
 func get_time_to_clean_spot() -> float:
 	return time_to_clean_spot
+
+func set_rotation_speed(new_speed : float) -> void:
+	rotation_speed = new_speed
+	on_rotation_speed_changed.emit(rotation_speed)

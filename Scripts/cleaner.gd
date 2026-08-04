@@ -30,8 +30,9 @@ var last_pos : Vector2
 var curr_pos : Vector2
 var player_dir : Vector2
 var mediatrix_data_updated : bool
+var spots_colliding : Array[Node]
 signal on_stuck_on_spot
-signal on_unstuck_from_spot
+signal on_unstuck_from_spot(fully_cleaned : bool)
 
 func _ready() -> void:
 	collider = get_node("CollisionShape2D")
@@ -106,12 +107,31 @@ func get_mediatrix_data() -> mediatrix_data:
 func start_cleaning() -> void:
 	cleaning = true
 	first_frame_cleaning = true
+	if !spots_colliding.is_empty():
+		spots_colliding[0].start_cleaning(Stats.get_time_to_clean_spot())
+		on_stuck_on_spot.emit()
 	#set_cleaner_dir()
-	get_mediatrix_data()
+	get_mediatrix_data() #??
 
-func start_cleaning_dirty_spot() -> float:
+func stop_cleaning() -> void:
+	cleaning = false
+	stop_cleaning_dirty_spot()
+
+func collide_with_dirty_spot(dirty_spot : Node) -> float:
+	spots_colliding.append(dirty_spot)
+	if !cleaning:
+		return -1.0
 	on_stuck_on_spot.emit()
 	return Stats.get_time_to_clean_spot()
 
-func finish_cleaning_dirty_spot() -> void:
-	on_unstuck_from_spot.emit()
+func stop_colliding_with_dirty_spot(dirty_spot : Node) -> void:
+	spots_colliding.erase(dirty_spot)
+
+func stop_cleaning_dirty_spot() -> void:
+	if !spots_colliding.is_empty():
+		spots_colliding[0].pause_cleaning()
+		on_unstuck_from_spot.emit(false)
+
+func finish_cleaning_dirty_spot(dirty_spot : Node) -> void:
+	spots_colliding.erase(dirty_spot)
+	on_unstuck_from_spot.emit(true)

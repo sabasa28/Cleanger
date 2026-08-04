@@ -1,9 +1,12 @@
 extends Node
 
 @export var timer_label : Label
-@export var objective_label1 : Label
-@export var objective_label2 : Label
-@export var objective_label3 : Label
+@export var objective_label1 : RichTextLabel
+@export var objective_label2 : RichTextLabel
+@export var objective_label3 : RichTextLabel
+@export var windows_label : RichTextLabel
+@export var floors_label : RichTextLabel
+
 
 func set_timer_text(time_left_num : int) -> void:
 	var mins = time_left_num / 60
@@ -21,6 +24,25 @@ func update_mayor_objective_text(objective_text : String) -> void:
 	objective_label1.text = ""
 	objective_label2.text = objective_text
 	objective_label3.text = ""
+
+func cross_out_minor_objective(obj_num : int) -> void:
+	match obj_num:
+		0:
+			objective_label1.text = "[i]" + objective_label1.text + "[/i]"
+		1:
+			objective_label2.text = "[i]" + objective_label2.text + "[/i]"
+		_:
+			objective_label3.text = "[i]" + objective_label3.text + "[/i]"
+
+func update_windows_label(new_windows_amount : int, windows_added : int) -> void:
+	windows_label.text = str(new_windows_amount)
+
+func update_floor_multiplier_label(new_floor_multiplier : float, multiplier_added : float) -> void:
+	floors_label.text = str(new_floor_multiplier)
+
+func reset_ui() -> void:
+	windows_label.text = str(0)
+	floors_label.text = str(1.0)
 
 func _ready() -> void:
 	pass

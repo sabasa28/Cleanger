@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://djgoa64krtup5"]
 
 [ext_resource type="Script" uid="uid://dio411ybm74ah" path="res://Scripts/upgrades_ui.gd" id="1_r7ofa"]
+[ext_resource type="Texture2D" uid="uid://bqd8c5t4rkouj" path="res://Assets/placeholder_upgrades_background.png" id="2_55cvm"]
 
 [node name="upgrades_ui" type="CanvasLayer" unique_id=820732258]
 script = ExtResource("1_r7ofa")
@@ -19,43 +20,53 @@ theme_override_constants/margin_bottom = 0
 [node name="Control" type="Control" parent="MarginContainer" unique_id=1752217362]
 layout_mode = 2
 
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control" unique_id=73083331]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_55cvm")
+expand_mode = 1
+
 [node name="ButtonUpgrade1" type="Button" parent="MarginContainer/Control" unique_id=248504399]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 250.0
-offset_top = 200.0
-offset_right = 300.0
-offset_bottom = 250.0
+offset_left = 400.0
+offset_top = 290.0
+offset_right = 450.0
+offset_bottom = 340.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="ButtonUpgrade2" type="Button" parent="MarginContainer/Control" unique_id=1643558348]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 850.0
-offset_top = 200.0
-offset_right = 900.0001
-offset_bottom = 250.0
+offset_left = 842.0
+offset_top = 101.0
+offset_right = 892.0001
+offset_bottom = 151.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="ButtonUpgrade3" type="Button" parent="MarginContainer/Control" unique_id=100880909]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 550.0
-offset_top = 325.0
-offset_right = 600.0
-offset_bottom = 375.0
+offset_left = 703.0
+offset_top = 316.0
+offset_right = 753.0
+offset_bottom = 366.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="ButtonUpgradeFinished" type="Button" parent="MarginContainer/Control" unique_id=1091547187]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 0
-offset_left = 976.0
-offset_top = 571.0
-offset_right = 1126.0
-offset_bottom = 621.0
+offset_left = 909.0
+offset_top = 589.0
+offset_right = 1059.0
+offset_bottom = 639.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 

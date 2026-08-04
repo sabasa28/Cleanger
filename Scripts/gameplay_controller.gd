@@ -21,6 +21,7 @@ func start_cleaning_phase() -> void:
 	current_timer = 0.0
 	InGameUi.set_timer_text((int)(timer_end - current_timer))#por la conversion pierdo tiempo visualmente?
 	stage_spawner.reset_windows()
+	Stats.start_run()
 
 func end_cleaning_phase() -> void:
 	on_cleaning_phase = false

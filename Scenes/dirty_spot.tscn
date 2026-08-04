@@ -21,3 +21,4 @@ z_index = 8
 shape = SubResource("CircleShape2D_m8yxx")
 
 [connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_exited"]
