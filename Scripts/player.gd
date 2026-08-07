@@ -1,9 +1,9 @@
 class_name Player
 extends RigidBody2D
 
-const BASE_STRENGHT = 100000.0
+const BASE_STRENGHT = 200000.0
 
-@export var strenght_modifier = 1.0
+var strenght_modifier = 1.0
 @export var swipeCooldown = 0.2
 var swipeCurrentCooldown = 0.0
 var swiping = false
@@ -30,6 +30,7 @@ func _ready() -> void:
 	height_checking_timer = height_checking_cooldown
 	cleaner.on_stuck_on_spot.connect(start_cleaning_dirty_spot)
 	cleaner.on_unstuck_from_spot.connect(stop_cleaning_dirty_spot)
+	strenght_modifier = Stats.get_strenght_modifier()
 
 func _physics_process(delta: float) -> void:
 	if swiping:
@@ -92,6 +93,7 @@ func reset() -> void:
 	gravity_scale = initial_gravity_scale
 	is_cleaner_stuck = false
 	swipeCurrentCooldown = 0.0
+	strenght_modifier = Stats.get_strenght_modifier()
 
 func update_rot_speed(new_rot_speed : float) -> void:
 	cleaner_rot_speed = new_rot_speed

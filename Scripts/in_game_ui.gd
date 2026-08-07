@@ -34,7 +34,7 @@ func cross_out_minor_objective(obj_num : int) -> void:
 		_:
 			objective_label3.text = "[i]" + objective_label3.text + "[/i]"
 
-func update_windows_label(new_windows_amount : int, windows_added : int) -> void:
+func update_windows_label(new_windows_amount : float, windows_added : float) -> void:
 	windows_label.text = str(new_windows_amount)
 
 func update_floor_multiplier_label(new_floor_multiplier : float, multiplier_added : float) -> void:

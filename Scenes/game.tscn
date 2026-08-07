@@ -13,7 +13,6 @@ distance = -1.3
 [node name="Player" parent="." unique_id=1559178234 instance=ExtResource("1_ebmjs")]
 position = Vector2(0, -456)
 gravity_scale = 2.0
-strenght_modifier = 2.0
 swipeCooldown = 0.5
 height_checking_cooldown = 0.5
 time_cleaning_after_swipe = 0.5

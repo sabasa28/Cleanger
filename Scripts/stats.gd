@@ -16,12 +16,15 @@ var windows_cleaned : int
 var total_runs : int
 var spots_cleaned : int
 var golden_spots_cleaned : int
-var window_value : float = 1.0
+var window_value : float = 10.0
 var floor_value : float = 0.1
+var spot_value : float = 2.0
+var golden_spot_value : float = 50.0
 var base_time_to_clean_spot : float = 1.0
 var cleaning_power : float = 1.0
 var time_to_clean_spot
 var rotation_speed : float = 0.15
+var strenght_modifier : float = 1.0
 
 func _ready() -> void: #calculate vars
 	time_to_clean_spot = base_time_to_clean_spot / cleaning_power
@@ -40,7 +43,7 @@ func end_run() -> void:
 	on_run_ended.emit()
 
 func add_run_coins_to_total() -> void:
-	var coins_earned = windows_cleaned * window_value * (1.0 + floors_cleaned * floor_value) #aca se multiplicaria con el multiplicador
+	var coins_earned : float = (windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value) * (1.0 + floors_cleaned * floor_value) #aca se multiplicaria con el multiplicador
 	total_coins += coins_earned
 	on_coins_changed.emit(total_coins, coins_earned)
 
@@ -51,7 +54,7 @@ func add_floor_cleaned(floor_cleaned : int) -> void:
 
 func add_window_cleaned() -> void:
 	windows_cleaned += 1
-	InGameUi.update_windows_label(windows_cleaned, 1)
+	InGameUi.update_windows_label(windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value, window_value)
 	on_window_cleaned.emit(windows_cleaned)
 
 func check_height(player_height : float, last_player_height : float) -> void:
@@ -59,6 +62,7 @@ func check_height(player_height : float, last_player_height : float) -> void:
 
 func add_dirty_spot_cleaned() -> void:
 	spots_cleaned += 1
+	InGameUi.update_windows_label(windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value, spot_value)
 	on_spot_cleaned.emit(spots_cleaned)
 
 func update_cleaning_power(new_cleaning_power : float) -> void:
@@ -71,3 +75,21 @@ func get_time_to_clean_spot() -> float:
 func set_rotation_speed(new_speed : float) -> void:
 	rotation_speed = new_speed
 	on_rotation_speed_changed.emit(rotation_speed)
+
+func raise_window_value(amount_to_raise : float) -> void:
+	window_value += amount_to_raise
+
+func raise_floor_value(amount_to_raise : float) -> void:
+	floor_value += amount_to_raise
+
+func raise_spot_value(amount_to_raise : float) -> void:
+	spot_value += amount_to_raise
+
+func raise_golden_spot_value(amount_to_raise : float) -> void:
+	golden_spot_value += amount_to_raise
+
+func raise_strenght(amount_to_raise : float) -> void:
+	strenght_modifier += amount_to_raise
+
+func get_strenght_modifier() -> float:
+	return strenght_modifier
