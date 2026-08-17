@@ -108,7 +108,8 @@ func start_cleaning() -> void:
 	cleaning = true
 	first_frame_cleaning = true
 	if !spots_colliding.is_empty():
-		spots_colliding[0].start_cleaning(Stats.get_time_to_clean_spot())
+		for i in spots_colliding:
+			i.start_cleaning(Stats.get_cleaning_power())
 		on_stuck_on_spot.emit()
 	#set_cleaner_dir()
 	get_mediatrix_data() #??
@@ -122,14 +123,16 @@ func collide_with_dirty_spot(dirty_spot : Node) -> float:
 	if !cleaning:
 		return -1.0
 	on_stuck_on_spot.emit()
-	return Stats.get_time_to_clean_spot()
+	return Stats.get_cleaning_power()
 
 func stop_colliding_with_dirty_spot(dirty_spot : Node) -> void:
+	dirty_spot.pause_cleaning()
 	spots_colliding.erase(dirty_spot)
 
 func stop_cleaning_dirty_spot() -> void:
 	if !spots_colliding.is_empty():
-		spots_colliding[0].pause_cleaning()
+		for i in spots_colliding:
+			i.pause_cleaning()
 		on_unstuck_from_spot.emit(false)
 
 func finish_cleaning_dirty_spot(dirty_spot : Node) -> void:

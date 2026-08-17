@@ -17,17 +17,16 @@ var total_runs : int
 var spots_cleaned : int
 var golden_spots_cleaned : int
 var window_value : float = 10.0
-var floor_value : float = 0.1
+var floor_value : float = 0.0
 var spot_value : float = 2.0
 var golden_spot_value : float = 50.0
-var base_time_to_clean_spot : float = 1.0
+var combo_value : float = 0.0
 var cleaning_power : float = 1.0
 var time_to_clean_spot
 var rotation_speed : float = 0.15
-var strenght_modifier : float = 1.0
-
-func _ready() -> void: #calculate vars
-	time_to_clean_spot = base_time_to_clean_spot / cleaning_power
+var strength_modifier : float = 1.0
+var cleaner_width_modifier : float = 1.0
+var speed_modifier : float = 1.0
 
 func start_run() -> void:
 	on_run_started.emit()
@@ -46,6 +45,14 @@ func add_run_coins_to_total() -> void:
 	var coins_earned : float = (windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value) * (1.0 + floors_cleaned * floor_value) #aca se multiplicaria con el multiplicador
 	total_coins += coins_earned
 	on_coins_changed.emit(total_coins, coins_earned)
+
+func try_remove_coins_from_total(coins_to_remove : int) -> bool:
+	if coins_to_remove < total_coins:
+		total_coins -= coins_to_remove
+		on_coins_changed.emit(total_coins, 0)
+		return true
+	else:
+		return false
 
 func add_floor_cleaned(floor_cleaned : int) -> void:
 	floors_cleaned += 1
@@ -67,10 +74,9 @@ func add_dirty_spot_cleaned() -> void:
 
 func update_cleaning_power(new_cleaning_power : float) -> void:
 	cleaning_power = new_cleaning_power
-	time_to_clean_spot = base_time_to_clean_spot / cleaning_power
 
-func get_time_to_clean_spot() -> float:
-	return time_to_clean_spot
+func get_cleaning_power() -> float:
+	return cleaning_power
 
 func set_rotation_speed(new_speed : float) -> void:
 	rotation_speed = new_speed
@@ -88,8 +94,17 @@ func raise_spot_value(amount_to_raise : float) -> void:
 func raise_golden_spot_value(amount_to_raise : float) -> void:
 	golden_spot_value += amount_to_raise
 
-func raise_strenght(amount_to_raise : float) -> void:
-	strenght_modifier += amount_to_raise
+func raise_combo_value(amount_to_raise : float) -> void:
+	combo_value += amount_to_raise
 
-func get_strenght_modifier() -> float:
-	return strenght_modifier
+func raise_strength(amount_to_raise : float) -> void:
+	strength_modifier += amount_to_raise
+
+func raise_cleaner_width(amount_to_raise : float) -> void:
+	cleaner_width_modifier += amount_to_raise
+
+func raise_speed(amount_to_raise : float) -> void:
+	speed_modifier += amount_to_raise
+
+func get_strength_modifier() -> float:
+	return strength_modifier

@@ -1,9 +1,9 @@
 class_name Player
 extends RigidBody2D
 
-const BASE_STRENGHT = 200000.0
+const BASE_strength = 200000.0
 
-var strenght_modifier = 1.0
+var strength_modifier = 1.0
 @export var swipeCooldown = 0.2
 var swipeCurrentCooldown = 0.0
 var swiping = false
@@ -19,8 +19,12 @@ var last_checked_height : float
 var paused : bool = false
 var initial_pos : Vector2
 var cleaner_rot_speed : float
+var unpaused_timer : float
+@export var time_to_unpause : float
+var waiting_to_unpause : bool = false
 
 func _ready() -> void:
+	unpaused_timer = time_to_unpause
 	Stats.on_rotation_speed_changed.connect(update_rot_speed)
 	cleaner_rot_speed = Stats.rotation_speed
 	initial_pos = global_position
@@ -30,21 +34,25 @@ func _ready() -> void:
 	height_checking_timer = height_checking_cooldown
 	cleaner.on_stuck_on_spot.connect(start_cleaning_dirty_spot)
 	cleaner.on_unstuck_from_spot.connect(stop_cleaning_dirty_spot)
-	strenght_modifier = Stats.get_strenght_modifier()
+	strength_modifier = Stats.get_strength_modifier()
 
 func _physics_process(delta: float) -> void:
 	if swiping:
 		if swipeCurrentCooldown <= 0:
-			swipeCurrentCooldown = swipeCooldown
+			swipeCurrentCooldown = swipeCooldown / Stats.speed_modifier
 			if !cleaner.cleaning:
 				cleaner.start_cleaning()
-				print("player_start_cleaning")
 			if !is_cleaner_stuck: #no cambiar de lugar con el de arriba
-				apply_force((cleanerPivot.global_position - cleaner.global_position).normalized() * BASE_STRENGHT * strenght_modifier)
+				apply_force((cleanerPivot.global_position - cleaner.global_position).normalized() * BASE_strength * strength_modifier)
+				
 			cleaning_timer = 0.0
 
 func _process(delta: float) -> void:
 	if paused:
+		if waiting_to_unpause:
+			unpaused_timer -= delta
+			if unpaused_timer <= 0.0:
+				paused = false
 		return
 	#print(Engine.get_frames_per_second())
 	
@@ -70,15 +78,10 @@ func _process(delta: float) -> void:
 		last_checked_height = global_position.y
 
 func start_cleaning_dirty_spot() -> void:
-	is_cleaner_stuck = true
-	linear_velocity = Vector2.ZERO
-	gravity_scale = 0.0
+	linear_velocity *= 0.7
 
 func stop_cleaning_dirty_spot(fully_cleaned_spot : bool) -> void:
-	is_cleaner_stuck = false
-	gravity_scale = initial_gravity_scale
 	if fully_cleaned_spot:
-		swipeCurrentCooldown = 0.0
 		Stats.add_dirty_spot_cleaned()
 
 func pause() -> void:
@@ -88,12 +91,16 @@ func pause() -> void:
 	linear_velocity = Vector2.ZERO
 
 func reset() -> void:
-	paused = false
+	unpause()
 	global_position = initial_pos
 	gravity_scale = initial_gravity_scale
 	is_cleaner_stuck = false
 	swipeCurrentCooldown = 0.0
-	strenght_modifier = Stats.get_strenght_modifier()
+	strength_modifier = Stats.get_strength_modifier()
 
 func update_rot_speed(new_rot_speed : float) -> void:
 	cleaner_rot_speed = new_rot_speed
+
+func unpause() -> void:
+	waiting_to_unpause = true
+	unpaused_timer = time_to_unpause

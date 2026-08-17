@@ -213,7 +213,7 @@ func try_clean_window() -> bool:
 	if super_pixels_cleaned > min_super_pixels_to_clear:
 		image.fill(Color.LIGHT_BLUE)
 		cleaned = true
-		window.on_window_cleaned()
+		window.on_base_cleaned()
 		return true
 	else:
 		return false

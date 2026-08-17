@@ -27,7 +27,7 @@ func end_cleaning_phase() -> void:
 	on_cleaning_phase = false
 	Stats.end_run()
 	player.pause()
-	upgrades_ui.visible = true
+	upgrades_ui.prepare_and_set_visible()
 
 func _process(delta: float) -> void:
 	if on_cleaning_phase:
