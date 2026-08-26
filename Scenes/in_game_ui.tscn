@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ioajbp0h84d5"]
 
-[ext_resource type="Texture2D" uid="uid://dwnhiu17klgj5" path="res://Assets/tilemap.png" id="1_5x6se"]
+[ext_resource type="Texture2D" uid="uid://dwnhiu17klgj5" path="res://Assets/Sprites/tilemap.png" id="1_5x6se"]
 [ext_resource type="Script" uid="uid://dld74mqng2a4e" path="res://Scripts/in_game_ui.gd" id="1_ey7ub"]
 [ext_resource type="FontFile" uid="uid://c1u302hkj1on4" path="res://Fonts/bptypewrite.strikethrough-italic.ttf" id="3_t3gp5"]
 [ext_resource type="FontFile" uid="uid://3p7hsboevt12" path="res://Fonts/bptypewrite.italic.otf" id="4_orthm"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcv02p7pg1e40"
-path="res://.godot/imported/Char_mainbody.png-18f606439c7d09c758372533a325260a.ctex"
+uid="uid://bxo4ff33fsmbw"
+path="res://.godot/imported/mancha_1.png-cb4ebddc4809b657dc0a57e2d31257d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Char_mainbody.png"
-dest_files=["res://.godot/imported/Char_mainbody.png-18f606439c7d09c758372533a325260a.ctex"]
+source_file="res://Assets/Sprites/mancha_1.png"
+dest_files=["res://.godot/imported/mancha_1.png-cb4ebddc4809b657dc0a57e2d31257d6.ctex"]
 
 [params]
 

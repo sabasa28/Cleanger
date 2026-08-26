@@ -138,3 +138,6 @@ func stop_cleaning_dirty_spot() -> void:
 func finish_cleaning_dirty_spot(dirty_spot : Node) -> void:
 	spots_colliding.erase(dirty_spot)
 	on_unstuck_from_spot.emit(true)
+
+func set_width() -> void:
+	pass

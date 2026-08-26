@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djgmypfy4tg20"
-path="res://.godot/imported/stickman.png-25a35b1d7421e7db4883a98c5b6cece6.ctex"
+uid="uid://cw3cb6agskpum"
+path="res://.godot/imported/gorrito 1.png-0e2c842e0bbdc717c0810cf2b64cec17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/stickman.png"
-dest_files=["res://.godot/imported/stickman.png-25a35b1d7421e7db4883a98c5b6cece6.ctex"]
+source_file="res://Assets/Sprites/gorrito 1.png"
+dest_files=["res://.godot/imported/gorrito 1.png-0e2c842e0bbdc717c0810cf2b64cec17.ctex"]
 
 [params]
 

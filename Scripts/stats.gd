@@ -21,7 +21,7 @@ var floor_value : float = 0.0
 var spot_value : float = 2.0
 var golden_spot_value : float = 50.0
 var combo_value : float = 0.0
-var cleaning_power : float = 1.0
+var cleaning_power : float = 4.0
 var time_to_clean_spot
 var rotation_speed : float = 0.15
 var strength_modifier : float = 1.0
@@ -100,8 +100,8 @@ func raise_combo_value(amount_to_raise : float) -> void:
 func raise_strength(amount_to_raise : float) -> void:
 	strength_modifier += amount_to_raise
 
-func raise_cleaner_width(amount_to_raise : float) -> void:
-	cleaner_width_modifier += amount_to_raise
+func set_cleaner_width(new_value : float) -> void:
+	cleaner_width_modifier = new_value
 
 func raise_speed(amount_to_raise : float) -> void:
 	speed_modifier += amount_to_raise

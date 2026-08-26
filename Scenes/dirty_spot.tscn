@@ -1,17 +1,18 @@
 [gd_scene format=3 uid="uid://4miicpvealls"]
 
 [ext_resource type="Script" uid="uid://72ek2s18hya7" path="res://Scripts/dirty_spot.gd" id="1_2joo6"]
-[ext_resource type="Texture2D" uid="uid://dwnhiu17klgj5" path="res://Assets/tilemap.png" id="2_2egfs"]
+[ext_resource type="Texture2D" uid="uid://bxo4ff33fsmbw" path="res://Assets/Sprites/mancha_1.png" id="2_2egfs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8yxx"]
 radius = 13.341664
 
-[node name="dirty_spot" type="Node2D" unique_id=1862778030]
+[node name="dirty_spot" type="Node2D" unique_id=1862778030 node_paths=PackedStringArray("sprite")]
+scale = Vector2(10, 10)
 script = ExtResource("1_2joo6")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=430201969]
 texture = ExtResource("2_2egfs")
-region_enabled = true
 region_rect = Rect2(35, 134, 28, 28)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2140299950]

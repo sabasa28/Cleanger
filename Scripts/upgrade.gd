@@ -9,9 +9,15 @@ var upgrade_times : int
 var current_level : int = 0
 @export var stat_to_modify : modifiable_stat
 @export var button : NodePath
-@export var dependant_of : upgrade
+
+@export_category("Dependencies")
+@export var dependency_upgrade : upgrade
+@export var lvl_of_dependency : int
+#export var dependency_achievement : achievement
+
 var button_node : Node
 var initiated : bool = false
+var available : bool = false
 enum modifiable_stat
 {
 	floor_modifier_lock,
@@ -40,15 +46,31 @@ func try_init(upgrade_num : int) -> void:
 
 func update_button_and_menu() -> void:
 	#aca segun si esta desbloqueda y si no tiene dependencia bloqueda seteamos si se ve y si se ve gris o normal
-	button_node.get_child(0).update_ui(name, description, upgrade_price[current_level])
+	if available && current_level < upgrade_times:
+		button_node.get_child(0).update_ui(name, description, upgrade_price[current_level])
+	else:
+		button_node.get_child(0).change_enabled_state(false)
 
-func apply_upgrade() -> void:
-	if current_level >= upgrade_price.size():
+func update_available() -> void:
+	if available:
 		return
+	var turn_available : bool = false
+	if dependency_upgrade == null:
+		turn_available = true
+	elif dependency_upgrade.current_level >= lvl_of_dependency:
+		turn_available = true
+	
+	if turn_available:
+		available = true
+		update_button_and_menu()
+
+func apply_upgrade() -> bool:
+	if current_level >= upgrade_times || !available:
+		return false
 	if upgrade_price[current_level] <= Stats.total_coins:
 		Stats.try_remove_coins_from_total(upgrade_price[current_level])
 	else:
-		return
+		return false
 	match stat_to_modify:
 			modifiable_stat.floor_modifier_lock:
 				Stats.raise_floor_value(upgrade_amount[current_level])
@@ -61,7 +83,7 @@ func apply_upgrade() -> void:
 			modifiable_stat.cleaner_strength:
 				Stats.raise_strength(upgrade_amount[current_level])
 			modifiable_stat.cleaner_width:
-				Stats.raise_cleaner_width(upgrade_amount[current_level])
+				Stats.set_cleaner_width(upgrade_amount[current_level])
 			modifiable_stat.cleaner_speed:
 				Stats.raise_speed(upgrade_amount[current_level])
 			modifiable_stat.water_supply:
@@ -81,4 +103,5 @@ func apply_upgrade() -> void:
 			modifiable_stat.bomb_carrying_bird_cd:
 				pass
 	current_level += 1
-	
+	update_button_and_menu()
+	return true

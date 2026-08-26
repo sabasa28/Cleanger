@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw3cb6agskpum"
-path="res://.godot/imported/gorrito 1.png-13f67a681edf021a0ce21a0ac4b999bb.ctex"
+uid="uid://bqd8c5t4rkouj"
+path="res://.godot/imported/placeholder_upgrades_background.png-0072ff3a3b3b1a60b93e00814f3bf280.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/gorrito 1.png"
-dest_files=["res://.godot/imported/gorrito 1.png-13f67a681edf021a0ce21a0ac4b999bb.ctex"]
+source_file="res://Assets/Sprites/placeholder_upgrades_background.png"
+dest_files=["res://.godot/imported/placeholder_upgrades_background.png-0072ff3a3b3b1a60b93e00814f3bf280.ctex"]
 
 [params]
 

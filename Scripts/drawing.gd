@@ -117,7 +117,7 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 			else:
 				limit2_options.append(aux_limits[i])
 		
-		limit1_curr = limit1_options[0].pos if limit1_options[0].dot < limit1_options[1].dot else limit1_options[1].pos
+		limit1_curr = limit1_options[0].pos if limit1_options[0].dot < limit1_options[1].dot else limit1_options[1].pos #probablemente peligroso, hacer safe
 		limit2_curr = limit2_options[0].pos if limit2_options[0].dot < limit2_options[1].dot else limit2_options[1].pos
 		
 		#print("limit curr 1", limit1_curr)
@@ -218,6 +218,22 @@ func try_clean_window() -> bool:
 	else:
 		return false
 
+func clean_from_distance(point : Vector2, range : float) -> void:
+	var pos : Vector2
+	for columna in super_pixels_per_side:
+		for fila in super_pixels_per_side:
+			var super_pixel_num = columna * super_pixels_per_side + fila
+			if super_pixels_state[super_pixel_num] == true:
+				continue
+			pos = Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y)
+			if (pos - point).length() < range:
+				image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
+				super_pixels_state.set(super_pixel_num, true)
+				super_pixels_cleaned += 1
+				if try_clean_window():
+					break
+	texture.update(image) #cambiar para que sea una vez por frame?
+
 func _process(delta: float) -> void:
 	if cleaned:
 		return
@@ -231,6 +247,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		return
 	if area.is_in_group("Cleaner"):
 		body_inside.append(area)
+	if area.is_in_group("Explotion"):
+		clean_from_distance(area.global_position - global_position - offset + get_rect().size/2.0, area.get_range())
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if cleaned:
