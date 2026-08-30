@@ -15,6 +15,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Explotion"):
 		if cleaner_ref != null:
 			cleaner_ref.stop_colliding_with_dirty_spot(self)
+		Stats.add_dirty_spot_cleaned()
 		window_ref.on_spot_cleaned()
 		queue_free()
 	

@@ -20,7 +20,16 @@ var window_value : float = 10.0
 var floor_value : float = 0.0
 var spot_value : float = 2.0
 var golden_spot_value : float = 50.0
-var combo_value : float = 0.0
+#combo related
+var initial_combo_value : float = 0.0
+var current_combo_value : float = 0.0
+const initial_time_for_combo : float = 5000.0
+var current_time_for_combo : float 
+const time_for_combo_multiplier : float = 0.9
+var last_combo_time : int
+var current_combo_num : int = 0
+var combo_coins : float = 0
+
 var cleaning_power : float = 4.0
 var time_to_clean_spot
 var rotation_speed : float = 0.15
@@ -32,6 +41,7 @@ func start_run() -> void:
 	on_run_started.emit()
 	InGameUi.reset_ui()
 
+
 func end_run() -> void:
 	add_run_coins_to_total()
 	total_runs += 1
@@ -39,6 +49,10 @@ func end_run() -> void:
 	windows_cleaned = 0
 	spots_cleaned = 0
 	golden_spots_cleaned = 0
+	combo_coins = 0.0
+	current_combo_num = 0
+	current_time_for_combo = initial_time_for_combo
+	current_combo_value = initial_combo_value
 	on_run_ended.emit()
 
 func add_run_coins_to_total() -> void:
@@ -61,16 +75,39 @@ func add_floor_cleaned(floor_cleaned : int) -> void:
 
 func add_window_cleaned() -> void:
 	windows_cleaned += 1
-	InGameUi.update_windows_label(windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value, window_value)
+	try_add_combo()
+	update_window_related_ui(window_value)
 	on_window_cleaned.emit(windows_cleaned)
+
+func try_add_combo() -> void:
+	if initial_combo_value == 0.0: #this means we didn't unlock combo yet
+		return
+	var current_time = Time.get_ticks_msec()
+	if ((current_time - last_combo_time) < current_time_for_combo):
+		#combo logrado, sigue el combo
+		current_time_for_combo *= time_for_combo_multiplier
+		current_combo_num += 1
+		current_combo_value += initial_combo_value
+		combo_coins += current_combo_value
+	else:
+		#combo no logrado, reseteamos
+		current_time_for_combo = initial_time_for_combo
+		current_combo_value = initial_combo_value
+		current_combo_num = 0
+	print("time between windows cleaned", current_time - last_combo_time)
+	last_combo_time = current_time
+	update_window_related_ui(current_combo_value)
 
 func check_height(player_height : float, last_player_height : float) -> void:
 	on_height_changed.emit(player_height, last_player_height)	
 
 func add_dirty_spot_cleaned() -> void:
 	spots_cleaned += 1
-	InGameUi.update_windows_label(windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value, spot_value)
+	update_window_related_ui(spot_value)
 	on_spot_cleaned.emit(spots_cleaned)
+
+func update_window_related_ui(last_value_added : float) -> void:
+	InGameUi.update_windows_label(windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value, last_value_added)
 
 func update_cleaning_power(new_cleaning_power : float) -> void:
 	cleaning_power = new_cleaning_power
@@ -95,7 +132,7 @@ func raise_golden_spot_value(amount_to_raise : float) -> void:
 	golden_spot_value += amount_to_raise
 
 func raise_combo_value(amount_to_raise : float) -> void:
-	combo_value += amount_to_raise
+	initial_combo_value += amount_to_raise
 
 func raise_strength(amount_to_raise : float) -> void:
 	strength_modifier += amount_to_raise

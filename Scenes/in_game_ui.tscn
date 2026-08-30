@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://dld74mqng2a4e" path="res://Scripts/in_game_ui.gd" id="1_ey7ub"]
 [ext_resource type="FontFile" uid="uid://c1u302hkj1on4" path="res://Fonts/bptypewrite.strikethrough-italic.ttf" id="3_t3gp5"]
 [ext_resource type="FontFile" uid="uid://3p7hsboevt12" path="res://Fonts/bptypewrite.italic.otf" id="4_orthm"]
+[ext_resource type="Script" uid="uid://27ksdeu3xvxk" path="res://Scripts/rising_text_pool.gd" id="5_2ovgp"]
+[ext_resource type="Script" uid="uid://0cwkukjtbrr8" path="res://Scripts/rising_fading_text.gd" id="5_orthm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dmca1"]
 font = ExtResource("4_orthm")
@@ -15,7 +17,7 @@ font = ExtResource("4_orthm")
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label")]
+[node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label", "windows_rising_text_pool", "floors_rising_text_pool")]
 script = ExtResource("1_ey7ub")
 timer_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/VBoxContainer/TimerLabel")
 objective_label1 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective")
@@ -23,6 +25,8 @@ objective_label2 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VB
 objective_label3 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective3")
 windows_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned")
 floors_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier")
+windows_rising_text_pool = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool")
+floors_rising_text_pool = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool")
 
 [node name="GameplayUI" type="MarginContainer" parent="." unique_id=1607867072]
 anchors_preset = 15
@@ -249,6 +253,7 @@ vertical_alignment = 1
 
 [node name="WindowsCleaned" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer" unique_id=416437817]
 custom_minimum_size = Vector2(17.925, 107.005)
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -264,6 +269,225 @@ scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RisingTextPool" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned" unique_id=1225182789]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.962502
+offset_top = -56.38751
+offset_right = 16.037498
+offset_bottom = -16.387508
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_2ovgp")
+
+[node name="WindowsCleaned" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=523936947]
+visible = false
+custom_minimum_size = Vector2(19.92, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
+
+[node name="WindowsCleaned2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=639474355]
+visible = false
+custom_minimum_size = Vector2(17.925, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
+
+[node name="WindowsCleaned3" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=1281057904]
+visible = false
+custom_minimum_size = Vector2(17.925, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
+
+[node name="WindowsCleaned4" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=1403149464]
+visible = false
+custom_minimum_size = Vector2(17.925, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
+
+[node name="WindowsCleaned5" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=879742995]
+visible = false
+custom_minimum_size = Vector2(17.925, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
+
+[node name="WindowsCleaned6" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=2064603043]
+visible = false
+custom_minimum_size = Vector2(17.925, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3" unique_id=249999471]
 custom_minimum_size = Vector2(176.38, 0)
@@ -301,6 +525,7 @@ vertical_alignment = 1
 
 [node name="FloorMultiplier" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2" unique_id=574765261]
 custom_minimum_size = Vector2(17.925, 107.005)
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -316,6 +541,225 @@ scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RisingTextPool" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier" unique_id=1021271246]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.962502
+offset_top = -56.38751
+offset_right = 16.037498
+offset_bottom = -16.387508
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_2ovgp")
+
+[node name="WindowsCleaned" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=104835360]
+visible = false
+custom_minimum_size = Vector2(19.92, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.3825
+offset_top = -20.0
+offset_right = 52.692497
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "10000"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
+
+[node name="WindowsCleaned2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=2029106919]
+visible = false
+custom_minimum_size = Vector2(17.925, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
+
+[node name="WindowsCleaned3" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=1387898724]
+visible = false
+custom_minimum_size = Vector2(17.925, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
+
+[node name="WindowsCleaned4" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=1082584252]
+visible = false
+custom_minimum_size = Vector2(17.925, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
+
+[node name="WindowsCleaned5" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=2110171377]
+visible = false
+custom_minimum_size = Vector2(17.925, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
+
+[node name="WindowsCleaned6" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=1614361299]
+visible = false
+custom_minimum_size = Vector2(17.925, 42.045)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 80.075
+offset_bottom = 22.044998
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
+script = ExtResource("5_orthm")
+time_rising = 3.0
+random_offset_limit = 20.0
+rising_distance = 40.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3" unique_id=542902997]
 custom_minimum_size = Vector2(0, 43.795)

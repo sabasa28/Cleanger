@@ -40,8 +40,8 @@ func _ready() -> void:
 	cleaner.on_stuck_on_spot.connect(start_cleaning_dirty_spot)
 	cleaner.on_unstuck_from_spot.connect(stop_cleaning_dirty_spot)
 	strength_modifier = Stats.get_strength_modifier()
-	swipe_anim_cooldown = cleaner_anim.get_animation("Swipe").length / cleaner_anim.speed_scale
-	
+	swipe_anim_cooldown = cleaner_anim.get_animation("Swipe").length / cleaner_anim.speed_scale / 2.0 #CHECKEAR QUE NO SEA MAS LENTO ESTE CD QUE EL DEL SWIPE_COOLDOWN MEJORADO
+
 
 func _process(delta: float) -> void:
 	if paused:

@@ -6,7 +6,8 @@ extends Node
 @export var objective_label3 : RichTextLabel
 @export var windows_label : RichTextLabel
 @export var floors_label : RichTextLabel
-
+@export var windows_rising_text_pool : RisingTextPool
+@export var floors_rising_text_pool : RisingTextPool
 
 func set_timer_text(time_left_num : int) -> void:
 	var mins = time_left_num / 60
@@ -28,7 +29,7 @@ func update_mayor_objective_text(objective_text : String) -> void:
 func cross_out_minor_objective(obj_num : int) -> void:
 	match obj_num:
 		0:
-			objective_label1.text = "[i]" + objective_label1.text + "[/i]"
+			objective_label1.text = "[i]" + objective_label1.text + "[/i]"#o se puede usar [s][/s]
 		1:
 			objective_label2.text = "[i]" + objective_label2.text + "[/i]"
 		_:
@@ -36,16 +37,12 @@ func cross_out_minor_objective(obj_num : int) -> void:
 
 func update_windows_label(new_windows_amount : float, windows_added : float) -> void:
 	windows_label.text = str(new_windows_amount)
+	windows_rising_text_pool.release_array_element(str(windows_added))
 
 func update_floor_multiplier_label(new_floor_multiplier : float, multiplier_added : float) -> void:
 	floors_label.text = str(new_floor_multiplier)
+	floors_rising_text_pool.release_array_element(str(multiplier_added))
 
 func reset_ui() -> void:
 	windows_label.text = str(0)
 	floors_label.text = str(1.0)
-
-func _ready() -> void:
-	pass
-
-func _process(_delta: float) -> void:
-	pass
