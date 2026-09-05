@@ -17,9 +17,10 @@ font = ExtResource("4_orthm")
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label", "windows_rising_text_pool", "floors_rising_text_pool")]
+[node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "combo_timer_label", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label", "windows_rising_text_pool", "floors_rising_text_pool")]
 script = ExtResource("1_ey7ub")
-timer_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/VBoxContainer/TimerLabel")
+timer_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer/Control/TimerLabel")
+combo_timer_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control/ComboTimerLabel")
 objective_label1 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective")
 objective_label2 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective2")
 objective_label3 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective3")
@@ -62,39 +63,57 @@ patch_margin_bottom = 14
 
 [node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=97674351]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -33.0
-offset_right = 33.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -204.0
+offset_right = -138.0
 offset_bottom = 40.0
-grow_horizontal = 2
+grow_horizontal = 0
 theme_override_constants/margin_top = 10
 
 [node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=1148948539]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "Timer"
 label_settings = SubResource("LabelSettings_dmca1")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=529754812]
-custom_maximum_size = Vector2(225, 150)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="TimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/VBoxContainer" unique_id=1779320711]
+[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=363559231]
 layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer/Control" unique_id=1779320711]
+layout_mode = 0
+offset_top = 53.0
+offset_right = 60.0
+offset_bottom = 74.000015
+text = "Timer"
+label_settings = SubResource("LabelSettings_t3gp5")
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=914278762]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 1.0
+offset_right = 207.00006
+offset_bottom = 41.0
+theme_override_constants/margin_top = 10
+
+[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1560435504]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Combo"
+label_settings = SubResource("LabelSettings_dmca1")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1006008327]
+layout_mode = 2
+
+[node name="ComboTimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=1894074982]
+layout_mode = 0
+offset_top = 53.0
+offset_right = 60.0
+offset_bottom = 74.000015
 text = "Timer"
 label_settings = SubResource("LabelSettings_t3gp5")
 horizontal_alignment = 1

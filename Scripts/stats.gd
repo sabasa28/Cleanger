@@ -8,6 +8,10 @@ signal on_spot_cleaned
 signal on_run_started
 signal on_run_ended
 signal on_rotation_speed_changed(current_rot_speed)
+signal on_speed_modified(new_speed_modifier : float, new_speed_level : int)
+signal on_width_modified(new_width_level : int)
+
+var gameplay_controller : GameplayController
 
 var total_coins : int
 var floors_cleaned : int
@@ -21,21 +25,28 @@ var floor_value : float = 0.0
 var spot_value : float = 2.0
 var golden_spot_value : float = 50.0
 #combo related
-var initial_combo_value : float = 0.0
-var current_combo_value : float = 0.0
-const initial_time_for_combo : float = 5000.0
+var initial_combo_value : int = 0.0
+var current_combo_value : int = 0.0
+const initial_time_for_combo : float = 10000.0 #in miliseconds
 var current_time_for_combo : float 
-const time_for_combo_multiplier : float = 0.9
-var last_combo_time : int
+const time_for_combo_multiplier : float = 0.95
+var last_combo_time : float = 0.0
+var min_combo_time : float = 0.5
 var current_combo_num : int = 0
-var combo_coins : float = 0
+var current_combo_coins : int = 0
+var total_combo_coins : int = 0
 
-var cleaning_power : float = 4.0
-var time_to_clean_spot
+var cleaning_power : float = 4.0 #(times to clean spot, lower is better)
 var rotation_speed : float = 0.15
 var strength_modifier : float = 1.0
 var cleaner_width_modifier : float = 1.0
 var speed_modifier : float = 1.0
+var cleaner_width_level : int = 0
+var cleaner_speed_level : int = 0
+
+var water_bomb_explotion_time_min : float = 0.4
+var water_bomb_explotion_time_max : float = 0.7
+var water_bomb_explotion_range : float = 1.0 #actually a multiplier
 
 func start_run() -> void:
 	on_run_started.emit()
@@ -49,14 +60,15 @@ func end_run() -> void:
 	windows_cleaned = 0
 	spots_cleaned = 0
 	golden_spots_cleaned = 0
-	combo_coins = 0.0
+	total_combo_coins = 0
+	current_combo_coins = 0
 	current_combo_num = 0
 	current_time_for_combo = initial_time_for_combo
 	current_combo_value = initial_combo_value
 	on_run_ended.emit()
 
 func add_run_coins_to_total() -> void:
-	var coins_earned : float = (windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value) * (1.0 + floors_cleaned * floor_value) #aca se multiplicaria con el multiplicador
+	var coins_earned : float = (windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value + total_combo_coins) * (1.0 + floors_cleaned * floor_value) #aca se multiplicaria con el multiplicador
 	total_coins += coins_earned
 	on_coins_changed.emit(total_coins, coins_earned)
 
@@ -88,15 +100,19 @@ func try_add_combo() -> void:
 		current_time_for_combo *= time_for_combo_multiplier
 		current_combo_num += 1
 		current_combo_value += initial_combo_value
-		combo_coins += current_combo_value
-	else:
-		#combo no logrado, reseteamos
-		current_time_for_combo = initial_time_for_combo
-		current_combo_value = initial_combo_value
-		current_combo_num = 0
-	print("time between windows cleaned", current_time - last_combo_time)
+		current_combo_coins += current_combo_value
+	gameplay_controller.set_combo_timer(current_time_for_combo / 1000)
+	#print("time between windows cleaned", current_time - last_combo_time)
 	last_combo_time = current_time
-	update_window_related_ui(current_combo_value)
+
+func on_combo_finished() -> void:
+	if current_combo_num > 0: 
+			current_time_for_combo = initial_time_for_combo
+			current_combo_value = initial_combo_value
+			current_combo_num = 0
+			total_combo_coins += current_combo_coins
+			update_window_related_ui(current_combo_coins)
+			current_combo_coins = 0
 
 func check_height(player_height : float, last_player_height : float) -> void:
 	on_height_changed.emit(player_height, last_player_height)	
@@ -107,7 +123,7 @@ func add_dirty_spot_cleaned() -> void:
 	on_spot_cleaned.emit(spots_cleaned)
 
 func update_window_related_ui(last_value_added : float) -> void:
-	InGameUi.update_windows_label(windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value, last_value_added)
+	InGameUi.update_windows_label(windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value + total_combo_coins, last_value_added)
 
 func update_cleaning_power(new_cleaning_power : float) -> void:
 	cleaning_power = new_cleaning_power
@@ -137,11 +153,14 @@ func raise_combo_value(amount_to_raise : float) -> void:
 func raise_strength(amount_to_raise : float) -> void:
 	strength_modifier += amount_to_raise
 
-func set_cleaner_width(new_value : float) -> void:
-	cleaner_width_modifier = new_value
+func raise_width_level(amount_to_raise : int) -> void:
+	cleaner_width_level += amount_to_raise
+	on_width_modified.emit(cleaner_width_level)
 
-func raise_speed(amount_to_raise : float) -> void:
+func raise_speed_level(amount_to_raise : float) -> void:
 	speed_modifier += amount_to_raise
+	cleaner_speed_level += 1
+	on_speed_modified.emit(speed_modifier, cleaner_speed_level)
 
 func get_strength_modifier() -> float:
 	return strength_modifier

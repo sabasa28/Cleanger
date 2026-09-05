@@ -83,9 +83,9 @@ func apply_upgrade() -> bool:
 			modifiable_stat.cleaner_strength:
 				Stats.raise_strength(upgrade_amount[current_level])
 			modifiable_stat.cleaner_width:
-				Stats.set_cleaner_width(upgrade_amount[current_level])
+				Stats.raise_width_level(upgrade_amount[current_level])
 			modifiable_stat.cleaner_speed:
-				Stats.raise_speed(upgrade_amount[current_level])
+				Stats.raise_speed_level(upgrade_amount[current_level])
 			modifiable_stat.water_supply:
 				pass
 			modifiable_stat.water_explotion_cd:

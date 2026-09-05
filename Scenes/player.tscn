@@ -10,6 +10,7 @@ radius = 99.0
 height = 530.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
+size = Vector2(20, 13.177631)
 
 [sub_resource type="Animation" id="Animation_vgqql"]
 length = 0.001
@@ -52,8 +53,8 @@ gravity_scale = 7.0
 lock_rotation = true
 linear_damp = 5.0
 script = ExtResource("1_cvnsp")
-swipeCooldown = 0.3
-time_cleaning_after_swipe = 0.1
+swipe_base_cooldown = 1.0
+height_checking_cooldown = 0.5
 cleanerPivot = NodePath("Node2D")
 cleaner = NodePath("Node2D/Node2D/Area2D2")
 cleaner_anim = NodePath("Node2D/Node2D/Area2D2/AnimationPlayer")
@@ -74,14 +75,18 @@ position = Vector2(0, -154)
 [node name="Node2D" type="Node2D" parent="Node2D" unique_id=1124885383]
 position = Vector2(374, 0)
 
-[node name="Area2D2" type="Area2D" parent="Node2D/Node2D" unique_id=1642259077 groups=["Cleaner"]]
+[node name="Area2D2" type="Area2D" parent="Node2D/Node2D" unique_id=1642259077 node_paths=PackedStringArray("sprite") groups=["Cleaner"]]
 process_priority = 5
 z_index = 1
 rotation = -1.5707964
 scale = Vector2(14.922, 8.496901)
 script = ExtResource("3_vgqql")
+sprite = NodePath("Sprite2D")
+cleaners = Array[Rect2]([Rect2(0, 2, 26, 62), Rect2(28, 2, 32, 62), Rect2(62, 2, 38, 62), Rect2(102, 2, 44, 62), Rect2(148, 2, 50, 62), Rect2(200, 2, 56, 62), Rect2(258, 2, 62, 62)])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Node2D/Area2D2" unique_id=1472793818]
+position = Vector2(-1.288449e-07, 1.765348)
+scale = Vector2(0.99999976, 0.9999996)
 shape = SubResource("RectangleShape2D_cvnsp")
 debug_color = Color(0.47034276, 0.64001155, 1, 1)
 
@@ -90,7 +95,7 @@ position = Vector2(2.1677008e-07, -8.709059)
 scale = Vector2(0.765, 0.765)
 texture = ExtResource("4_vgqql")
 region_enabled = true
-region_rect = Rect2(0, 14, 26, 51)
+region_rect = Rect2(0, 2, 26, 62)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Node2D/Area2D2" unique_id=909989612]
 libraries/ = SubResource("AnimationLibrary_x3wgy")

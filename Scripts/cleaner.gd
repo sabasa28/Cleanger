@@ -22,6 +22,13 @@ class mediatrix_data:
 	var last_left : Vector2
 	var cleaner_dir : direction
 
+@export var sprite : Sprite2D
+@export var cleaners : Array[Rect2]
+var current_speed_type : int = 0
+var current_width_type : int = 0
+const cleaner_speed_region_offset : float = 64.0
+var cleaner_base_width : float
+
 var current_mediatrix_data : mediatrix_data
 @export var collider : CollisionShape2D
 var cleaning = false
@@ -32,10 +39,11 @@ var player_dir : Vector2
 var mediatrix_data_updated : bool
 var spots_colliding : Array[Node]
 signal on_stuck_on_spot
-signal on_unstuck_from_spot(fully_cleaned : bool)
 
 func _ready() -> void:
 	collider = get_node("CollisionShape2D")
+	cleaner_base_width = collider.shape.size.x
+	set_cleaner_type()
 	current_mediatrix_data = mediatrix_data.new()
 	get_mediatrix_data()
 
@@ -133,11 +141,18 @@ func stop_cleaning_dirty_spot() -> void:
 	if !spots_colliding.is_empty():
 		for i in spots_colliding:
 			i.pause_cleaning()
-		on_unstuck_from_spot.emit(false)
 
-func finish_cleaning_dirty_spot(dirty_spot : Node) -> void:
-	spots_colliding.erase(dirty_spot)
-	on_unstuck_from_spot.emit(true)
+func set_cleaner_speed_sprite(type : int) -> void:
+	current_speed_type = type
+	set_cleaner_type()
 
-func set_width() -> void:
-	pass
+func set_width(type : int) -> void:
+	current_width_type = type
+	set_cleaner_type()
+
+func set_cleaner_type() -> void:
+	var rect_to_use : Rect2 = cleaners[current_width_type]
+	rect_to_use.position.y += cleaner_speed_region_offset * current_speed_type
+	sprite.region_rect = rect_to_use
+	var width_multiplier = rect_to_use.size.x / cleaners[0].size.x
+	collider.shape.size.x = cleaner_base_width * width_multiplier

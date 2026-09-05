@@ -1,6 +1,7 @@
 extends Node
 
 @export var timer_label : Label
+@export var combo_timer_label : Label
 @export var objective_label1 : RichTextLabel
 @export var objective_label2 : RichTextLabel
 @export var objective_label3 : RichTextLabel
@@ -10,11 +11,17 @@ extends Node
 @export var floors_rising_text_pool : RisingTextPool
 
 func set_timer_text(time_left_num : int) -> void:
+	timer_label.text = format_time(time_left_num)
+
+func set_combo_timer_text(time_left_num : int) -> void:
+	combo_timer_label.text = format_time(time_left_num)
+
+func format_time(time_left_num : int) -> String:
 	var mins = time_left_num / 60
 	var secs = time_left_num % 60
 	if secs < 10:
 		secs = "0" + str(secs)
-	timer_label.text = str(mins, ":", secs)
+	return str(mins, ":", secs)
 
 func update_minor_objective_text(objective_text1 : String, objective_text2 : String, objective_text3 : String) -> void:
 	objective_label1.text = objective_text1

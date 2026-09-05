@@ -6,8 +6,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dmca1"]
 radius = 150.0
 
-[node name="water_explotion" type="Area2D" unique_id=1359671409 groups=["Explotion"]]
+[node name="water_explotion" type="Area2D" unique_id=1359671409 node_paths=PackedStringArray("collider") groups=["Explotion"]]
 script = ExtResource("1_ieqmh")
+collider = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=323953135]
 shape = SubResource("CircleShape2D_dmca1")
