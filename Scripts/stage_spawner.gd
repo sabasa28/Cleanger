@@ -1,6 +1,6 @@
 extends Node2D
 
-var window_prefab = preload("res://Scenes/window_square.tscn")
+
 @export var window_interval : Vector2
 @export var window_spawn_origin : Vector2
 @export var columns_and_rows : Vector2i
@@ -37,7 +37,7 @@ func reset_windows() -> void:
 		floor = false
 	for rows in columns_and_rows.y:
 		for columns in columns_and_rows.x:
-			spawned_window = window_prefab.instantiate()
+			spawned_window = Stats.window_prefab.instantiate()
 			on_reset_windows.connect(spawned_window.delete_window) 
 			spawned_window.has_spot = randi() % 2
 			add_child(spawned_window)

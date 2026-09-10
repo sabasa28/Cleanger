@@ -6,14 +6,14 @@ var window_num
 var has_spot : bool = false
 @export var window_ref : Node2D
 var spot_pos_offset : Vector2
-var spot_prefab = preload("res://Scenes/dirty_spot.tscn")
+
 var base_cleaned : bool = false #base == window minus the spots
 
 func _ready() -> void:
 	if has_spot:
 		spot_pos_offset = window_ref.image_size / 4.0
 		var spawned_spot
-		spawned_spot = spot_prefab.instantiate()
+		spawned_spot = Stats.spot_prefab.instantiate()
 		add_child(spawned_spot)
 		var versorX = 1.0 if randi() % 2 else -1.0
 		var versorY = 1.0 if randi() % 2 else -1.0

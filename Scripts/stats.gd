@@ -10,6 +10,7 @@ signal on_run_ended
 signal on_rotation_speed_changed(current_rot_speed)
 signal on_speed_modified(new_speed_modifier : float, new_speed_level : int)
 signal on_width_modified(new_width_level : int)
+signal on_cleaner_explotion_unlocked()
 
 var gameplay_controller : GameplayController
 
@@ -44,9 +45,29 @@ var speed_modifier : float = 1.0
 var cleaner_width_level : int = 0
 var cleaner_speed_level : int = 0
 
+var necessary_cleanlyness : float = 0.95
+
 var water_bomb_explotion_time_min : float = 0.4
 var water_bomb_explotion_time_max : float = 0.7
 var water_bomb_explotion_range : float = 1.0 #actually a multiplier
+var water_bomb_water_bomb_chance : float = 0.0
+
+var cleaner_explotion_time : float = 10.0
+var cleaner_explotion_unlocked : bool = false
+var cleaner_explotion_range : float = 2.0 #actually a multiplier
+var cleaner_explotion_water_bomb_chance : float = 0.0
+
+#prefabs
+var water_bomb_prefab = preload("res://Scenes/water_bomb.tscn")
+var explotion_prefab = preload("res://Scenes/water_explotion.tscn")
+var spot_prefab = preload("res://Scenes/dirty_spot.tscn")
+var window_prefab = preload("res://Scenes/window_square.tscn")
+
+enum explotion_origin
+{
+	water_bomb,
+	regular_explotion
+}
 
 func start_run() -> void:
 	on_run_started.emit()
@@ -161,6 +182,25 @@ func raise_speed_level(amount_to_raise : float) -> void:
 	speed_modifier += amount_to_raise
 	cleaner_speed_level += 1
 	on_speed_modified.emit(speed_modifier, cleaner_speed_level)
+
+func lower_necessary_cleanlyness_value(amount_to_lower : float) -> void:
+	necessary_cleanlyness -= amount_to_lower
+
+func lower_cleaner_explotion_time(amount_to_lower : float) -> void:
+	if !cleaner_explotion_unlocked:
+		cleaner_explotion_unlocked = true
+		on_cleaner_explotion_unlocked.emit()
+	else:
+		cleaner_explotion_time -= amount_to_lower
+
+func raise_cleaner_explotion_range(amount_to_raise : float) -> void:
+	cleaner_explotion_range += amount_to_raise
+
+func raise_cleaner_explotion_water_bomb_chance(amount_to_raise : float) -> void:
+	cleaner_explotion_water_bomb_chance += amount_to_raise
+
+func raise_water_bomb_water_bomb_chance(amount_to_raise : float) -> void:
+	water_bomb_water_bomb_chance += amount_to_raise
 
 func get_strength_modifier() -> float:
 	return strength_modifier

@@ -80,7 +80,7 @@ script = ExtResource("2_mnydp")
 name = "Más fuerza"
 description = "Aumenta la fuerza del impulso de tu limpiador"
 upgrade_amount = Array[float]([0.1, 0.1, 0.1, 0.1])
-upgrade_price = Array[int]([50, 100, 500, 1000])
+upgrade_price = Array[int]([100, 500, 1000, 2500])
 stat_to_modify = 4
 button = NodePath("MarginContainer/Control/ButtonUpgrade3")
 dependency_upgrade = SubResource("Resource_mnydp")
@@ -92,7 +92,7 @@ script = ExtResource("2_mnydp")
 name = "Más ancho"
 description = "Aumenta el ancho del limpiador"
 upgrade_amount = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])
-upgrade_price = Array[int]([20, 100, 500, 500, 500, 500])
+upgrade_price = Array[int]([100, 500, 1000, 2000, 4000, 10000])
 stat_to_modify = 5
 button = NodePath("MarginContainer/Control/ButtonUpgrade6")
 dependency_upgrade = SubResource("Resource_mnydp")
@@ -117,25 +117,28 @@ name = "Eficiencia"
 description = "Las ventanas requieren limpiarse un 5% menos antes de considerarse limpias."
 upgrade_amount = Array[float]([0.05, 0.05, 0.05])
 upgrade_price = Array[int]([150, 5000, 15000])
-button = NodePath("MarginContainer/Control/ButtonUpgrade9")
+stat_to_modify = 15
+button = NodePath("MarginContainer/Control/ButtonUpgrade10")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
 [sub_resource type="Resource" id="Resource_kwblu"]
 script = ExtResource("2_mnydp")
 name = "Explosión de agua"
 description = "Cada 10 segundos tu limpiador causa una explosión de agua que limpia a su alrededor."
-upgrade_amount = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
-upgrade_price = Array[int]([200, 350, 500, 650, 800])
-button = NodePath("MarginContainer/Control/ButtonUpgrade9")
+upgrade_amount = Array[float]([0.0, 1.0, 1.0, 1.0, 1.0, 1.0])
+upgrade_price = Array[int]([200, 350, 500, 650, 800, 950])
+stat_to_modify = 16
+button = NodePath("MarginContainer/Control/ButtonUpgrade11")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
 [sub_resource type="Resource" id="Resource_im2lx"]
 script = ExtResource("2_mnydp")
 name = "Explosión mejorada"
 description = "Aumenta el tamaño de tu explosión de agua"
-upgrade_amount = Array[float]([0.1, 0.1, 0.1, 0.1, 0.1])
+upgrade_amount = Array[float]([0.2, 0.2, 0.2, 0.2, 0.2])
 upgrade_price = Array[int]([250, 500, 750, 1000, 1250])
-button = NodePath("MarginContainer/Control/ButtonUpgrade9")
+stat_to_modify = 17
+button = NodePath("MarginContainer/Control/ButtonUpgrade12")
 dependency_upgrade = SubResource("Resource_kwblu")
 lvl_of_dependency = 1
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
@@ -144,27 +147,30 @@ metadata/_custom_type_script = "uid://b13bbk8g4cak"
 script = ExtResource("2_mnydp")
 name = "Explosón con bombita"
 description = "La explosión de agua tiene +20% de probabilidad de adicionalmente lanzar una bombita de agua en una dirección aleatoria."
-upgrade_amount = Array[float]([20.0, 20.0, 20.0, 20.0, 20.0])
-upgrade_price = Array[int]([1000, 2000, 3000, 4000, 5000])
-button = NodePath("MarginContainer/Control/ButtonUpgrade9")
+upgrade_amount = Array[float]([0.2, 0.2, 0.2, 0.2, 0.2])
+upgrade_price = Array[int]([500, 2000, 3000, 4000, 5000])
+stat_to_modify = 18
+button = NodePath("MarginContainer/Control/ButtonUpgrade13")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
 [sub_resource type="Resource" id="Resource_y0t3v"]
 script = ExtResource("2_mnydp")
-name = "Máxima explosión"
+name = "Máxima explosión(CAMBIAR?)"
 description = "La explosión de agua causada por tu limpiador ocurre 1 segundo más rápido."
 upgrade_amount = Array[float]([1.0, 1.0, 1.0])
 upgrade_price = Array[int]([5000, 10000, 20000])
-button = NodePath("MarginContainer/Control/ButtonUpgrade9")
+stat_to_modify = 16
+button = NodePath("MarginContainer/Control/ButtonUpgrade14")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
 [sub_resource type="Resource" id="Resource_8sexr"]
 script = ExtResource("2_mnydp")
 name = "Bombitas de agua"
 description = "Cada 10 segundos lanzá una bombita de agua a un lugar aleatorio."
-upgrade_amount = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0])
-upgrade_price = Array[int]([200, 350, 500, 650, 800])
-button = NodePath("MarginContainer/Control/ButtonUpgrade9")
+upgrade_amount = Array[float]([0.0, 1.0, 1.0, 1.0, 1.0, 1.0])
+upgrade_price = Array[int]([200, 350, 500, 650, 800, 950])
+stat_to_modify = 11
+button = NodePath("MarginContainer/Control/DISABLED")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
 [sub_resource type="Gradient" id="Gradient_yk0t2"]
@@ -1044,17 +1050,17 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonUpgrade9" type="Button" parent="MarginContainer/Control" unique_id=219843596]
+[node name="ButtonUpgrade10" type="Button" parent="MarginContainer/Control" unique_id=1235406502]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 942.0
-offset_top = 646.0
-offset_right = 992.0
-offset_bottom = 696.0
+offset_left = 621.0
+offset_top = 465.0
+offset_right = 671.0
+offset_bottom = 515.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade9" unique_id=1163089173 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade10" unique_id=573117501 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
 layout_mode = 0
 offset_left = 50.0
@@ -1068,7 +1074,7 @@ upgrade_name_text = NodePath("Control/RichTextLabel")
 upgrade_description_text = NodePath("Control/RichTextLabel2")
 upgrade_cost_text = NodePath("Control/RichTextLabel3")
 
-[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade9/TextureRect" unique_id=725821895]
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade10/TextureRect" unique_id=939547585]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1076,7 +1082,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade9/TextureRect/Control" unique_id=630387369]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade10/TextureRect/Control" unique_id=422122188]
 custom_minimum_size = Vector2(64.825, 0)
 custom_maximum_size = Vector2(800, -1)
 layout_mode = 1
@@ -1095,7 +1101,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade9/TextureRect/Control" unique_id=1965028556]
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade10/TextureRect/Control" unique_id=547381889]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(901.185, -1)
 layout_mode = 1
@@ -1118,7 +1124,473 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade9/TextureRect/Control" unique_id=419230467]
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade10/TextureRect/Control" unique_id=1226241350]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -110.234985
+offset_right = 400.0
+offset_bottom = 0.00012207031
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 27
+text = "Cost:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonUpgrade11" type="Button" parent="MarginContainer/Control" unique_id=1374378161]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 445.0
+offset_top = 80.0
+offset_right = 495.0
+offset_bottom = 130.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade11" unique_id=454027921 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+visible = false
+layout_mode = 0
+offset_left = 50.0
+offset_top = -107.0
+offset_right = 1074.0
+offset_bottom = 405.0
+scale = Vector2(0.27, 0.27)
+texture = SubResource("NoiseTexture2D_23g7n")
+script = ExtResource("4_tyk1r")
+upgrade_name_text = NodePath("Control/RichTextLabel")
+upgrade_description_text = NodePath("Control/RichTextLabel2")
+upgrade_cost_text = NodePath("Control/RichTextLabel3")
+
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade11/TextureRect" unique_id=927149879]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade11/TextureRect/Control" unique_id=421621850]
+custom_minimum_size = Vector2(64.825, 0)
+custom_maximum_size = Vector2(800, -1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_right = 144.0
+offset_bottom = 53.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 38
+text = "Upgrade name?"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade11/TextureRect/Control" unique_id=728825068]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(901.185, -1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.5
+offset_top = -184.0
+offset_right = 450.5
+offset_bottom = 141.775
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "This is a test text for the upgrades if you see this I fucked up"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade11/TextureRect/Control" unique_id=1386042179]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -110.234985
+offset_right = 400.0
+offset_bottom = 0.00012207031
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 27
+text = "Cost:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonUpgrade12" type="Button" parent="MarginContainer/Control" unique_id=940789309]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 598.0
+offset_top = 82.0
+offset_right = 648.0
+offset_bottom = 132.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade12" unique_id=1896695740 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+visible = false
+layout_mode = 0
+offset_left = 50.0
+offset_top = -107.0
+offset_right = 1074.0
+offset_bottom = 405.0
+scale = Vector2(0.27, 0.27)
+texture = SubResource("NoiseTexture2D_23g7n")
+script = ExtResource("4_tyk1r")
+upgrade_name_text = NodePath("Control/RichTextLabel")
+upgrade_description_text = NodePath("Control/RichTextLabel2")
+upgrade_cost_text = NodePath("Control/RichTextLabel3")
+
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade12/TextureRect" unique_id=1135669985]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade12/TextureRect/Control" unique_id=90452154]
+custom_minimum_size = Vector2(64.825, 0)
+custom_maximum_size = Vector2(800, -1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_right = 144.0
+offset_bottom = 53.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 38
+text = "Upgrade name?"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade12/TextureRect/Control" unique_id=973104864]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(901.185, -1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.5
+offset_top = -184.0
+offset_right = 450.5
+offset_bottom = 141.775
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "This is a test text for the upgrades if you see this I fucked up"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade12/TextureRect/Control" unique_id=949805885]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -110.234985
+offset_right = 400.0
+offset_bottom = 0.00012207031
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 27
+text = "Cost:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonUpgrade13" type="Button" parent="MarginContainer/Control" unique_id=1573163949]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 454.0
+offset_top = 159.0
+offset_right = 504.0
+offset_bottom = 209.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade13" unique_id=1532152243 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+visible = false
+layout_mode = 0
+offset_left = 50.0
+offset_top = -107.0
+offset_right = 1074.0
+offset_bottom = 405.0
+scale = Vector2(0.27, 0.27)
+texture = SubResource("NoiseTexture2D_23g7n")
+script = ExtResource("4_tyk1r")
+upgrade_name_text = NodePath("Control/RichTextLabel")
+upgrade_description_text = NodePath("Control/RichTextLabel2")
+upgrade_cost_text = NodePath("Control/RichTextLabel3")
+
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade13/TextureRect" unique_id=654873032]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade13/TextureRect/Control" unique_id=1343793752]
+custom_minimum_size = Vector2(64.825, 0)
+custom_maximum_size = Vector2(800, -1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_right = 144.0
+offset_bottom = 53.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 38
+text = "Upgrade name?"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade13/TextureRect/Control" unique_id=70182656]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(901.185, -1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.5
+offset_top = -184.0
+offset_right = 450.5
+offset_bottom = 141.775
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "This is a test text for the upgrades if you see this I fucked up"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade13/TextureRect/Control" unique_id=1217159403]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -110.234985
+offset_right = 400.0
+offset_bottom = 0.00012207031
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 27
+text = "Cost:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonUpgrade14" type="Button" parent="MarginContainer/Control" unique_id=1969302692]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 539.0
+offset_top = 156.0
+offset_right = 589.0
+offset_bottom = 206.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade14" unique_id=1741251671 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+visible = false
+layout_mode = 0
+offset_left = 50.0
+offset_top = -107.0
+offset_right = 1074.0
+offset_bottom = 405.0
+scale = Vector2(0.27, 0.27)
+texture = SubResource("NoiseTexture2D_23g7n")
+script = ExtResource("4_tyk1r")
+upgrade_name_text = NodePath("Control/RichTextLabel")
+upgrade_description_text = NodePath("Control/RichTextLabel2")
+upgrade_cost_text = NodePath("Control/RichTextLabel3")
+
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade14/TextureRect" unique_id=779006196]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade14/TextureRect/Control" unique_id=821445764]
+custom_minimum_size = Vector2(64.825, 0)
+custom_maximum_size = Vector2(800, -1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_right = 144.0
+offset_bottom = 53.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 38
+text = "Upgrade name?"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade14/TextureRect/Control" unique_id=618103749]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(901.185, -1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.5
+offset_top = -184.0
+offset_right = 450.5
+offset_bottom = 141.775
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "This is a test text for the upgrades if you see this I fucked up"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade14/TextureRect/Control" unique_id=1931764034]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -110.234985
+offset_right = 400.0
+offset_bottom = 0.00012207031
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 27
+text = "Cost:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DISABLED" type="Button" parent="MarginContainer/Control" unique_id=219843596]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 942.0
+offset_top = 701.0
+offset_right = 992.0
+offset_bottom = 751.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/DISABLED" unique_id=1163089173 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+visible = false
+layout_mode = 0
+offset_left = 50.0
+offset_top = -107.0
+offset_right = 1074.0
+offset_bottom = 405.0
+scale = Vector2(0.27, 0.27)
+texture = SubResource("NoiseTexture2D_23g7n")
+script = ExtResource("4_tyk1r")
+upgrade_name_text = NodePath("Control/RichTextLabel")
+upgrade_description_text = NodePath("Control/RichTextLabel2")
+upgrade_cost_text = NodePath("Control/RichTextLabel3")
+
+[node name="Control" type="Control" parent="MarginContainer/Control/DISABLED/TextureRect" unique_id=725821895]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/DISABLED/TextureRect/Control" unique_id=630387369]
+custom_minimum_size = Vector2(64.825, 0)
+custom_maximum_size = Vector2(800, -1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_right = 144.0
+offset_bottom = 53.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 38
+text = "Upgrade name?"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/DISABLED/TextureRect/Control" unique_id=1965028556]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(901.185, -1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.5
+offset_top = -184.0
+offset_right = 450.5
+offset_bottom = 141.775
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "This is a test text for the upgrades if you see this I fucked up"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/DISABLED/TextureRect/Control" unique_id=419230467]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 1
@@ -1217,6 +1689,16 @@ vertical_alignment = 1
 [connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade6" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade6/TextureRect")]]
 [connection signal="mouse_entered" from="MarginContainer/Control/ButtonUpgrade7" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade7/TextureRect")]]
 [connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade7" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade7/TextureRect")]]
-[connection signal="mouse_entered" from="MarginContainer/Control/ButtonUpgrade9" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade9/TextureRect")]]
-[connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade9" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade9/TextureRect")]]
+[connection signal="mouse_entered" from="MarginContainer/Control/ButtonUpgrade10" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade10/TextureRect")]]
+[connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade10" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade10/TextureRect")]]
+[connection signal="mouse_entered" from="MarginContainer/Control/ButtonUpgrade11" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade11/TextureRect")]]
+[connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade11" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade11/TextureRect")]]
+[connection signal="mouse_entered" from="MarginContainer/Control/ButtonUpgrade12" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade12/TextureRect")]]
+[connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade12" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade12/TextureRect")]]
+[connection signal="mouse_entered" from="MarginContainer/Control/ButtonUpgrade13" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade13/TextureRect")]]
+[connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade13" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade13/TextureRect")]]
+[connection signal="mouse_entered" from="MarginContainer/Control/ButtonUpgrade14" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade14/TextureRect")]]
+[connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade14" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade14/TextureRect")]]
+[connection signal="mouse_entered" from="MarginContainer/Control/DISABLED" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade9/TextureRect")]]
+[connection signal="mouse_exited" from="MarginContainer/Control/DISABLED" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade9/TextureRect")]]
 [connection signal="button_down" from="MarginContainer/Control/ButtonUpgradeFinished" to="." method="_on_button_upgrade_finished_button_down"]

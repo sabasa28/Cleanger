@@ -31,7 +31,7 @@ func _ready() -> void:
 	for i in aux_limits.size():
 		aux_limits[i] = limit.new()
 	super_pixels_cleaned = 0
-	min_super_pixels_to_clear = (super_pixels_per_side * super_pixels_per_side) * amount_of_window_before_fullclean
+	min_super_pixels_to_clear = (super_pixels_per_side * super_pixels_per_side) * Stats.necessary_cleanlyness #optimizable, puede estar en stats en vez de en cada ventana
 	super_pixels_state.resize(super_pixels_per_side * super_pixels_per_side)
 	super_pixels_interval = image_size / super_pixels_per_side
 	half_super_pixels_per_side = super_pixels_per_side / 2

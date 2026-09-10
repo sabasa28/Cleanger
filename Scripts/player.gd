@@ -23,7 +23,10 @@ var cleaner_rot_speed : float
 var unpaused_timer : float
 @export var time_to_unpause : float
 var waiting_to_unpause : bool = false
-var water_bomb_prefab = preload("res://Scenes/water_bomb.tscn")
+
+var cleaner_explotions_unlocked : bool = false
+var cleaner_explotions_timer : float = 0.0
+
 @export var cleaner_anim : AnimationPlayer
 var swipe_anim_cooldown : float
 var swipe_anim_timer : float = 0.0
@@ -35,6 +38,7 @@ func _ready() -> void:
 	Stats.on_rotation_speed_changed.connect(update_rot_speed)
 	Stats.on_speed_modified.connect(raise_cleaner_speed_level)
 	Stats.on_width_modified.connect(raise_cleaner_width_level)
+	Stats.on_cleaner_explotion_unlocked.connect(unlock_cleaner_explotions)
 	cleaner_rot_speed = Stats.rotation_speed
 	initial_pos = global_position
 	last_checked_height = global_position.y
@@ -81,7 +85,7 @@ func _process(delta: float) -> void:
 		if swipe_anim_timer <= 0:
 			if !cleaner.cleaning:
 				cleaner.start_cleaning()
-				var spawned_bomb = water_bomb_prefab.instantiate()
+				var spawned_bomb = Stats.water_bomb_prefab.instantiate()
 				spawned_bomb.global_position = global_position
 				add_sibling(spawned_bomb)
 				spawned_bomb.initialize()
@@ -89,6 +93,15 @@ func _process(delta: float) -> void:
 				apply_force((cleanerPivot.global_position - cleaner.global_position).normalized() * BASE_strength * strength_modifier)
 			playing_swipe_anim = false
 			cleaning_timer = 0.0
+	
+	if cleaner_explotions_unlocked:
+		cleaner_explotions_timer -= delta
+		if cleaner_explotions_timer <= 0:
+			var spawned_explotion = Stats.explotion_prefab.instantiate()
+			spawned_explotion.global_position = cleaner.global_position
+			add_sibling(spawned_explotion)
+			spawned_explotion.set_data(Stats.explotion_origin.regular_explotion)
+			cleaner_explotions_timer = Stats.cleaner_explotion_time
 	
 	height_checking_timer -= delta
 	if height_checking_timer < 0:
@@ -112,6 +125,7 @@ func reset() -> void:
 	is_cleaner_stuck = false
 	swipe_current_cooldown = 0.0
 	strength_modifier = Stats.get_strength_modifier()
+	cleaner_explotions_timer = Stats.cleaner_explotion_time
 
 func update_rot_speed(new_rot_speed : float) -> void:
 	cleaner_rot_speed = new_rot_speed
@@ -126,3 +140,6 @@ func raise_cleaner_speed_level(new_speed_modifier : float, new_speed_level : int
 
 func raise_cleaner_width_level(new_width_level : int) -> void:
 	cleaner.set_width(new_width_level)
+
+func unlock_cleaner_explotions() -> void:
+	cleaner_explotions_unlocked = true

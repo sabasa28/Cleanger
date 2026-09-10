@@ -35,6 +35,10 @@ enum modifiable_stat
 	water_carrying_bird_cd,
 	cleaner_rot_speed,
 	bomb_carrying_bird_cd,
+	necessary_cleanlyness,
+	cleaner_explotion_time,
+	cleaner_explotion_range,
+	explotion_water_bomb_chance
 }
 
 func try_init(upgrade_num : int) -> void:
@@ -102,6 +106,14 @@ func apply_upgrade() -> bool:
 				pass
 			modifiable_stat.bomb_carrying_bird_cd:
 				pass
+			modifiable_stat.necessary_cleanlyness:
+				Stats.lower_necessary_cleanlyness_value(upgrade_amount[current_level])
+			modifiable_stat.cleaner_explotion_time:
+				Stats.lower_cleaner_explotion_time(upgrade_amount[current_level])
+			modifiable_stat.cleaner_explotion_range:
+				Stats.raise_cleaner_explotion_range(upgrade_amount[current_level])
+			modifiable_stat.explotion_water_bomb_chance:
+				Stats.raise_cleaner_explotion_water_bomb_chance(upgrade_amount[current_level])
 	current_level += 1
 	update_button_and_menu()
 	return true
