@@ -11,10 +11,11 @@ signal on_rotation_speed_changed(current_rot_speed)
 signal on_speed_modified(new_speed_modifier : float, new_speed_level : int)
 signal on_width_modified(new_width_level : int)
 signal on_cleaner_explotion_unlocked()
+signal on_pasive_water_bomb_unlocked()
 
 var gameplay_controller : GameplayController
 
-var total_coins : int
+var total_coins : int = 1000000000000000
 var floors_cleaned : int
 var current_floor : int
 var windows_cleaned : int
@@ -38,7 +39,7 @@ var current_combo_coins : int = 0
 var total_combo_coins : int = 0
 
 var cleaning_power : float = 4.0 #(times to clean spot, lower is better)
-var rotation_speed : float = 0.15
+var rotation_speed : float = 0.3 #actually a multiplier
 var strength_modifier : float = 1.0
 var cleaner_width_modifier : float = 1.0
 var speed_modifier : float = 1.0
@@ -47,6 +48,8 @@ var cleaner_speed_level : int = 0
 
 var necessary_cleanlyness : float = 0.95
 
+var pasive_water_bomb_cd : float = 10.0
+var pasive_water_bomb_unlocked : bool = false
 var water_bomb_explotion_time_min : float = 0.4
 var water_bomb_explotion_time_max : float = 0.7
 var water_bomb_explotion_range : float = 1.0 #actually a multiplier
@@ -56,6 +59,9 @@ var cleaner_explotion_time : float = 10.0
 var cleaner_explotion_unlocked : bool = false
 var cleaner_explotion_range : float = 2.0 #actually a multiplier
 var cleaner_explotion_water_bomb_chance : float = 0.0
+var spots_before_cleaner_explotion : float = 20.0
+var spots_trigger_explotion_unlocked : bool = false
+var spots_left_before_cleaner_explotion : float
 
 #prefabs
 var water_bomb_prefab = preload("res://Scenes/water_bomb.tscn")
@@ -66,13 +72,19 @@ var window_prefab = preload("res://Scenes/window_square.tscn")
 enum explotion_origin
 {
 	water_bomb,
-	regular_explotion
+	regular_explotion,
+	dirt_spot
 }
+
+func set_initial_values() -> void:
+	on_rotation_speed_changed.emit(rotation_speed)
+	on_speed_modified.emit(speed_modifier, cleaner_speed_level)
+	on_width_modified.emit(cleaner_width_level)
+	
 
 func start_run() -> void:
 	on_run_started.emit()
 	InGameUi.reset_ui()
-
 
 func end_run() -> void:
 	add_run_coins_to_total()
@@ -86,6 +98,7 @@ func end_run() -> void:
 	current_combo_num = 0
 	current_time_for_combo = initial_time_for_combo
 	current_combo_value = initial_combo_value
+	spots_left_before_cleaner_explotion = spots_before_cleaner_explotion
 	on_run_ended.emit()
 
 func add_run_coins_to_total() -> void:
@@ -136,12 +149,19 @@ func on_combo_finished() -> void:
 			current_combo_coins = 0
 
 func check_height(player_height : float, last_player_height : float) -> void:
-	on_height_changed.emit(player_height, last_player_height)	
+	on_height_changed.emit(player_height, last_player_height)
 
-func add_dirty_spot_cleaned() -> void:
+func add_dirty_spot_cleaned(spot : Node2D) -> void:
 	spots_cleaned += 1
 	update_window_related_ui(spot_value)
 	on_spot_cleaned.emit(spots_cleaned)
+	if spots_trigger_explotion_unlocked:
+		spots_left_before_cleaner_explotion -= 1
+		if spots_left_before_cleaner_explotion <= 0:
+			var spawned_explotion = Stats.explotion_prefab.instantiate()
+			spawned_explotion.global_position = spot.global_position
+			spawned_explotion.set_data(Stats.explotion_origin.dirt_spot)
+			spot.add_sibling(spawned_explotion) #hacer especial, mas grande?
 
 func update_window_related_ui(last_value_added : float) -> void:
 	InGameUi.update_windows_label(windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value + total_combo_coins, last_value_added)
@@ -199,8 +219,22 @@ func raise_cleaner_explotion_range(amount_to_raise : float) -> void:
 func raise_cleaner_explotion_water_bomb_chance(amount_to_raise : float) -> void:
 	cleaner_explotion_water_bomb_chance += amount_to_raise
 
+func lower_pasive_water_bomb_cd(amount_to_lower : float) -> void:
+	if pasive_water_bomb_unlocked:
+		pasive_water_bomb_cd -= amount_to_lower
+	else:
+		pasive_water_bomb_unlocked = true
+		on_pasive_water_bomb_unlocked.emit()
+
 func raise_water_bomb_water_bomb_chance(amount_to_raise : float) -> void:
 	water_bomb_water_bomb_chance += amount_to_raise
+
+func lower_spots_before_cleaner_explotion(amount_to_lower : float) -> void:
+	if spots_trigger_explotion_unlocked:
+		spots_before_cleaner_explotion -= amount_to_lower
+	else:
+		spots_trigger_explotion_unlocked = true
+	spots_left_before_cleaner_explotion = spots_before_cleaner_explotion
 
 func get_strength_modifier() -> float:
 	return strength_modifier

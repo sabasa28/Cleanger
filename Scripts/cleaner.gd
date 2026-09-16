@@ -24,11 +24,13 @@ class mediatrix_data:
 
 @export var sprite : Sprite2D
 @export var cleaners : Array[Rect2]
+@export var cleaner_width_type_distance : float
 var current_speed_type : int = 0
 var current_width_type : int = 0
 const cleaner_speed_region_offset : float = 64.0
 var cleaner_base_width : float
 
+var initial_pos : Vector2
 var current_mediatrix_data : mediatrix_data
 @export var collider : CollisionShape2D
 var cleaning = false
@@ -41,6 +43,7 @@ var spots_colliding : Array[Node]
 signal on_stuck_on_spot
 
 func _ready() -> void:
+	initial_pos = position
 	collider = get_node("CollisionShape2D")
 	cleaner_base_width = collider.shape.size.x
 	set_cleaner_type()
@@ -59,17 +62,17 @@ func get_mediatrix_data() -> mediatrix_data:
 	if mediatrix_data_updated:
 		return current_mediatrix_data
 	var forward_vec = Vector2(global_transform.y).normalized() #eventualmente
-	var up_vec = Vector2(forward_vec.y, -forward_vec.x) 								#arreglar
+	var up_vec = Vector2(forward_vec.y, -forward_vec.x) 	#arreglar
 	
 	current_mediatrix_data.last_cornerH1V1 = current_mediatrix_data.cornerH1V1
 	current_mediatrix_data.last_cornerH1V2 = current_mediatrix_data.cornerH1V2
 	current_mediatrix_data.last_cornerH2V1 = current_mediatrix_data.cornerH2V1
 	current_mediatrix_data.last_cornerH2V2 = current_mediatrix_data.cornerH2V2
-	
-	var mediatrixV1 = position - forward_vec * ((collider.shape.get_rect().size.y * global_scale.y) / 2.0) #cambiar a usar posicion de collider en vez de area y en el drawing tambien
-	var mediatrixV2 = position + forward_vec * ((collider.shape.get_rect().size.y * global_scale.y) / 2.0)
-	var mediatrixH1 = position + up_vec * ((collider.shape.get_rect().size.x * global_scale.x) / 2.0)
-	var mediatrixH2 = position - up_vec * ((collider.shape.get_rect().size.x * global_scale.x) / 2.0)
+	print(position)
+	var mediatrixV1 = -forward_vec * ((collider.shape.get_rect().size.y * global_scale.y) / 2.0) #cambiar a usar posicion de collider en vez de area y en el drawing tambien
+	var mediatrixV2 = forward_vec * ((collider.shape.get_rect().size.y * global_scale.y) / 2.0)
+	var mediatrixH1 = up_vec * ((collider.shape.get_rect().size.x * global_scale.x) / 2.0)
+	var mediatrixH2 = -up_vec * ((collider.shape.get_rect().size.x * global_scale.x) / 2.0)
 	
 	#print("fw: ", forward_vec)
 	#print("up: ", up_vec)
@@ -156,3 +159,4 @@ func set_cleaner_type() -> void:
 	sprite.region_rect = rect_to_use
 	var width_multiplier = rect_to_use.size.x / cleaners[0].size.x
 	collider.shape.size.x = cleaner_base_width * width_multiplier
+	position.x = initial_pos.x + cleaner_width_type_distance * current_width_type

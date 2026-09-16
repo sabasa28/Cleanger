@@ -30,4 +30,6 @@ func set_data(new_origin : Stats.explotion_origin) -> void:
 					spawned_bomb.global_position = global_position
 					add_sibling(spawned_bomb)
 					spawned_bomb.initialize()
+		Stats.explotion_origin.dirt_spot:
+			range = Stats.cleaner_explotion_range * 2.0
 	scale = Vector2.ONE * range

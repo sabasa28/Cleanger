@@ -38,7 +38,8 @@ enum modifiable_stat
 	necessary_cleanlyness,
 	cleaner_explotion_time,
 	cleaner_explotion_range,
-	explotion_water_bomb_chance
+	explotion_water_bomb_chance,
+	spots_to_trigger_explotion
 }
 
 func try_init(upgrade_num : int) -> void:
@@ -76,44 +77,47 @@ func apply_upgrade() -> bool:
 	else:
 		return false
 	match stat_to_modify:
-			modifiable_stat.floor_modifier_lock:
-				Stats.raise_floor_value(upgrade_amount[current_level])
-			modifiable_stat.coins_per_window:
-				Stats.raise_window_value(upgrade_amount[current_level])
-			modifiable_stat.coins_per_spot:
-				Stats.raise_spot_value(upgrade_amount[current_level])
-			modifiable_stat.coins_per_combo:
-				Stats.raise_combo_value(upgrade_amount[current_level])
-			modifiable_stat.cleaner_strength:
-				Stats.raise_strength(upgrade_amount[current_level])
-			modifiable_stat.cleaner_width:
-				Stats.raise_width_level(upgrade_amount[current_level])
-			modifiable_stat.cleaner_speed:
-				Stats.raise_speed_level(upgrade_amount[current_level])
-			modifiable_stat.water_supply:
-				pass
-			modifiable_stat.water_explotion_cd:
-				pass
-			modifiable_stat.water_explotion_range:
-				pass
-			modifiable_stat.water_explotion_water_bomb_chance:
-				pass
-			modifiable_stat.water_bomb_cd:
-				pass
-			modifiable_stat.water_carrying_bird_cd:
-				pass
-			modifiable_stat.cleaner_rot_speed:
-				pass
-			modifiable_stat.bomb_carrying_bird_cd:
-				pass
-			modifiable_stat.necessary_cleanlyness:
-				Stats.lower_necessary_cleanlyness_value(upgrade_amount[current_level])
-			modifiable_stat.cleaner_explotion_time:
-				Stats.lower_cleaner_explotion_time(upgrade_amount[current_level])
-			modifiable_stat.cleaner_explotion_range:
-				Stats.raise_cleaner_explotion_range(upgrade_amount[current_level])
-			modifiable_stat.explotion_water_bomb_chance:
-				Stats.raise_cleaner_explotion_water_bomb_chance(upgrade_amount[current_level])
+		modifiable_stat.floor_modifier_lock:
+			Stats.raise_floor_value(upgrade_amount[current_level])
+		modifiable_stat.coins_per_window:
+			Stats.raise_window_value(upgrade_amount[current_level])
+		modifiable_stat.coins_per_spot:
+			Stats.raise_spot_value(upgrade_amount[current_level])
+		modifiable_stat.coins_per_combo:
+			Stats.raise_combo_value(upgrade_amount[current_level])
+		modifiable_stat.cleaner_strength:
+			Stats.raise_strength(upgrade_amount[current_level])
+		modifiable_stat.cleaner_width:
+			Stats.raise_width_level(upgrade_amount[current_level])
+		modifiable_stat.cleaner_speed:
+			Stats.raise_speed_level(upgrade_amount[current_level])
+		modifiable_stat.water_supply:
+			pass
+		modifiable_stat.water_explotion_cd:
+			pass
+		modifiable_stat.water_explotion_range:
+			pass
+		modifiable_stat.water_explotion_water_bomb_chance:
+			pass
+		modifiable_stat.water_bomb_cd:
+			Stats.lower_pasive_water_bomb_cd(upgrade_amount[current_level])
+			pass
+		modifiable_stat.water_carrying_bird_cd:
+			pass
+		modifiable_stat.cleaner_rot_speed:
+			pass
+		modifiable_stat.bomb_carrying_bird_cd:
+			pass
+		modifiable_stat.necessary_cleanlyness:
+			Stats.lower_necessary_cleanlyness_value(upgrade_amount[current_level])
+		modifiable_stat.cleaner_explotion_time:
+			Stats.lower_cleaner_explotion_time(upgrade_amount[current_level])
+		modifiable_stat.cleaner_explotion_range:
+			Stats.raise_cleaner_explotion_range(upgrade_amount[current_level])
+		modifiable_stat.explotion_water_bomb_chance:
+			Stats.raise_cleaner_explotion_water_bomb_chance(upgrade_amount[current_level])
+		modifiable_stat.spots_to_trigger_explotion:
+			Stats.lower_spots_before_cleaner_explotion(upgrade_amount[current_level])
 	current_level += 1
 	update_button_and_menu()
 	return true

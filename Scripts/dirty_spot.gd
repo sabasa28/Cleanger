@@ -36,7 +36,7 @@ func clean_once(cleaning_power : float) -> void:
 	print("Cleaned once")
 	if dirt_left <= 0:
 		window_ref.on_spot_cleaned()
-		Stats.add_dirty_spot_cleaned()
+		Stats.add_dirty_spot_cleaned(self)
 		if cleaner_ref != null:
 			cleaner_ref.stop_colliding_with_dirty_spot(self)
 		queue_free()

@@ -15,6 +15,7 @@ var current_objective
 
 func _ready() -> void:
 	Stats.gameplay_controller = self
+	Stats.set_initial_values()
 	timer_end = run_time
 	upgrades_ui.on_upgrades_finished.connect(start_cleaning_phase)
 	start_cleaning_phase()

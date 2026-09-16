@@ -19,13 +19,24 @@ var initial_gravity_scale : float
 var last_checked_height : float
 var paused : bool = false
 var initial_pos : Vector2
-var cleaner_rot_speed : float
+var cleaner_rot_speed_base = 0.15
+var cleaner_cleaning_rot_speed_modifier : float
 var unpaused_timer : float
 @export var time_to_unpause : float
 var waiting_to_unpause : bool = false
 
+@export var impulse_strength_modifier : float
+var time_impulsing : float = 0.0
+@export var time_for_max_impulse : float
+var impulsing : bool = false
+@export var impulse_cd : float
+
+
 var cleaner_explotions_unlocked : bool = false
 var cleaner_explotions_timer : float = 0.0
+
+var pasive_water_bomb_unlocked : bool = false
+var pasive_water_bomb_timer : float = 0.0
 
 @export var cleaner_anim : AnimationPlayer
 var swipe_anim_cooldown : float
@@ -39,7 +50,8 @@ func _ready() -> void:
 	Stats.on_speed_modified.connect(raise_cleaner_speed_level)
 	Stats.on_width_modified.connect(raise_cleaner_width_level)
 	Stats.on_cleaner_explotion_unlocked.connect(unlock_cleaner_explotions)
-	cleaner_rot_speed = Stats.rotation_speed
+	Stats.on_pasive_water_bomb_unlocked.connect(unlock_pasive_water_bomb)
+	cleaner_cleaning_rot_speed_modifier = Stats.rotation_speed
 	initial_pos = global_position
 	last_checked_height = global_position.y
 	initial_gravity_scale = gravity_scale
@@ -62,8 +74,10 @@ func _process(delta: float) -> void:
 	
 	if !is_cleaner_stuck:
 		var target_rot : float = cleanerPivot.get_angle_to(get_global_mouse_position())
-		cleanerPivot.rotate(lerp(0.0, target_rot, cleaner_rot_speed))
+		var rot_speed : float = (cleaner_rot_speed_base * cleaner_cleaning_rot_speed_modifier) if swiping else cleaner_rot_speed_base
+		cleanerPivot.rotate(lerp(0.0, target_rot, rot_speed))
 		#cleanerPivot.look_at(get_global_mouse_position())
+	
 	cleaner.player_dir = linear_velocity.normalized()
 	if swipe_current_cooldown > 0:
 		swipe_current_cooldown -= delta
@@ -71,12 +85,14 @@ func _process(delta: float) -> void:
 		if cleaning_timer < time_cleaning_after_swipe:
 			cleaning_timer += delta
 		else:
+			gravity_scale = initial_gravity_scale
 			cleaner.stop_cleaning()
 	
-	if swiping:
+	if swiping & !impulsing:
 		if swipe_current_cooldown <= 0:
 			swipe_current_cooldown = swipe_base_cooldown / Stats.speed_modifier
 			cleaner_anim.play("Swipe")
+			gravity_scale = initial_gravity_scale / 3.0
 			swipe_anim_timer = swipe_anim_cooldown
 			playing_swipe_anim = true
 	
@@ -85,18 +101,35 @@ func _process(delta: float) -> void:
 		if swipe_anim_timer <= 0:
 			if !cleaner.cleaning:
 				cleaner.start_cleaning()
-				var spawned_bomb = Stats.water_bomb_prefab.instantiate()
-				spawned_bomb.global_position = global_position
-				add_sibling(spawned_bomb)
-				spawned_bomb.initialize()
 			if !is_cleaner_stuck: #no cambiar de lugar con el de arriba
 				apply_force((cleanerPivot.global_position - cleaner.global_position).normalized() * BASE_strength * strength_modifier)
 			playing_swipe_anim = false
 			cleaning_timer = 0.0
 	
+	if impulsing:
+		time_impulsing += delta
+		if Input.is_action_just_released("impulse"):
+			impulsing = false
+			gravity_scale = initial_gravity_scale
+			apply_force((cleanerPivot.global_position - cleaner.global_position).normalized() * BASE_strength * impulse_strength_modifier * minf(time_impulsing / time_for_max_impulse, 1.0))
+	
+	if !swiping && Input.is_action_just_pressed("impulse"):
+		impulsing = true
+		gravity_scale = 0.0
+		time_impulsing = 0.0 
+	
+	if pasive_water_bomb_unlocked:
+		pasive_water_bomb_timer -= delta
+		if pasive_water_bomb_timer <= 0.0:
+			var spawned_bomb = Stats.water_bomb_prefab.instantiate()
+			spawned_bomb.global_position = global_position
+			add_sibling(spawned_bomb)
+			spawned_bomb.initialize()
+			pasive_water_bomb_timer = Stats.pasive_water_bomb_cd
+	
 	if cleaner_explotions_unlocked:
 		cleaner_explotions_timer -= delta
-		if cleaner_explotions_timer <= 0:
+		if cleaner_explotions_timer <= 0.0:
 			var spawned_explotion = Stats.explotion_prefab.instantiate()
 			spawned_explotion.global_position = cleaner.global_position
 			add_sibling(spawned_explotion)
@@ -128,7 +161,7 @@ func reset() -> void:
 	cleaner_explotions_timer = Stats.cleaner_explotion_time
 
 func update_rot_speed(new_rot_speed : float) -> void:
-	cleaner_rot_speed = new_rot_speed
+	cleaner_cleaning_rot_speed_modifier = new_rot_speed
 
 func unpause() -> void:
 	waiting_to_unpause = true
@@ -143,3 +176,6 @@ func raise_cleaner_width_level(new_width_level : int) -> void:
 
 func unlock_cleaner_explotions() -> void:
 	cleaner_explotions_unlocked = true
+
+func unlock_pasive_water_bomb() -> void:
+	pasive_water_bomb_unlocked = true
