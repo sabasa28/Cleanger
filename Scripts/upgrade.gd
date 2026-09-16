@@ -39,7 +39,8 @@ enum modifiable_stat
 	cleaner_explotion_time,
 	cleaner_explotion_range,
 	explotion_water_bomb_chance,
-	spots_to_trigger_explotion
+	spots_to_trigger_explotion,
+	water_bomb_instant_clean_chance
 }
 
 func try_init(upgrade_num : int) -> void:
@@ -118,6 +119,8 @@ func apply_upgrade() -> bool:
 			Stats.raise_cleaner_explotion_water_bomb_chance(upgrade_amount[current_level])
 		modifiable_stat.spots_to_trigger_explotion:
 			Stats.lower_spots_before_cleaner_explotion(upgrade_amount[current_level])
+		modifiable_stat.water_bomb_instant_clean_chance:
+			Stats.raise_water_bomb_instant_clean_chance(upgrade_amount[current_level])
 	current_level += 1
 	update_button_and_menu()
 	return true

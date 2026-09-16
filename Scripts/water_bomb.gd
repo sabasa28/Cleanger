@@ -10,7 +10,11 @@ func _process(delta: float) -> void:
 	if timer >= explotion_time:
 		var spawned_explotion = Stats.explotion_prefab.instantiate()
 		spawned_explotion.global_position = global_position
-		spawned_explotion.set_data(Stats.explotion_origin.water_bomb)
+		var will_instaclean = false
+		if Stats.water_bomb_instant_clean_unlocked:
+			if randf() < Stats.water_bomb_instant_clean_chance:
+				will_instaclean = true
+		spawned_explotion.set_data(Stats.explotion_origin.water_bomb, will_instaclean)
 		add_sibling(spawned_explotion)
 		queue_free()
 
@@ -22,5 +26,5 @@ func initialize(is_clone : bool = false) -> void:
 			if randf() > Stats.water_bomb_water_bomb_chance:
 				var spawned_bomb = Stats.water_bomb_prefab.instantiate()
 				spawned_bomb.global_position = global_position
-				get_parent().add_sibling(spawned_bomb)
+				get_parent().add_sibling(spawned_bomb) #????
 				spawned_bomb.initialize(true)

@@ -183,6 +183,16 @@ stat_to_modify = 19
 button = NodePath("MarginContainer/Control/ButtonUpgrade16")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
+[sub_resource type="Resource" id="Resource_di7eb"]
+script = ExtResource("2_mnydp")
+name = "bombitas eficientes"
+description = "Tus bombitas de agua tienen un 20% de probabilidad de limpiar manchas instantáneamente."
+upgrade_amount = Array[float]([0.2, 0.2, 0.2, 0.2, 0.2])
+upgrade_price = Array[int]([300, 750, 1500, 3500, 10000])
+stat_to_modify = 20
+button = NodePath("MarginContainer/Control/ButtonUpgrade17")
+metadata/_custom_type_script = "uid://b13bbk8g4cak"
+
 [sub_resource type="Gradient" id="Gradient_yk0t2"]
 colors = PackedColorArray(0.290337, 0.49642777, 1, 1, 0, 0.27450982, 1, 1)
 
@@ -196,7 +206,7 @@ color_ramp = SubResource("Gradient_yk0t2")
 
 [node name="upgrades_ui" type="CanvasLayer" unique_id=820732258 node_paths=PackedStringArray("coins_text")]
 script = ExtResource("1_r7ofa")
-all_upgrades = Array[ExtResource("2_mnydp")]([SubResource("Resource_qxkgt"), SubResource("Resource_mnydp"), SubResource("Resource_hn3xb"), SubResource("Resource_8o8co"), SubResource("Resource_5symo"), SubResource("Resource_vgqql"), SubResource("Resource_tyk1r"), SubResource("Resource_ws6wd"), SubResource("Resource_n72eg"), SubResource("Resource_dmca1"), SubResource("Resource_kwblu"), SubResource("Resource_im2lx"), SubResource("Resource_q746k"), SubResource("Resource_y0t3v"), SubResource("Resource_8sexr"), SubResource("Resource_3dryh")])
+all_upgrades = Array[ExtResource("2_mnydp")]([SubResource("Resource_qxkgt"), SubResource("Resource_mnydp"), SubResource("Resource_hn3xb"), SubResource("Resource_8o8co"), SubResource("Resource_5symo"), SubResource("Resource_vgqql"), SubResource("Resource_tyk1r"), SubResource("Resource_ws6wd"), SubResource("Resource_n72eg"), SubResource("Resource_dmca1"), SubResource("Resource_kwblu"), SubResource("Resource_im2lx"), SubResource("Resource_q746k"), SubResource("Resource_y0t3v"), SubResource("Resource_8sexr"), SubResource("Resource_3dryh"), SubResource("Resource_di7eb")])
 coins_text = NodePath("MarginContainer/Control/Control/RichTextLabel Coins")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=91577738]
@@ -1711,6 +1721,99 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ButtonUpgrade17" type="Button" parent="MarginContainer/Control" unique_id=342617498]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 288.0
+offset_top = 528.0
+offset_right = 338.0
+offset_bottom = 578.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade17" unique_id=508622805 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+visible = false
+layout_mode = 0
+offset_left = 1.0
+offset_top = -139.0
+offset_right = 1025.0
+offset_bottom = 373.0
+scale = Vector2(0.27, 0.27)
+texture = SubResource("NoiseTexture2D_23g7n")
+script = ExtResource("4_tyk1r")
+upgrade_name_text = NodePath("Control/RichTextLabel")
+upgrade_description_text = NodePath("Control/RichTextLabel2")
+upgrade_cost_text = NodePath("Control/RichTextLabel3")
+
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade17/TextureRect" unique_id=920389614]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade17/TextureRect/Control" unique_id=467410319]
+custom_minimum_size = Vector2(64.825, 0)
+custom_maximum_size = Vector2(800, -1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_right = 144.0
+offset_bottom = 53.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 38
+text = "Upgrade name?"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade17/TextureRect/Control" unique_id=655222107]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(901.185, -1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.5
+offset_top = -184.0
+offset_right = 450.5
+offset_bottom = 141.775
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "This is a test text for the upgrades if you see this I fucked up"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade17/TextureRect/Control" unique_id=1253461317]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -110.234985
+offset_right = 400.0
+offset_bottom = 0.00012207031
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 27
+text = "Cost:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DISABLED" type="Button" parent="MarginContainer/Control" unique_id=219843596]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
@@ -1899,6 +2002,8 @@ vertical_alignment = 1
 [connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade15" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade15/TextureRect")]]
 [connection signal="mouse_entered" from="MarginContainer/Control/ButtonUpgrade16" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade16/TextureRect")]]
 [connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade16" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade16/TextureRect")]]
+[connection signal="mouse_entered" from="MarginContainer/Control/ButtonUpgrade17" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade17/TextureRect")]]
+[connection signal="mouse_exited" from="MarginContainer/Control/ButtonUpgrade17" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade17/TextureRect")]]
 [connection signal="mouse_entered" from="MarginContainer/Control/DISABLED" to="." method="_display_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade9/TextureRect")]]
 [connection signal="mouse_exited" from="MarginContainer/Control/DISABLED" to="." method="_stop_displaying_description" binds= [NodePath("MarginContainer/Control/ButtonUpgrade9/TextureRect")]]
 [connection signal="button_down" from="MarginContainer/Control/ButtonUpgradeFinished" to="." method="_on_button_upgrade_finished_button_down"]

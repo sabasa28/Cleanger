@@ -5,6 +5,7 @@ const range_base : float = 150.0
 var range : float
 const time_before_despawn : float = 0.5
 var timer : float = 0.0
+var instacleans : bool = false
 
 
 var origin : Stats.explotion_origin
@@ -17,8 +18,9 @@ func _process(delta: float) -> void:
 func get_range() -> float:
 	return range * range_base
 
-func set_data(new_origin : Stats.explotion_origin) -> void:
+func set_data(new_origin : Stats.explotion_origin, new_instacleans : bool = false) -> void:
 	origin = new_origin
+	instacleans = new_instacleans
 	match origin:
 		Stats.explotion_origin.water_bomb:
 			range = Stats.water_bomb_explotion_range

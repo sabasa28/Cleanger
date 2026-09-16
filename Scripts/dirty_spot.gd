@@ -13,7 +13,10 @@ func _ready() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Explotion"):
-		clean_once(Stats.get_cleaning_power())
+		if area.instacleans:
+			fully_clean()
+		else:
+			clean_once(Stats.get_cleaning_power())
 	
 	if !being_cleaned_by_cleaner && area.is_in_group("Cleaner"):
 		cleaner_ref = area
@@ -40,6 +43,14 @@ func clean_once(cleaning_power : float) -> void:
 		if cleaner_ref != null:
 			cleaner_ref.stop_colliding_with_dirty_spot(self)
 		queue_free()
+
+func fully_clean() -> void:
+	dirt_left = 0.0
+	window_ref.on_spot_cleaned()
+	Stats.add_dirty_spot_cleaned(self)
+	if cleaner_ref != null:
+		cleaner_ref.stop_colliding_with_dirty_spot(self)
+	queue_free()
 
 func pause_cleaning() -> void:
 	being_cleaned_by_cleaner = false

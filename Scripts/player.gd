@@ -88,7 +88,7 @@ func _process(delta: float) -> void:
 			gravity_scale = initial_gravity_scale
 			cleaner.stop_cleaning()
 	
-	if swiping & !impulsing:
+	if swiping && !impulsing:
 		if swipe_current_cooldown <= 0:
 			swipe_current_cooldown = swipe_base_cooldown / Stats.speed_modifier
 			cleaner_anim.play("Swipe")

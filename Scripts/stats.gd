@@ -54,6 +54,8 @@ var water_bomb_explotion_time_min : float = 0.4
 var water_bomb_explotion_time_max : float = 0.7
 var water_bomb_explotion_range : float = 1.0 #actually a multiplier
 var water_bomb_water_bomb_chance : float = 0.0
+var water_bomb_instant_clean_unlocked : bool = false
+var water_bomb_instant_clean_chance : float = 0.0
 
 var cleaner_explotion_time : float = 10.0
 var cleaner_explotion_unlocked : bool = false
@@ -235,6 +237,10 @@ func lower_spots_before_cleaner_explotion(amount_to_lower : float) -> void:
 	else:
 		spots_trigger_explotion_unlocked = true
 	spots_left_before_cleaner_explotion = spots_before_cleaner_explotion
+
+func raise_water_bomb_instant_clean_chance(amount_to_raise : float) -> void:
+	water_bomb_instant_clean_unlocked = true
+	water_bomb_instant_clean_chance += amount_to_raise
 
 func get_strength_modifier() -> float:
 	return strength_modifier
