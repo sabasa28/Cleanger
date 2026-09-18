@@ -68,7 +68,7 @@ func get_mediatrix_data() -> mediatrix_data:
 	current_mediatrix_data.last_cornerH1V2 = current_mediatrix_data.cornerH1V2
 	current_mediatrix_data.last_cornerH2V1 = current_mediatrix_data.cornerH2V1
 	current_mediatrix_data.last_cornerH2V2 = current_mediatrix_data.cornerH2V2
-	print(position)
+	
 	var mediatrixV1 = -forward_vec * ((collider.shape.get_rect().size.y * global_scale.y) / 2.0) #cambiar a usar posicion de collider en vez de area y en el drawing tambien
 	var mediatrixV2 = forward_vec * ((collider.shape.get_rect().size.y * global_scale.y) / 2.0)
 	var mediatrixH1 = up_vec * ((collider.shape.get_rect().size.x * global_scale.x) / 2.0)

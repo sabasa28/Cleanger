@@ -3,8 +3,12 @@ extends Resource
 
 @export var name : String
 @export var description : String
-@export var upgrade_amount : Array[float]
 @export var upgrade_price : Array[int]
+@export var upgrade_main_amount : float
+@export_group("Extra")
+@export var upgrade_extra_amount : float
+@export_group("")
+
 var upgrade_times : int
 var current_level : int = 0
 @export var stat_to_modify : modifiable_stat
@@ -46,9 +50,7 @@ enum modifiable_stat
 func try_init(upgrade_num : int) -> void:
 	if initiated == true:
 		return
-	upgrade_times = upgrade_amount.size()
-	if upgrade_amount.size() != upgrade_price.size():
-		print("upgrade times has conflict")
+	upgrade_times = upgrade_price.size()
 
 func update_button_and_menu() -> void:
 	#aca segun si esta desbloqueda y si no tiene dependencia bloqueda seteamos si se ve y si se ve gris o normal
@@ -79,19 +81,19 @@ func apply_upgrade() -> bool:
 		return false
 	match stat_to_modify:
 		modifiable_stat.floor_modifier_lock:
-			Stats.raise_floor_value(upgrade_amount[current_level])
+			Stats.raise_floor_value(upgrade_main_amount)
 		modifiable_stat.coins_per_window:
-			Stats.raise_window_value(upgrade_amount[current_level])
+			Stats.raise_window_value(upgrade_main_amount)
 		modifiable_stat.coins_per_spot:
-			Stats.raise_spot_value(upgrade_amount[current_level])
+			Stats.raise_spot_value(upgrade_main_amount)
 		modifiable_stat.coins_per_combo:
-			Stats.raise_combo_value(upgrade_amount[current_level])
+			Stats.raise_combo_value(upgrade_main_amount)
 		modifiable_stat.cleaner_strength:
-			Stats.raise_strength(upgrade_amount[current_level])
+			Stats.raise_strength(upgrade_main_amount)
 		modifiable_stat.cleaner_width:
-			Stats.raise_width_level(upgrade_amount[current_level])
+			Stats.raise_width_level(upgrade_main_amount)
 		modifiable_stat.cleaner_speed:
-			Stats.raise_speed_level(upgrade_amount[current_level])
+			Stats.raise_speed_level(upgrade_main_amount)
 		modifiable_stat.water_supply:
 			pass
 		modifiable_stat.water_explotion_cd:
@@ -101,7 +103,7 @@ func apply_upgrade() -> bool:
 		modifiable_stat.water_explotion_water_bomb_chance:
 			pass
 		modifiable_stat.water_bomb_cd:
-			Stats.lower_pasive_water_bomb_cd(upgrade_amount[current_level])
+			Stats.lower_pasive_water_bomb_cd(upgrade_main_amount)
 			pass
 		modifiable_stat.water_carrying_bird_cd:
 			pass
@@ -110,17 +112,17 @@ func apply_upgrade() -> bool:
 		modifiable_stat.bomb_carrying_bird_cd:
 			pass
 		modifiable_stat.necessary_cleanlyness:
-			Stats.lower_necessary_cleanlyness_value(upgrade_amount[current_level])
+			Stats.lower_necessary_cleanlyness_value(upgrade_main_amount)
 		modifiable_stat.cleaner_explotion_time:
-			Stats.lower_cleaner_explotion_time(upgrade_amount[current_level])
+			Stats.lower_cleaner_explotion_time(upgrade_main_amount)
 		modifiable_stat.cleaner_explotion_range:
-			Stats.raise_cleaner_explotion_range(upgrade_amount[current_level])
+			Stats.raise_cleaner_explotion_range(upgrade_main_amount)
 		modifiable_stat.explotion_water_bomb_chance:
-			Stats.raise_cleaner_explotion_water_bomb_chance(upgrade_amount[current_level])
+			Stats.raise_cleaner_explotion_water_bomb_chance(upgrade_main_amount)
 		modifiable_stat.spots_to_trigger_explotion:
-			Stats.lower_spots_before_cleaner_explotion(upgrade_amount[current_level])
+			Stats.lower_spots_before_cleaner_explotion(upgrade_main_amount)
 		modifiable_stat.water_bomb_instant_clean_chance:
-			Stats.raise_water_bomb_instant_clean_chance(upgrade_amount[current_level])
+			Stats.raise_water_bomb_instant_clean_chance(upgrade_main_amount)
 	current_level += 1
 	update_button_and_menu()
 	return true

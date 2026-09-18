@@ -14,7 +14,6 @@ var height_checking_timer = 0.0
 var cleaning_timer = 0.0
 @export var cleanerPivot : Node2D
 @export var cleaner : Cleaner
-var is_cleaner_stuck : bool = false
 var initial_gravity_scale : float
 var last_checked_height : float
 var paused : bool = false
@@ -33,7 +32,7 @@ var impulsing : bool = false
 
 
 var cleaner_explotions_unlocked : bool = false
-var cleaner_explotions_timer : float = 0.0
+var cleaner_swipes_left_before_explotion : int = 0.0
 
 var pasive_water_bomb_unlocked : bool = false
 var pasive_water_bomb_timer : float = 0.0
@@ -72,11 +71,11 @@ func _process(delta: float) -> void:
 	
 	swiping = Input.is_action_pressed("clean")
 	
-	if !is_cleaner_stuck:
-		var target_rot : float = cleanerPivot.get_angle_to(get_global_mouse_position())
-		var rot_speed : float = (cleaner_rot_speed_base * cleaner_cleaning_rot_speed_modifier) if swiping else cleaner_rot_speed_base
-		cleanerPivot.rotate(lerp(0.0, target_rot, rot_speed))
-		#cleanerPivot.look_at(get_global_mouse_position())
+
+	var target_rot : float = cleanerPivot.get_angle_to(get_global_mouse_position())
+	var rot_speed : float = (cleaner_rot_speed_base * cleaner_cleaning_rot_speed_modifier) if cleaner.cleaning else cleaner_rot_speed_base
+	cleanerPivot.rotate(lerp(0.0, target_rot, rot_speed))
+	#cleanerPivot.look_at(get_global_mouse_position())
 	
 	cleaner.player_dir = linear_velocity.normalized()
 	if swipe_current_cooldown > 0:
@@ -101,8 +100,16 @@ func _process(delta: float) -> void:
 		if swipe_anim_timer <= 0:
 			if !cleaner.cleaning:
 				cleaner.start_cleaning()
-			if !is_cleaner_stuck: #no cambiar de lugar con el de arriba
-				apply_force((cleanerPivot.global_position - cleaner.global_position).normalized() * BASE_strength * strength_modifier)
+			#no cambiar de lugar con lo de arriba
+			apply_force((cleanerPivot.global_position - cleaner.global_position).normalized() * BASE_strength * strength_modifier)
+			if cleaner_explotions_unlocked:
+				cleaner_swipes_left_before_explotion -= 1
+				if cleaner_swipes_left_before_explotion <= 0:
+					var spawned_explotion = Stats.explotion_prefab.instantiate()
+					spawned_explotion.global_position = cleaner.global_position
+					add_sibling(spawned_explotion)
+					spawned_explotion.set_data(Stats.explotion_origin.regular_explotion)
+					cleaner_swipes_left_before_explotion = Stats.cleaner_explotion_time as int
 			playing_swipe_anim = false
 			cleaning_timer = 0.0
 	
@@ -127,14 +134,7 @@ func _process(delta: float) -> void:
 			spawned_bomb.initialize()
 			pasive_water_bomb_timer = Stats.pasive_water_bomb_cd
 	
-	if cleaner_explotions_unlocked:
-		cleaner_explotions_timer -= delta
-		if cleaner_explotions_timer <= 0.0:
-			var spawned_explotion = Stats.explotion_prefab.instantiate()
-			spawned_explotion.global_position = cleaner.global_position
-			add_sibling(spawned_explotion)
-			spawned_explotion.set_data(Stats.explotion_origin.regular_explotion)
-			cleaner_explotions_timer = Stats.cleaner_explotion_time
+
 	
 	height_checking_timer -= delta
 	if height_checking_timer < 0:
@@ -147,7 +147,6 @@ func start_cleaning_dirty_spot() -> void:
 
 func pause() -> void:
 	paused = true
-	is_cleaner_stuck = false
 	gravity_scale = 0.0
 	linear_velocity = Vector2.ZERO
 
@@ -155,10 +154,9 @@ func reset() -> void:
 	unpause()
 	global_position = initial_pos
 	gravity_scale = initial_gravity_scale
-	is_cleaner_stuck = false
 	swipe_current_cooldown = 0.0
 	strength_modifier = Stats.get_strength_modifier()
-	cleaner_explotions_timer = Stats.cleaner_explotion_time
+	cleaner_swipes_left_before_explotion = Stats.cleaner_explotion_time as int
 
 func update_rot_speed(new_rot_speed : float) -> void:
 	cleaner_cleaning_rot_speed_modifier = new_rot_speed

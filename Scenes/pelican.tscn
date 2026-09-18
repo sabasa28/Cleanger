@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://gniu5dw1fi2c"]
+
+[ext_resource type="Script" uid="uid://d2ehrtgiri56e" path="res://Scripts/pelican.gd" id="1_m72nr"]
+
+[node name="Pelican" type="RigidBody2D" unique_id=1471901458]
+script = ExtResource("1_m72nr")
