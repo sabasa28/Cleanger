@@ -30,6 +30,8 @@ var time_impulsing : float = 0.0
 var impulsing : bool = false
 @export var impulse_cd : float
 
+var stunned : bool = false
+var stun_timer : float = 0.0
 
 var cleaner_explotions_unlocked : bool = false
 var cleaner_swipes_left_before_explotion : int = 0.0
@@ -69,9 +71,14 @@ func _process(delta: float) -> void:
 				paused = false
 		return
 	
-	swiping = Input.is_action_pressed("clean")
+	swiping = Input.is_action_pressed("clean") if !stunned else false
 	
-
+	if stunned:
+		stun_timer -= delta
+		if stun_timer <= 0.0:
+			stun_timer = 0.0
+			stunned = false
+	
 	var target_rot : float = cleanerPivot.get_angle_to(get_global_mouse_position())
 	var rot_speed : float = (cleaner_rot_speed_base * delta * cleaner_cleaning_rot_speed_modifier) if cleaner.cleaning else cleaner_rot_speed_base * delta
 	cleanerPivot.rotate(lerp(0.0, target_rot, rot_speed))
@@ -120,7 +127,7 @@ func _process(delta: float) -> void:
 			gravity_scale = initial_gravity_scale
 			apply_force((cleanerPivot.global_position - cleaner.global_position).normalized() * BASE_strength * impulse_strength_modifier * minf(time_impulsing / time_for_max_impulse, 1.0))
 	
-	if !swiping && Input.is_action_just_pressed("impulse"):
+	if !swiping && Input.is_action_just_pressed("impulse"): #si queda aplicar stun
 		impulsing = true
 		gravity_scale = 0.0
 		time_impulsing = 0.0 
@@ -177,3 +184,8 @@ func unlock_cleaner_explotions() -> void:
 
 func unlock_pasive_water_bomb() -> void:
 	pasive_water_bomb_unlocked = true
+
+func stun(stun_time : float) -> void:
+	if stun_timer < stun_time:
+		stun_timer = stun_time
+		stunned = true

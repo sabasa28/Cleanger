@@ -4,3 +4,8 @@
 
 [node name="GameplayController" type="Node2D" unique_id=216072137]
 script = ExtResource("1_883fa")
+min_time_between_pelican_spawn = 3.0
+max_time_between_pelican_spawn = 7.0
+pelican_max_heigh_dist_to_player = 2500.0
+left_limit = -2000.0
+right_limit = 2000.0

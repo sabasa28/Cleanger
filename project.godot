@@ -26,6 +26,10 @@ Stats="*uid://dkv08nr88gc0w"
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[global_group]
+
+Player=""
+
 [input]
 
 clean={

@@ -12,13 +12,23 @@ var current_objective
 @export var run_time : float
 @export var player : Player
 @export var upgrades_ui : Node
+@export var min_time_between_pelican_spawn : float
+@export var max_time_between_pelican_spawn : float
+@export var pelican_max_heigh_dist_to_player : float
+var time_until_next_pelican_spawn : float
+var pelican_spawn_timer : float = 0.0
+@export var left_limit : float
+@export var right_limit : float
+var map_length : float
 
 func _ready() -> void:
+	map_length = right_limit - left_limit
 	Stats.gameplay_controller = self
 	Stats.set_initial_values()
 	timer_end = run_time
 	upgrades_ui.on_upgrades_finished.connect(start_cleaning_phase)
 	start_cleaning_phase()
+	time_until_next_pelican_spawn = randf_range(min_time_between_pelican_spawn, max_time_between_pelican_spawn)
 
 func start_cleaning_phase() -> void:
 	upgrades_ui.visible = false
@@ -52,6 +62,18 @@ func _process(delta: float) -> void:
 				running_combo_timer = false
 				Stats.on_combo_finished()
 			InGameUi.set_combo_timer_text((int)(combo_timer))
+		pelican_spawn_timer += delta
+		if pelican_spawn_timer >= time_until_next_pelican_spawn:
+			var spawned_pelican : Node2D = Stats.pelican_prefab.instantiate()
+			var going_right = true if randi_range(0,1) == 0 else false
+			var spawn_pos_x : float = left_limit if going_right else right_limit
+			var spawn_pos : Vector2 = Vector2(spawn_pos_x, player.global_position.y - randf_range(0.0, pelican_max_heigh_dist_to_player))
+			spawned_pelican.global_position = spawn_pos
+			add_child(spawned_pelican)
+			spawned_pelican.initialize(going_right, map_length)
+			pelican_spawn_timer = 0.0
+			time_until_next_pelican_spawn = randf_range(min_time_between_pelican_spawn, max_time_between_pelican_spawn)
+
 
 func set_combo_timer(new_time : float) -> void:
 	running_combo_timer = true

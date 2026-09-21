@@ -1,6 +1,23 @@
 [gd_scene format=3 uid="uid://gniu5dw1fi2c"]
 
 [ext_resource type="Script" uid="uid://d2ehrtgiri56e" path="res://Scripts/pelican.gd" id="1_m72nr"]
+[ext_resource type="Texture2D" uid="uid://cw3cb6agskpum" path="res://Assets/Sprites/gorrito 1.png" id="2_3q41l"]
 
-[node name="Pelican" type="RigidBody2D" unique_id=1471901458]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bdm6k"]
+radius = 18.0
+height = 70.0
+
+[node name="Pelican" type="Area2D" unique_id=1492517466]
+scale = Vector2(5, 5)
 script = ExtResource("1_m72nr")
+flying_speed = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=553627578]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_bdm6k")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1807812791]
+scale = Vector2(1, 0.655)
+texture = ExtResource("2_3q41l")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

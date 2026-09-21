@@ -70,6 +70,7 @@ var water_bomb_prefab = preload("res://Scenes/water_bomb.tscn")
 var explotion_prefab = preload("res://Scenes/water_explotion.tscn")
 var spot_prefab = preload("res://Scenes/dirty_spot.tscn")
 var window_prefab = preload("res://Scenes/window_square.tscn")
+var pelican_prefab = preload("res://Scenes/pelican.tscn")
 
 enum explotion_origin
 {

@@ -48,7 +48,7 @@ _data = {
 &"Swipe": SubResource("Animation_fkybt")
 }
 
-[node name="Player" type="RigidBody2D" unique_id=1559178234 node_paths=PackedStringArray("cleanerPivot", "cleaner", "cleaner_anim")]
+[node name="Player" type="RigidBody2D" unique_id=1559178234 node_paths=PackedStringArray("cleanerPivot", "cleaner", "cleaner_anim") groups=["Player"]]
 gravity_scale = 7.0
 lock_rotation = true
 linear_damp = 5.0
