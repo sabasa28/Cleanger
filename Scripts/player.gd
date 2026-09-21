@@ -18,7 +18,7 @@ var initial_gravity_scale : float
 var last_checked_height : float
 var paused : bool = false
 var initial_pos : Vector2
-var cleaner_rot_speed_base = 0.15
+var cleaner_rot_speed_base = 17.5
 var cleaner_cleaning_rot_speed_modifier : float
 var unpaused_timer : float
 @export var time_to_unpause : float
@@ -73,7 +73,7 @@ func _process(delta: float) -> void:
 	
 
 	var target_rot : float = cleanerPivot.get_angle_to(get_global_mouse_position())
-	var rot_speed : float = (cleaner_rot_speed_base * cleaner_cleaning_rot_speed_modifier) if cleaner.cleaning else cleaner_rot_speed_base
+	var rot_speed : float = (cleaner_rot_speed_base * delta * cleaner_cleaning_rot_speed_modifier) if cleaner.cleaning else cleaner_rot_speed_base * delta
 	cleanerPivot.rotate(lerp(0.0, target_rot, rot_speed))
 	#cleanerPivot.look_at(get_global_mouse_position())
 	
