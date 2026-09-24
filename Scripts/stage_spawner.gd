@@ -40,9 +40,10 @@ func reset_windows() -> void:
 			spawned_window = Stats.window_prefab.instantiate()
 			on_reset_windows.connect(spawned_window.delete_window) 
 			spawned_window.has_spot = randi() % 2
-			add_child(spawned_window)
 			spawned_window.global_position = window_spawn_origin + Vector2 (window_interval.x * columns, -window_interval.y * rows)
 			spawned_window.stage_manager = self
 			var current_window_num = rows * columns_and_rows.x + columns
 			spawned_window.window_num = current_window_num
 			windows_state[current_window_num] = false
+			print("window pos ", spawned_window.global_position)
+			add_child(spawned_window)

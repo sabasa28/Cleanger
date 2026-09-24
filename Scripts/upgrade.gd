@@ -120,7 +120,7 @@ func apply_upgrade() -> bool:
 		modifiable_stat.explotion_water_bomb_chance:
 			Stats.raise_cleaner_explotion_water_bomb_chance(upgrade_main_amount)
 		modifiable_stat.spots_to_trigger_explotion:
-			Stats.lower_spots_before_cleaner_explotion(upgrade_main_amount)
+			Stats.raise_spots_explotion_chance(upgrade_main_amount)
 		modifiable_stat.water_bomb_instant_clean_chance:
 			Stats.raise_water_bomb_instant_clean_chance(upgrade_main_amount)
 	current_level += 1

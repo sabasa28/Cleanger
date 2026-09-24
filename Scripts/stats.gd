@@ -61,9 +61,8 @@ var cleaner_explotion_time : float = 10.0
 var cleaner_explotion_unlocked : bool = false
 var cleaner_explotion_range : float = 2.0 #actually a multiplier
 var cleaner_explotion_water_bomb_chance : float = 0.0
-var spots_before_cleaner_explotion : float = 20.0
+var spots_explotion_chance : float = 0.0
 var spots_trigger_explotion_unlocked : bool = false
-var spots_left_before_cleaner_explotion : float
 
 #prefabs
 var water_bomb_prefab = preload("res://Scenes/water_bomb.tscn")
@@ -75,8 +74,7 @@ var pelican_prefab = preload("res://Scenes/pelican.tscn")
 enum explotion_origin
 {
 	water_bomb,
-	regular_explotion,
-	dirt_spot
+	regular_explotion
 }
 
 func set_initial_values() -> void:
@@ -90,7 +88,6 @@ func start_run() -> void:
 	InGameUi.reset_ui()
 	current_combo_value = initial_combo_value
 	current_time_for_combo = initial_time_for_combo
-	spots_left_before_cleaner_explotion = spots_before_cleaner_explotion
 
 func end_run() -> void:
 	add_run_coins_to_total()
@@ -160,13 +157,7 @@ func add_dirty_spot_cleaned(spot : Node2D) -> void:
 	spots_cleaned += 1
 	update_window_related_ui(spot_value)
 	on_spot_cleaned.emit(spots_cleaned)
-	if spots_trigger_explotion_unlocked:
-		spots_left_before_cleaner_explotion -= 1
-		if spots_left_before_cleaner_explotion <= 0:
-			var spawned_explotion = Stats.explotion_prefab.instantiate()
-			spawned_explotion.global_position = spot.global_position
-			spawned_explotion.set_data(Stats.explotion_origin.dirt_spot)
-			spot.add_sibling(spawned_explotion) #hacer especial, mas grande?
+	
 
 func update_window_related_ui(last_value_added : float) -> void:
 	InGameUi.update_windows_label(windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value + total_combo_coins, last_value_added)
@@ -234,12 +225,9 @@ func lower_pasive_water_bomb_cd(amount_to_lower : float) -> void:
 func raise_water_bomb_water_bomb_chance(amount_to_raise : float) -> void:
 	water_bomb_water_bomb_chance += amount_to_raise
 
-func lower_spots_before_cleaner_explotion(amount_to_lower : float) -> void:
-	if spots_trigger_explotion_unlocked:
-		spots_before_cleaner_explotion -= amount_to_lower
-	else:
-		spots_trigger_explotion_unlocked = true
-	spots_left_before_cleaner_explotion = spots_before_cleaner_explotion
+func raise_spots_explotion_chance(amount_to_raise : float) -> void:
+	spots_trigger_explotion_unlocked = true
+	spots_explotion_chance += amount_to_raise
 
 func raise_water_bomb_instant_clean_chance(amount_to_raise : float) -> void:
 	water_bomb_instant_clean_unlocked = true

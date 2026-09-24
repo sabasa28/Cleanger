@@ -34,9 +34,18 @@ func start_cleaning(new_cleaning_power : float) -> void:
 	clean_once(new_cleaning_power)
 
 func clean_once(cleaning_power : float) -> void:
-	dirt_left = dirt_left - (cleaning_resistance / cleaning_power)
-	sprite.scale = Vector2.ONE * (dirt_left / cleaning_resistance)
-	print("Cleaned once")
+	if dirt_left == cleaning_resistance: ##si es la primera vez que la limpiamos
+		if Stats.spots_trigger_explotion_unlocked:
+			if randf() < Stats.spots_explotion_chance:
+				var spawned_explotion = Stats.explotion_prefab.instantiate()
+				spawned_explotion.global_position = global_position
+				spawned_explotion.set_data(Stats.explotion_origin.regular_explotion)
+				add_sibling(spawned_explotion)
+				dirt_left = 0.0
+	if dirt_left > 0.0:
+		dirt_left = dirt_left - (cleaning_resistance / cleaning_power)
+		sprite.scale = Vector2.ONE * (dirt_left / cleaning_resistance)
+		print("Cleaned once")
 	if dirt_left <= 0:
 		window_ref.on_spot_cleaned()
 		Stats.add_dirty_spot_cleaned(self)
