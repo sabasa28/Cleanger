@@ -10,7 +10,7 @@ height = 70.0
 [node name="Pelican" type="Area2D" unique_id=1492517466]
 scale = Vector2(5, 5)
 script = ExtResource("1_m72nr")
-flying_speed = 200.0
+flying_speed = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=553627578]
 rotation = 1.5707964

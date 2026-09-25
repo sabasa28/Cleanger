@@ -235,3 +235,6 @@ func raise_water_bomb_instant_clean_chance(amount_to_raise : float) -> void:
 
 func get_strength_modifier() -> float:
 	return strength_modifier
+
+func debug_force_end_run() -> void:
+	gameplay_controller.end_cleaning_phase()

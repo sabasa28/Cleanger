@@ -71,6 +71,9 @@ func _process(delta: float) -> void:
 				paused = false
 		return
 	
+	if Input.is_action_just_pressed("DEBUGfinish_run"):
+		Stats.debug_force_end_run()
+	
 	swiping = Input.is_action_pressed("clean") if !stunned else false
 	
 	if stunned:

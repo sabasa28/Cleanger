@@ -15,6 +15,7 @@ var current_objective
 @export var min_time_between_pelican_spawn : float
 @export var max_time_between_pelican_spawn : float
 @export var pelican_max_heigh_dist_to_player : float
+@export var min_pelican_height_spawn : float
 var time_until_next_pelican_spawn : float
 var pelican_spawn_timer : float = 0.0
 @export var left_limit : float
@@ -67,7 +68,7 @@ func _process(delta: float) -> void:
 			var spawned_pelican : Node2D = Stats.pelican_prefab.instantiate()
 			var going_right = true if randi_range(0,1) == 0 else false
 			var spawn_pos_x : float = left_limit if going_right else right_limit
-			var spawn_pos : Vector2 = Vector2(spawn_pos_x, player.global_position.y - randf_range(0.0, pelican_max_heigh_dist_to_player))
+			var spawn_pos : Vector2 = Vector2(spawn_pos_x, minf(player.global_position.y, min_pelican_height_spawn) - randf_range(0.0, pelican_max_heigh_dist_to_player))
 			spawned_pelican.global_position = spawn_pos
 			add_child(spawned_pelican)
 			spawned_pelican.initialize(going_right, map_length)
