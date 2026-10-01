@@ -44,7 +44,9 @@ enum modifiable_stat
 	cleaner_explotion_range,
 	explotion_water_bomb_chance,
 	spots_to_trigger_explotion,
-	water_bomb_instant_clean_chance
+	water_bomb_instant_clean_chance,
+	pelican_spawn_time,
+	combo_timer_speed
 }
 
 func try_init(upgrade_num : int) -> void:
@@ -123,6 +125,10 @@ func apply_upgrade() -> bool:
 			Stats.raise_spots_explotion_chance(upgrade_main_amount)
 		modifiable_stat.water_bomb_instant_clean_chance:
 			Stats.raise_water_bomb_instant_clean_chance(upgrade_main_amount)
+		modifiable_stat.pelican_spawn_time:
+			Stats.lower_max_pelican_time(upgrade_main_amount)
+		modifiable_stat.combo_timer_speed:
+			Stats.lower_combo_timer_speed(upgrade_main_amount)
 	current_level += 1
 	update_button_and_menu()
 	return true

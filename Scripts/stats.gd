@@ -31,6 +31,7 @@ var initial_combo_value : int = 0.0
 var current_combo_value : int = 0.0
 const initial_time_for_combo : float = 10000.0 #in miliseconds
 var current_time_for_combo : float 
+var combo_time_lowering_speed : float = 1.0
 const time_for_combo_multiplier : float = 0.95
 var last_combo_time : float = 0.0
 var min_combo_time : float = 0.5
@@ -63,6 +64,9 @@ var cleaner_explotion_range : float = 2.0 #actually a multiplier
 var cleaner_explotion_water_bomb_chance : float = 0.0
 var spots_explotion_chance : float = 0.0
 var spots_trigger_explotion_unlocked : bool = false
+
+var min_time_pelican_spawn = 1.0
+var max_time_pelican_spawn = 8.0
 
 #prefabs
 var water_bomb_prefab = preload("res://Scenes/water_bomb.tscn")
@@ -116,8 +120,9 @@ func try_remove_coins_from_total(coins_to_remove : int) -> bool:
 
 func add_floor_cleaned(floor_cleaned : int) -> void:
 	floors_cleaned += 1
-	InGameUi.update_floor_multiplier_label(1.0 + floors_cleaned * floor_value, floor_value)
-	on_floor_cleaned.emit(floor_cleaned, floors_cleaned)
+	if floor_value != 0.0:
+		InGameUi.update_floor_multiplier_label(1.0 + floors_cleaned * floor_value, floor_value)
+		on_floor_cleaned.emit(floor_cleaned, floors_cleaned)
 
 func add_window_cleaned() -> void:
 	windows_cleaned += 1
@@ -232,6 +237,12 @@ func raise_spots_explotion_chance(amount_to_raise : float) -> void:
 func raise_water_bomb_instant_clean_chance(amount_to_raise : float) -> void:
 	water_bomb_instant_clean_unlocked = true
 	water_bomb_instant_clean_chance += amount_to_raise
+
+func lower_max_pelican_time(amount_to_lower : float) -> void:
+	max_time_pelican_spawn -= amount_to_lower
+
+func lower_combo_timer_speed(amount_to_lower : float) -> void:
+	combo_time_lowering_speed -= amount_to_lower
 
 func get_strength_modifier() -> float:
 	return strength_modifier

@@ -162,6 +162,8 @@ func pause() -> void:
 
 func reset() -> void:
 	unpause()
+	stun_timer = 0.0
+	stunned = false
 	global_position = initial_pos
 	gravity_scale = initial_gravity_scale
 	swipe_current_cooldown = 0.0

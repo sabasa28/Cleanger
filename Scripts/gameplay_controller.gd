@@ -6,14 +6,15 @@ var timer_end : float
 var current_timer : float = 0.0
 var combo_timer : float = 0.0
 var running_combo_timer : bool = false
+var combo_timer_speed : float = 1.0
 var on_cleaning_phase : bool = false
 var current_objective
 @export var stage_spawner : Node2D
 @export var run_time : float
 @export var player : Player
 @export var upgrades_ui : Node
-@export var min_time_between_pelican_spawn : float
-@export var max_time_between_pelican_spawn : float
+var min_time_between_pelican_spawn : float
+var max_time_between_pelican_spawn : float
 @export var pelican_max_heigh_dist_to_player : float
 @export var min_pelican_height_spawn : float
 var time_until_next_pelican_spawn : float
@@ -27,14 +28,19 @@ func _ready() -> void:
 	Stats.gameplay_controller = self
 	Stats.set_initial_values()
 	timer_end = run_time
+	combo_timer_speed = Stats.combo_time_lowering_speed
 	upgrades_ui.on_upgrades_finished.connect(start_cleaning_phase)
 	start_cleaning_phase()
+	max_time_between_pelican_spawn = Stats.max_time_pelican_spawn
 	time_until_next_pelican_spawn = randf_range(min_time_between_pelican_spawn, max_time_between_pelican_spawn)
 
 func start_cleaning_phase() -> void:
 	upgrades_ui.visible = false
 	on_cleaning_phase = true
 	player.reset()
+	combo_timer_speed = Stats.combo_time_lowering_speed
+	max_time_between_pelican_spawn = Stats.max_time_pelican_spawn
+	time_until_next_pelican_spawn = randf_range(min_time_between_pelican_spawn, max_time_between_pelican_spawn)
 	current_timer = 0.0
 	InGameUi.set_timer_text((int)(timer_end - current_timer))#por la conversion pierdo tiempo visualmente?
 	stop_combo_timer()
@@ -57,7 +63,7 @@ func _process(delta: float) -> void:
 			current_timer += delta
 			InGameUi.set_timer_text((int)(timer_end - current_timer))#por la conversion pierdo tiempo visualmente?
 		if running_combo_timer:
-			combo_timer -= delta
+			combo_timer -= delta * combo_timer_speed
 			if combo_timer <= 0.0:
 				combo_timer = 0.0
 				running_combo_timer = false
