@@ -2,6 +2,10 @@ extends Node
 
 @export var timer_label : Label
 @export var combo_timer_label : Label
+@export var combo_circular_timer : TextureProgressBar
+@export var combo_timer_base_color : Color
+@export var combo_timer_half_color : Color
+@export var combo_timer_low_color : Color
 @export var objective_label1 : RichTextLabel
 @export var objective_label2 : RichTextLabel
 @export var objective_label3 : RichTextLabel
@@ -13,8 +17,19 @@ extends Node
 func set_timer_text(time_left_num : int) -> void:
 	timer_label.text = format_time(time_left_num)
 
-func set_combo_timer_text(time_left_num : int) -> void:
-	combo_timer_label.text = format_time(time_left_num)
+func set_combo_timer_text(time_left_num : int, time_left_ooo : float) -> void: #ooo = out of one
+	if time_left_ooo == 0.0:
+		combo_timer_label.text = ""
+	else:
+		combo_timer_label.text = format_time(time_left_num)
+	combo_circular_timer.value = time_left_ooo
+	if time_left_ooo < 0.66:
+		if time_left_ooo < 0.33:
+			combo_circular_timer.tint_progress = combo_timer_low_color
+		else:
+			combo_circular_timer.tint_progress = combo_timer_half_color
+	else:
+		combo_circular_timer.tint_progress = combo_timer_base_color
 
 func format_time(time_left_num : int) -> String:
 	var mins = time_left_num / 60

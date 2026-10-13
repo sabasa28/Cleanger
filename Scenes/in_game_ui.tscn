@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dwnhiu17klgj5" path="res://Assets/Sprites/tilemap.png" id="1_5x6se"]
 [ext_resource type="Script" uid="uid://dld74mqng2a4e" path="res://Scripts/in_game_ui.gd" id="1_ey7ub"]
 [ext_resource type="FontFile" uid="uid://c1u302hkj1on4" path="res://Fonts/bptypewrite.strikethrough-italic.ttf" id="3_t3gp5"]
+[ext_resource type="Texture2D" uid="uid://b2kr3l7b0h6u0" path="res://Assets/Sprites/Circle64x64.png" id="4_dfbn1"]
 [ext_resource type="FontFile" uid="uid://3p7hsboevt12" path="res://Fonts/bptypewrite.italic.otf" id="4_orthm"]
 [ext_resource type="Script" uid="uid://27ksdeu3xvxk" path="res://Scripts/rising_text_pool.gd" id="5_2ovgp"]
 [ext_resource type="Script" uid="uid://0cwkukjtbrr8" path="res://Scripts/rising_fading_text.gd" id="5_orthm"]
@@ -17,10 +18,14 @@ font = ExtResource("4_orthm")
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "combo_timer_label", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label", "windows_rising_text_pool", "floors_rising_text_pool")]
+[node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "combo_timer_label", "combo_circular_timer", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label", "windows_rising_text_pool", "floors_rising_text_pool")]
 script = ExtResource("1_ey7ub")
 timer_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer/Control/TimerLabel")
 combo_timer_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control/ComboTimerLabel")
+combo_circular_timer = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control/TextureProgressBar")
+combo_timer_base_color = Color(0, 0.74509805, 0, 1)
+combo_timer_half_color = Color(0.7921569, 0.69411767, 0, 1)
+combo_timer_low_color = Color(1, 0, 0, 1)
 objective_label1 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective")
 objective_label2 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective2")
 objective_label3 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective3")
@@ -111,12 +116,24 @@ layout_mode = 2
 
 [node name="ComboTimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=1894074982]
 layout_mode = 0
-offset_top = 53.0
+offset_top = 101.0
 offset_right = 60.0
-offset_bottom = 74.000015
+offset_bottom = 122.000015
 text = "Timer"
 label_settings = SubResource("LabelSettings_t3gp5")
 horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=551243353]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 64.0
+offset_bottom = 96.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+fill_mode = 5
+texture_progress = ExtResource("4_dfbn1")
+tint_progress = Color(0, 0.7432059, 0, 1)
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=1202373938]
 custom_minimum_size = Vector2(150, 250)

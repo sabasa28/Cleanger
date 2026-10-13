@@ -5,6 +5,7 @@ extends Node2D
 var timer_end : float
 var current_timer : float = 0.0
 var combo_timer : float = 0.0
+var initial_combo_time : float = 0.0
 var running_combo_timer : bool = false
 var combo_timer_speed : float = 1.0
 var on_cleaning_phase : bool = false
@@ -68,7 +69,7 @@ func _process(delta: float) -> void:
 				combo_timer = 0.0
 				running_combo_timer = false
 				Stats.on_combo_finished()
-			InGameUi.set_combo_timer_text((int)(combo_timer))
+			InGameUi.set_combo_timer_text((int)(combo_timer), combo_timer / initial_combo_time)
 		pelican_spawn_timer += delta
 		if pelican_spawn_timer >= time_until_next_pelican_spawn:
 			var spawned_pelican : Node2D = Stats.pelican_prefab.instantiate()
@@ -85,8 +86,9 @@ func _process(delta: float) -> void:
 func set_combo_timer(new_time : float) -> void:
 	running_combo_timer = true
 	combo_timer = new_time
+	initial_combo_time = combo_timer
 
 func stop_combo_timer() -> void:
 	running_combo_timer = false
 	combo_timer = 0.0
-	InGameUi.set_combo_timer_text((int)(combo_timer))
+	InGameUi.set_combo_timer_text(0, 0.0)
