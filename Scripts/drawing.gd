@@ -6,7 +6,6 @@ extends Sprite2D
 var body_inside : Array[Node2D]
 var image : Image
 var initialImage : Image
-@export var textureToPutOver : Texture2D
 @export var textureForMask : Texture2D
 var imageToPutOver : Image
 var imageToPutOverMask : Image
@@ -27,6 +26,7 @@ class limit:
 var aux_limits : Array[limit]
 
 func _ready() -> void:
+	image_size = Stats.window_size
 	aux_limits.resize(4)
 	for i in aux_limits.size():
 		aux_limits[i] = limit.new()
@@ -37,20 +37,12 @@ func _ready() -> void:
 	half_super_pixels_per_side = super_pixels_per_side / 2
 	texture = ImageTexture.create_from_image(Image.create_empty(image_size.x,image_size.y,false, Image.FORMAT_RGBA8))
 	imageToPutOver = textureForMask.get_image()
-	imageToPutOver.resize(image_size.x, image_size.y)
+	imageToPutOver.resize(image_size.x, image_size.y, 0) #usar 0 interpolation porque sino se destruye la calidad
 	image = texture.get_image()
 	image.blend_rect(imageToPutOver, Rect2i(0,0,image_size.x,image_size.y),Vector2i(0,0))
-	initialImage = Image.create_empty(image_size.x, image_size.y, false, Image.FORMAT_RGBA8)
-	initialImage.copy_from(image)
-	image.fill(Color.SADDLE_BROWN)
-	image.fill_rect(Rect2i(5,5,20,20),Color.RED)
+	#image.fill(Color.SADDLE_BROWN)
 	texture.set_image(image)
-	var comparisonDict = image.compute_image_metrics(initialImage, false)
-	#print(comparisonDict.get("max"))
-	#print(comparisonDict.get("mean"))
-	#print(comparisonDict.get("mean_squared"))
-	#print(comparisonDict.get("root_mean_squared"))
-	#print(comparisonDict.get("peak_snr"))
+
 	collision.scale = Vector2(image_size.x / 20.0, image_size.y /20.0)
 
 func _paint_texture(pos: Vector2, body : Node2D) -> void:
@@ -178,7 +170,7 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),down, down_limit) && \
 			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), right, right_limit) && \
 			is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), left, left_limit):
-				image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
+				image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.TRANSPARENT)
 				super_pixels_state.set(super_pixel_num, true)
 				super_pixels_cleaned += 1
 				if try_clean_window():
@@ -193,7 +185,7 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 				is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir4, limit1_prev) && \
 				is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir1, limit1_prev) && \
 				is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y), dir2, limit2_prev):
-					image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
+					image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.TRANSPARENT)
 					super_pixels_state.set(super_pixel_num, true)
 					super_pixels_cleaned += 1
 					if try_clean_window():
@@ -211,7 +203,7 @@ func is_point_in_front(point : Vector2, dir : Vector2, orig : Vector2) -> bool:
 
 func try_clean_window() -> bool:
 	if super_pixels_cleaned > min_super_pixels_to_clear:
-		image.fill(Color.LIGHT_BLUE)
+		image.fill(Color.TRANSPARENT)
 		cleaned = true
 		window.on_base_cleaned()
 		return true
@@ -227,7 +219,7 @@ func clean_from_distance(point : Vector2, range : float) -> void:
 				continue
 			pos = Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y)
 			if (pos - point).length() < range:
-				image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.LIGHT_BLUE)
+				image.fill_rect(Rect2i(fila * super_pixels_interval.x, columna * super_pixels_interval.y,super_pixels_interval.x,super_pixels_interval.y), Color.TRANSPARENT)
 				super_pixels_state.set(super_pixel_num, true)
 				super_pixels_cleaned += 1
 				if try_clean_window():

@@ -10,6 +10,7 @@ var floors_state : Array[bool]
 signal on_reset_windows
 
 func _ready() -> void:
+	window_interval = Stats.window_size
 	Objectives.window_height = window_interval.y
 	Objectives.window_spawn_y = window_spawn_origin.y
 

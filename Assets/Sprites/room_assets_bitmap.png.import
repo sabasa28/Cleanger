@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://bhsbm0msimqp4"
+path="res://.godot/imported/room_assets_bitmap.png-bb39207223774ceb46da81ded5cc61be.res"
+
+[deps]
+
+source_file="res://Assets/Sprites/room_assets_bitmap.png"
+dest_files=["res://.godot/imported/room_assets_bitmap.png-bb39207223774ceb46da81ded5cc61be.res"]
+
+[params]
+
+create_from=1
+threshold=0.1

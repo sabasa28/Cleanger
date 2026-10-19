@@ -56,85 +56,6 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideMenu" unique_id=918763193]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=844206946]
-custom_minimum_size = Vector2(250, 150)
-layout_mode = 2
-texture = ExtResource("1_5x6se")
-region_rect = Rect2(0, 33, 32, 31.693665)
-patch_margin_left = 14
-patch_margin_top = 13
-patch_margin_right = 11
-patch_margin_bottom = 14
-
-[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=97674351]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -204.0
-offset_right = -138.0
-offset_bottom = 40.0
-grow_horizontal = 0
-theme_override_constants/margin_top = 10
-
-[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=1148948539]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Timer"
-label_settings = SubResource("LabelSettings_dmca1")
-horizontal_alignment = 1
-
-[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=363559231]
-layout_mode = 2
-
-[node name="TimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer/Control" unique_id=1779320711]
-layout_mode = 0
-offset_top = 53.0
-offset_right = 60.0
-offset_bottom = 74.000015
-text = "Timer"
-label_settings = SubResource("LabelSettings_t3gp5")
-horizontal_alignment = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=914278762]
-layout_mode = 0
-offset_left = 141.0
-offset_top = 1.0
-offset_right = 207.00006
-offset_bottom = 41.0
-theme_override_constants/margin_top = 10
-
-[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1560435504]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Combo"
-label_settings = SubResource("LabelSettings_dmca1")
-horizontal_alignment = 1
-
-[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1006008327]
-layout_mode = 2
-
-[node name="ComboTimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=1894074982]
-layout_mode = 0
-offset_top = 101.0
-offset_right = 60.0
-offset_bottom = 122.000015
-text = "Timer"
-label_settings = SubResource("LabelSettings_t3gp5")
-horizontal_alignment = 1
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=551243353]
-layout_mode = 0
-offset_top = 32.0
-offset_right = 64.0
-offset_bottom = 96.0
-max_value = 1.0
-step = 0.01
-value = 1.0
-fill_mode = 5
-texture_progress = ExtResource("4_dfbn1")
-tint_progress = Color(0, 0.7432059, 0, 1)
-
 [node name="NinePatchRect2" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=1202373938]
 custom_minimum_size = Vector2(150, 250)
 layout_mode = 2
@@ -226,6 +147,85 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=844206946]
+custom_minimum_size = Vector2(250, 150)
+layout_mode = 2
+texture = ExtResource("1_5x6se")
+region_rect = Rect2(0, 33, 32, 31.693665)
+patch_margin_left = 14
+patch_margin_top = 13
+patch_margin_right = 11
+patch_margin_bottom = 14
+
+[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=97674351]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -204.0
+offset_right = -138.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 10
+
+[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=1148948539]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Timer"
+label_settings = SubResource("LabelSettings_dmca1")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=363559231]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer/Control" unique_id=1779320711]
+layout_mode = 0
+offset_top = 53.0
+offset_right = 60.0
+offset_bottom = 74.000015
+text = "Timer"
+label_settings = SubResource("LabelSettings_t3gp5")
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=914278762]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 1.0
+offset_right = 207.00006
+offset_bottom = 41.0
+theme_override_constants/margin_top = 10
+
+[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1560435504]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Combo"
+label_settings = SubResource("LabelSettings_dmca1")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1006008327]
+layout_mode = 2
+
+[node name="ComboTimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=1894074982]
+layout_mode = 0
+offset_top = 101.0
+offset_right = 60.0
+offset_bottom = 122.000015
+text = "Timer"
+label_settings = SubResource("LabelSettings_t3gp5")
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=551243353]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 64.0
+offset_bottom = 96.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+fill_mode = 5
+texture_progress = ExtResource("4_dfbn1")
+tint_progress = Color(0, 0.7432059, 0, 1)
 
 [node name="NinePatchRect3" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=1742635693]
 custom_minimum_size = Vector2(150, 217.755)

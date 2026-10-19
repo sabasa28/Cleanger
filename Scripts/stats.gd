@@ -15,6 +15,8 @@ signal on_pasive_water_bomb_unlocked()
 
 var gameplay_controller : GameplayController
 
+const window_size : Vector2i = Vector2i(512,832)
+
 var total_coins : int = 1000000000000000
 var floors_cleaned : int
 var current_floor : int

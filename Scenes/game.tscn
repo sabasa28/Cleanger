@@ -18,7 +18,8 @@ time_to_unpause = 2.0
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2146928479]
 position = Vector2(0, -593)
 offset = Vector2(500, 0)
-zoom = Vector2(0.25, 0.25)
+zoom = Vector2(0.13, 0.13)
+process_callback = 0
 limit_enabled = false
 limit_left = -2750
 limit_right = 2500

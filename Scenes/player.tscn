@@ -63,17 +63,18 @@ impulse_cd = 2.0
 cleaner_anim = NodePath("CleanerPivot/Area2D2/AnimationPlayer")
 metadata/_edit_vertical_guides_ = [-290.0]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1334053351]
+position = Vector2(-2, 2.5)
+shape = SubResource("CapsuleShape2D_cvnsp")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1095897705]
 z_index = 10
 position = Vector2(0, -22.5)
 texture = ExtResource("1_v0iea")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1334053351]
-position = Vector2(-2, 2.5)
-shape = SubResource("CapsuleShape2D_cvnsp")
-
 [node name="CleanerPivot" type="Node2D" parent="." unique_id=1060885809]
 position = Vector2(0, -154)
+rotation = -1.5707964
 
 [node name="Area2D2" type="Area2D" parent="CleanerPivot" unique_id=1642259077 node_paths=PackedStringArray("sprite") groups=["Cleaner"]]
 process_priority = 5
@@ -93,6 +94,7 @@ shape = SubResource("RectangleShape2D_cvnsp")
 debug_color = Color(0.47034276, 0.64001155, 1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="CleanerPivot/Area2D2" unique_id=95469466]
+z_index = 3
 position = Vector2(0, -25.539)
 scale = Vector2(0.765, 0.765)
 texture = ExtResource("4_vgqql")

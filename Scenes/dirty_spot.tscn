@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://4miicpvealls"]
 
 [ext_resource type="Script" uid="uid://72ek2s18hya7" path="res://Scripts/dirty_spot.gd" id="1_2joo6"]
-[ext_resource type="Texture2D" uid="uid://bxo4ff33fsmbw" path="res://Assets/Sprites/mancha_1.png" id="2_2egfs"]
+[ext_resource type="Texture2D" uid="uid://dbe5abgtjw0ff" path="res://Assets/Sprites/mancha_3.png" id="2_2egfs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8yxx"]
 radius = 13.341664
@@ -12,6 +12,7 @@ script = ExtResource("1_2joo6")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=430201969]
+z_index = 2
 texture = ExtResource("2_2egfs")
 region_rect = Rect2(35, 134, 28, 28)
 

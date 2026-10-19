@@ -19,7 +19,7 @@ var current_level : int = 0
 @export var lvl_of_dependency : int
 #export var dependency_achievement : achievement
 
-var button_node : Node
+var button_node : upgrade_button
 var initiated : bool = false
 var available : bool = false
 enum modifiable_stat
@@ -58,6 +58,7 @@ func update_button_and_menu() -> void:
 	#aca segun si esta desbloqueda y si no tiene dependencia bloqueda seteamos si se ve y si se ve gris o normal
 	if available && current_level < upgrade_times:
 		button_node.get_child(0).update_ui(name, description, upgrade_price[current_level])
+		button_node.on_unlock()
 	else:
 		button_node.get_child(0).change_enabled_state(false)
 
@@ -130,5 +131,9 @@ func apply_upgrade() -> bool:
 		modifiable_stat.combo_timer_speed:
 			Stats.lower_combo_timer_speed(upgrade_main_amount)
 	current_level += 1
+	if current_level == 1:
+		button_node.on_bought()
+	if current_level == upgrade_times:
+		button_node.on_maxed()
 	update_button_and_menu()
 	return true
