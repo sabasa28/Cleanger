@@ -305,11 +305,11 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade" unique_id=1765562134 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_left = 18.400005
+offset_right = 918.4
+offset_bottom = 500.0
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -407,11 +407,12 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade2" unique_id=344433874 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_left = 19.199993
+offset_top = 2.3999977
+offset_right = 919.2
+offset_bottom = 502.4
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -509,11 +510,12 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade3" unique_id=2062675069 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_left = 18.399992
+offset_top = 1.5999985
+offset_right = 918.39996
+offset_bottom = 501.6
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -611,11 +613,12 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade4" unique_id=783738343 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_left = 18.399992
+offset_top = -0.80000305
+offset_right = 918.39996
+offset_bottom = 499.2
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -713,6 +716,7 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade5" unique_id=1747717734 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
 offset_left = 7.2000165
 offset_top = -52.000004
@@ -815,6 +819,7 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade6" unique_id=1416891265 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
 offset_left = 7.2000165
 offset_top = -52.000004
@@ -917,6 +922,7 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade7" unique_id=1529522103 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
 offset_left = 7.2000165
 offset_top = -52.000004
@@ -1019,6 +1025,7 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade8" unique_id=1136531144 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
 offset_left = 7.2000165
 offset_top = -52.000004
@@ -1121,11 +1128,12 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade9" unique_id=17355328 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_left = -92.80003
+offset_top = 0.7999954
+offset_right = 807.19995
+offset_bottom = 500.8
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -1223,11 +1231,12 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade10" unique_id=887128569 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_left = -92.799934
+offset_top = 2.4000015
+offset_right = 807.2001
+offset_bottom = 502.4
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -1325,11 +1334,12 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade11" unique_id=1209749247 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_left = -92.799934
+offset_top = 2.3999977
+offset_right = 807.2001
+offset_bottom = 502.4
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -1427,11 +1437,12 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade12" unique_id=2071815210 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_left = 17.599993
+offset_top = -34.4
+offset_right = 917.6
+offset_bottom = 465.6
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -1529,6 +1540,7 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade13" unique_id=1492200192 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
 offset_left = 7.2000165
 offset_top = -52.000004
@@ -1631,11 +1643,11 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade14" unique_id=2060939854 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_top = 16.8
+offset_right = 900.0
+offset_bottom = 516.8
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -1733,11 +1745,11 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade15" unique_id=118289230 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_top = 17.599995
+offset_right = 900.0
+offset_bottom = 517.6
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -1835,11 +1847,12 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade16" unique_id=1255640574 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_left = 0.7999921
+offset_top = 16.800007
+offset_right = 900.8
+offset_bottom = 516.8
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -1937,11 +1950,11 @@ bought_texture = ExtResource("7_kwblu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade17" unique_id=105375325 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 7.2000165
-offset_top = -52.000004
-offset_right = 907.2
-offset_bottom = 448.0
+offset_top = 16.800007
+offset_right = 900.0
+offset_bottom = 516.8
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -2042,6 +2055,7 @@ on_bought_raise_offset_of = [NodePath("../ButtonUpgrade19"), NodePath(".")]
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade18" unique_id=679990818 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
 offset_left = 127.99999
 offset_top = -0.80000496
@@ -2145,6 +2159,7 @@ bought_texture = SubResource("AtlasTexture_y0t3v")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade19" unique_id=508622805 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
+z_index = 1
 layout_mode = 0
 offset_left = 92.799995
 offset_top = -50.400005

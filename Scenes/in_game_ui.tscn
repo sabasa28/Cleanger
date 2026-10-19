@@ -10,12 +10,11 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_dmca1"]
 font = ExtResource("4_orthm")
-font_size = 22
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_t3gp5"]
 font = ExtResource("4_orthm")
-font_size = 20
 font_color = Color(0, 0, 0, 1)
 
 [node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "combo_timer_label", "combo_circular_timer", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label", "windows_rising_text_pool", "floors_rising_text_pool")]
@@ -38,8 +37,9 @@ floors_rising_text_pool = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchR
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -15.0
-offset_bottom = 15.0
+offset_top = -143.0
+offset_right = -1.3649902
+offset_bottom = 143.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -49,186 +49,13 @@ size_flags_vertical = 4
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideMenu" unique_id=918763193]
 layout_mode = 2
-
-[node name="NinePatchRect2" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=1202373938]
-custom_minimum_size = Vector2(150, 250)
-layout_mode = 2
-texture = ExtResource("1_5x6se")
-region_rect = Rect2(0, 33, 32, 31.693665)
-patch_margin_left = 14
-patch_margin_top = 13
-patch_margin_right = 11
-patch_margin_bottom = 14
-
-[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2" unique_id=1702131603]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -50.0
-offset_right = 50.0
-offset_bottom = 40.0
-grow_horizontal = 2
-theme_override_constants/margin_top = 10
-
-[node name="ObjTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/MarginContainer" unique_id=1064810086]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Objective"
-label_settings = SubResource("LabelSettings_dmca1")
-horizontal_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2" unique_id=1574017930]
-custom_minimum_size = Vector2(237.665, 0)
-custom_maximum_size = Vector2(237.665, 202.93)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.024139998
-anchor_top = 0.148
-anchor_right = 0.9748
-anchor_bottom = 0.95971996
-theme_override_constants/separation = 10
-alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="LabelObjective" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=132683095]
-custom_minimum_size = Vector2(17.925, 22.785)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("4_orthm")
-theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-bbcode_enabled = true
-text = "objective"
-fit_content = true
-scroll_active = false
-autowrap_mode = 2
-horizontal_alignment = 1
-
-[node name="LabelObjective2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=1982886260]
-custom_minimum_size = Vector2(17.925, 22.785)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("4_orthm")
-theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-bbcode_enabled = true
-text = "objective"
-fit_content = true
-scroll_active = false
-autowrap_mode = 2
-horizontal_alignment = 1
-
-[node name="LabelObjective3" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=2045548230]
-custom_minimum_size = Vector2(17.925, 22.785)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("4_orthm")
-theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-bbcode_enabled = true
-text = "objective"
-fit_content = true
-scroll_active = false
-autowrap_mode = 2
-horizontal_alignment = 1
-
-[node name="NinePatchRect" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=844206946]
-custom_minimum_size = Vector2(250, 150)
-layout_mode = 2
-texture = ExtResource("1_5x6se")
-region_rect = Rect2(0, 33, 32, 31.693665)
-patch_margin_left = 14
-patch_margin_top = 13
-patch_margin_right = 11
-patch_margin_bottom = 14
-
-[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=97674351]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -204.0
-offset_right = -138.0
-offset_bottom = 40.0
-grow_horizontal = 0
-theme_override_constants/margin_top = 10
-
-[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=1148948539]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Timer"
-label_settings = SubResource("LabelSettings_dmca1")
-horizontal_alignment = 1
-
-[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=363559231]
-layout_mode = 2
-
-[node name="TimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer/Control" unique_id=1779320711]
-layout_mode = 0
-offset_top = 53.0
-offset_right = 60.0
-offset_bottom = 74.000015
-text = "Timer"
-label_settings = SubResource("LabelSettings_t3gp5")
-horizontal_alignment = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=914278762]
-layout_mode = 0
-offset_left = 141.0
-offset_top = 1.0
-offset_right = 207.00006
-offset_bottom = 41.0
-theme_override_constants/margin_top = 10
-
-[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1560435504]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Combo"
-label_settings = SubResource("LabelSettings_dmca1")
-horizontal_alignment = 1
-
-[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1006008327]
-layout_mode = 2
-
-[node name="ComboTimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=1894074982]
-layout_mode = 0
-offset_top = 101.0
-offset_right = 60.0
-offset_bottom = 122.000015
-text = "Timer"
-label_settings = SubResource("LabelSettings_t3gp5")
-horizontal_alignment = 1
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=551243353]
-layout_mode = 0
-offset_top = 32.0
-offset_right = 64.0
-offset_bottom = 96.0
-max_value = 1.0
-step = 0.01
-value = 1.0
-fill_mode = 5
-texture_progress = ExtResource("4_dfbn1")
-tint_progress = Color(0, 0.7432059, 0, 1)
+theme_override_constants/separation = 2
 
 [node name="NinePatchRect3" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=1742635693]
-custom_minimum_size = Vector2(150, 217.755)
+custom_minimum_size = Vector2(171.495, 77.305)
 layout_mode = 2
 texture = ExtResource("1_5x6se")
 region_rect = Rect2(0, 33, 32, 31.693665)
@@ -257,28 +84,27 @@ horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3" unique_id=1908640505]
 custom_minimum_size = Vector2(169.49, 0)
-custom_maximum_size = Vector2(130, 202.93)
+custom_maximum_size = Vector2(78.185, 53.3)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -175.11499
-offset_right = 155.72
-offset_bottom = 1.5258789e-05
+offset_top = -50.0
+offset_right = 78.185
+offset_bottom = -3.0517578e-05
 grow_vertical = 0
-theme_override_constants/separation = 14
 alignment = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer" unique_id=1878331547]
-custom_minimum_size = Vector2(17.925, 22.785)
+custom_minimum_size = Vector2(17.925, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
 bbcode_enabled = true
 text = "Windows"
 fit_content = true
@@ -288,7 +114,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WindowsCleaned" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer" unique_id=416437817]
-custom_minimum_size = Vector2(17.925, 107.005)
+custom_minimum_size = Vector2(17.925, 0)
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 4
@@ -296,8 +122,8 @@ size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
 bbcode_enabled = true
 text = "0"
 fit_content = true
@@ -526,31 +352,31 @@ random_offset_limit = 20.0
 rising_distance = 40.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3" unique_id=249999471]
-custom_minimum_size = Vector2(176.38, 0)
-custom_maximum_size = Vector2(130, 202.93)
+custom_minimum_size = Vector2(176.14, 0)
+custom_maximum_size = Vector2(77.21, 202.93)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -116.87
-offset_top = -175.11499
+offset_left = -77.21
+offset_top = -50.0
+offset_bottom = -7.6293945e-05
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/separation = 14
 alignment = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2" unique_id=1514851378]
-custom_minimum_size = Vector2(17.925, 22.785)
+custom_minimum_size = Vector2(17.925, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
 bbcode_enabled = true
 text = "Floors"
 fit_content = true
@@ -560,7 +386,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="FloorMultiplier" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2" unique_id=574765261]
-custom_minimum_size = Vector2(17.925, 107.005)
+custom_minimum_size = Vector2(17.925, 0)
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 4
@@ -568,8 +394,8 @@ size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
 bbcode_enabled = true
 text = "1"
 fit_content = true
@@ -798,7 +624,6 @@ random_offset_limit = 20.0
 rising_distance = 40.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3" unique_id=542902997]
-custom_minimum_size = Vector2(0, 43.795)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -806,12 +631,187 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -20.0
-offset_top = -92.25
+offset_top = -46.0
 offset_right = 20.0
-offset_bottom = -48.454956
+offset_bottom = -2.204956
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_colors/default_color = Color(1.0039686, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
 text = "X"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=844206946]
+custom_minimum_size = Vector2(171.495, 124.175)
+layout_mode = 2
+texture = ExtResource("1_5x6se")
+region_rect = Rect2(0, 33, 32, 31.693665)
+patch_margin_left = 14
+patch_margin_top = 13
+patch_margin_right = 11
+patch_margin_bottom = 14
+
+[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=97674351]
+layout_mode = 1
+offset_right = 66.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+
+[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=1148948539]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Timer"
+label_settings = SubResource("LabelSettings_dmca1")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=363559231]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer/Control" unique_id=1779320711]
+layout_mode = 0
+offset_top = 53.0
+offset_right = 60.0
+offset_bottom = 74.000015
+text = "Timer"
+label_settings = SubResource("LabelSettings_t3gp5")
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=914278762]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.00006
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_right = 20
+
+[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1560435504]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Combo"
+label_settings = SubResource("LabelSettings_dmca1")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1006008327]
+layout_mode = 2
+
+[node name="ComboTimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=1894074982]
+layout_mode = 0
+offset_left = -3.97
+offset_top = 101.0
+offset_right = 56.03
+offset_bottom = 122.000015
+text = "Timer"
+label_settings = SubResource("LabelSettings_t3gp5")
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=551243353]
+layout_mode = 0
+offset_left = -3.97
+offset_top = 32.0
+offset_right = 60.03
+offset_bottom = 96.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+fill_mode = 5
+texture_progress = ExtResource("4_dfbn1")
+tint_progress = Color(0, 0.7432059, 0, 1)
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=1202373938]
+custom_minimum_size = Vector2(171.495, 150)
+layout_mode = 2
+texture = ExtResource("1_5x6se")
+region_rect = Rect2(0, 33, 32, 31.693665)
+patch_margin_left = 14
+patch_margin_top = 13
+patch_margin_right = 11
+patch_margin_bottom = 14
+
+[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2" unique_id=1702131603]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 10
+
+[node name="ObjTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/MarginContainer" unique_id=1064810086]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Objective"
+label_settings = SubResource("LabelSettings_dmca1")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2" unique_id=1574017930]
+custom_minimum_size = Vector2(237.665, 0)
+custom_maximum_size = Vector2(163.97, 202.93)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.023255875
+anchor_top = 0.21333334
+anchor_right = 0.9739159
+anchor_bottom = 1.0250533
+offset_right = 0.45648193
+offset_bottom = -6.595001
+theme_override_constants/separation = 10
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="LabelObjective" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=132683095]
+custom_minimum_size = Vector2(17.925, 22.785)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+bbcode_enabled = true
+text = "objective"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="LabelObjective2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=1982886260]
+custom_minimum_size = Vector2(17.925, 22.785)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+bbcode_enabled = true
+text = "objective"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="LabelObjective3" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=2045548230]
+custom_minimum_size = Vector2(17.925, 22.785)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_orthm")
+theme_override_fonts/italics_font = ExtResource("3_t3gp5")
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+bbcode_enabled = true
+text = "objective"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
