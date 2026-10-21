@@ -84,7 +84,8 @@ func _process(delta: float) -> void:
 	
 	var target_rot : float = cleanerPivot.get_angle_to(get_global_mouse_position())
 	var rot_speed : float = (cleaner_rot_speed_base * delta * cleaner_cleaning_rot_speed_modifier) if cleaner.cleaning else cleaner_rot_speed_base * delta
-	cleanerPivot.rotate(lerp(0.0, target_rot, rot_speed))
+	if !stunned:
+		cleanerPivot.rotate(lerp(0.0, target_rot, rot_speed))
 	#cleanerPivot.look_at(get_global_mouse_position())
 	
 	cleaner.player_dir = linear_velocity.normalized()

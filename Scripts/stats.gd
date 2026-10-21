@@ -105,6 +105,7 @@ func end_run() -> void:
 	total_combo_coins = 0
 	current_combo_coins = 0
 	current_combo_num = 0
+	InGameUi.reset_combo_amount_text()
 	on_run_ended.emit()
 
 func add_run_coins_to_total() -> void:
@@ -140,10 +141,13 @@ func try_add_combo() -> void:
 		#combo logrado, sigue el combo
 		current_time_for_combo *= time_for_combo_multiplier
 		current_combo_num += 1
+		InGameUi.set_combo_amount_text(current_combo_num)
 		current_combo_value += initial_combo_value
 		current_combo_coins += current_combo_value
 		print("current_combo_value_added", current_combo_value)
 		print("current_combo_coins", current_combo_coins)
+	else:
+		InGameUi.set_combo_amount_text(0)
 	gameplay_controller.set_combo_timer(current_time_for_combo / 1000)
 	#print("time between windows cleaned", current_time - last_combo_time)
 	last_combo_time = current_time
@@ -153,6 +157,7 @@ func on_combo_finished() -> void:
 			current_time_for_combo = initial_time_for_combo
 			current_combo_value = initial_combo_value
 			current_combo_num = 0
+			InGameUi.reset_combo_amount_text()
 			total_combo_coins += current_combo_coins
 			update_window_related_ui(current_combo_coins)
 			current_combo_coins = 0

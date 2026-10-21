@@ -1,6 +1,7 @@
 extends Node
 
 @export var timer_label : Label
+@export var combo_amount_label : Label
 @export var combo_timer_label : Label
 @export var combo_circular_timer : TextureProgressBar
 @export var combo_timer_base_color : Color
@@ -30,6 +31,14 @@ func set_combo_timer_text(time_left_num : int, time_left_ooo : float) -> void: #
 			combo_circular_timer.tint_progress = combo_timer_half_color
 	else:
 		combo_circular_timer.tint_progress = combo_timer_base_color
+
+func set_combo_amount_text(new_combo_amount : int) -> void:
+	new_combo_amount+=1
+	combo_amount_label.text = str(new_combo_amount)
+
+
+func reset_combo_amount_text() -> void:
+	combo_amount_label.text = ""
 
 func format_time(time_left_num : int) -> String:
 	var mins = time_left_num / 60
