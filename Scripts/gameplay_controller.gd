@@ -25,6 +25,7 @@ var pelican_spawn_timer : float = 0.0
 var map_length : float
 
 func _ready() -> void:
+	InGameUi.on_day_end.connect(end_day)
 	map_length = right_limit - left_limit
 	Stats.gameplay_controller = self
 	Stats.set_initial_values()
@@ -54,6 +55,12 @@ func end_cleaning_phase() -> void:
 	Stats.end_run()
 	player.pause()
 	stop_combo_timer()
+	show_run_stats()
+
+func show_run_stats() -> void:
+	InGameUi.show_run_stats()
+
+func end_day() -> void:
 	upgrades_ui.prepare_and_set_visible()
 
 func _process(delta: float) -> void:

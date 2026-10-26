@@ -7,6 +7,7 @@ var strength_modifier = 1.0
 @export var swipe_base_cooldown : float
 var swipe_modified_cooldown
 var swipe_current_cooldown = 0.0
+var ready_to_swipe : bool = true
 var swiping = false
 @export var height_checking_cooldown : float
 var height_checking_timer = 0.0
@@ -40,9 +41,12 @@ var pasive_water_bomb_unlocked : bool = false
 var pasive_water_bomb_timer : float = 0.0
 
 @export var cleaner_anim : AnimationPlayer
+@export var lunge_end_anim_name : StringName
 var swipe_anim_cooldown : float
 var swipe_anim_timer : float = 0.0
 var playing_swipe_anim : bool = false
+
+@export var sprite : Sprite2D
 
 func _ready() -> void:
 	swipe_modified_cooldown = swipe_base_cooldown / Stats.speed_modifier
@@ -64,6 +68,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	sprite.flip_v = cleanerPivot.transform.x.x < 0.0
 	if paused:
 		if waiting_to_unpause:
 			unpaused_timer -= delta
@@ -89,8 +94,10 @@ func _process(delta: float) -> void:
 	#cleanerPivot.look_at(get_global_mouse_position())
 	
 	cleaner.player_dir = linear_velocity.normalized()
-	if swipe_current_cooldown > 0:
+	if swipe_current_cooldown > 0.0:
 		swipe_current_cooldown -= delta
+		if swipe_current_cooldown <= 0.0:
+			cleaner_anim.play("StopLunge")
 	if cleaner.cleaning:
 		if cleaning_timer < time_cleaning_after_swipe:
 			cleaning_timer += delta
@@ -99,8 +106,9 @@ func _process(delta: float) -> void:
 			cleaner.stop_cleaning()
 	
 	if swiping && !impulsing:
-		if swipe_current_cooldown <= 0:
+		if ready_to_swipe:
 			swipe_current_cooldown = swipe_base_cooldown / Stats.speed_modifier
+			ready_to_swipe = false
 			cleaner_anim.play("Swipe")
 			gravity_scale = initial_gravity_scale / 3.0
 			swipe_anim_timer = swipe_anim_cooldown
@@ -168,6 +176,7 @@ func reset() -> void:
 	global_position = initial_pos
 	gravity_scale = initial_gravity_scale
 	swipe_current_cooldown = 0.0
+	ready_to_swipe = true
 	strength_modifier = Stats.get_strength_modifier()
 	cleaner_swipes_left_before_explotion = Stats.cleaner_explotion_time as int
 
@@ -195,3 +204,8 @@ func stun(stun_time : float) -> void:
 	if stun_timer < stun_time:
 		stun_timer = stun_time
 		stunned = true
+
+
+func _on_stop_lunge_animation_finished(anim_name: StringName) -> void:
+	if anim_name == lunge_end_anim_name:
+		ready_to_swipe = true

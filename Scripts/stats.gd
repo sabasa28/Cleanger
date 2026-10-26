@@ -40,6 +40,7 @@ var min_combo_time : float = 0.5
 var current_combo_num : int = 0
 var current_combo_coins : int = 0
 var total_combo_coins : int = 0
+var max_run_combo : int = 0
 
 var cleaning_power : float = 4.0 #(times to clean spot, lower is better)
 var rotation_speed : float = 0.3 #actually a multiplier
@@ -98,6 +99,7 @@ func start_run() -> void:
 func end_run() -> void:
 	add_run_coins_to_total()
 	total_runs += 1
+	InGameUi.update_run_windows_floors_and_combo(windows_cleaned, spots_cleaned, floors_cleaned if floor_value != 0.0 else -1, max_run_combo if initial_combo_value != 0.0 else -1)
 	floors_cleaned = 0
 	windows_cleaned = 0
 	spots_cleaned = 0
@@ -105,12 +107,14 @@ func end_run() -> void:
 	total_combo_coins = 0
 	current_combo_coins = 0
 	current_combo_num = 0
+	max_run_combo = 0
 	InGameUi.reset_combo_amount_text()
 	on_run_ended.emit()
 
 func add_run_coins_to_total() -> void:
-	var coins_earned : float = (windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value + total_combo_coins) * (1.0 + floors_cleaned * floor_value) #aca se multiplicaria con el multiplicador
+	var coins_earned : int = int((windows_cleaned * window_value + spots_cleaned * spot_value + golden_spots_cleaned * golden_spot_value + total_combo_coins) * (1.0 + floors_cleaned * floor_value)) #aca se multiplicaria con el multiplicador
 	total_coins += coins_earned
+	InGameUi.update_run_coins_label(coins_earned)
 	on_coins_changed.emit(total_coins, coins_earned)
 
 func try_remove_coins_from_total(coins_to_remove : int) -> bool:
@@ -154,13 +158,15 @@ func try_add_combo() -> void:
 
 func on_combo_finished() -> void:
 	if current_combo_num > 0: 
-			current_time_for_combo = initial_time_for_combo
-			current_combo_value = initial_combo_value
-			current_combo_num = 0
-			InGameUi.reset_combo_amount_text()
-			total_combo_coins += current_combo_coins
-			update_window_related_ui(current_combo_coins)
-			current_combo_coins = 0
+		current_time_for_combo = initial_time_for_combo
+		current_combo_value = initial_combo_value
+		if current_combo_num > max_run_combo:
+			max_run_combo = current_combo_num
+		current_combo_num = 0
+		InGameUi.reset_combo_amount_text()
+		total_combo_coins += current_combo_coins
+		update_window_related_ui(current_combo_coins)
+		current_combo_coins = 0
 
 func check_height(player_height : float, last_player_height : float) -> void:
 	on_height_changed.emit(player_height, last_player_height)
@@ -188,6 +194,8 @@ func raise_window_value(amount_to_raise : float) -> void:
 	window_value += amount_to_raise
 
 func raise_floor_value(amount_to_raise : float) -> void:
+	if floor_value == 0:
+		InGameUi.display_floors(true)
 	floor_value += amount_to_raise
 
 func raise_spot_value(amount_to_raise : float) -> void:
@@ -197,6 +205,8 @@ func raise_golden_spot_value(amount_to_raise : float) -> void:
 	golden_spot_value += amount_to_raise
 
 func raise_combo_value(amount_to_raise : float) -> void:
+	if initial_combo_value == 0:
+		InGameUi.display_combo(true)
 	initial_combo_value += amount_to_raise
 
 func raise_strength(amount_to_raise : float) -> void:

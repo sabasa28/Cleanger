@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://ioajbp0h84d5"]
 
-[ext_resource type="Texture2D" uid="uid://dwnhiu17klgj5" path="res://Assets/Sprites/tilemap.png" id="1_5x6se"]
 [ext_resource type="Script" uid="uid://dld74mqng2a4e" path="res://Scripts/in_game_ui.gd" id="1_ey7ub"]
+[ext_resource type="Texture2D" uid="uid://588uyga06qa8" path="res://Assets/Sprites/SquareBrightTrans.png" id="2_dfbn1"]
+[ext_resource type="Texture2D" uid="uid://0a0ns7r5cx6p" path="res://Assets/Sprites/SquareTrans.png" id="2_dwyif"]
 [ext_resource type="FontFile" uid="uid://c1u302hkj1on4" path="res://Fonts/bptypewrite.strikethrough-italic.ttf" id="3_t3gp5"]
 [ext_resource type="Texture2D" uid="uid://b2kr3l7b0h6u0" path="res://Assets/Sprites/Circle64x64.png" id="4_dfbn1"]
 [ext_resource type="FontFile" uid="uid://3p7hsboevt12" path="res://Fonts/bptypewrite.italic.otf" id="4_orthm"]
@@ -17,55 +18,189 @@ font_color = Color(0, 0, 0, 1)
 font = ExtResource("4_orthm")
 font_color = Color(0, 0, 0, 1)
 
-[node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "combo_amount_label", "combo_timer_label", "combo_circular_timer", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label", "windows_rising_text_pool", "floors_rising_text_pool")]
+[node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "combo_amount_label", "combo_timer_label", "combo_circular_timer", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label", "final_windows_label", "final_spots_label", "final_floor_label", "final_combo_label", "final_coins_label", "windows_rising_text_pool", "floors_rising_text_pool", "end_stats_panel", "end_day_button", "combo_ui", "floors_ui")]
 script = ExtResource("1_ey7ub")
-timer_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer/Control/TimerLabel")
-combo_amount_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control/TextureProgressBar/ComboAmountLabel")
-combo_timer_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control/ComboTimerLabel")
-combo_circular_timer = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control/TextureProgressBar")
+timer_label = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer/Control/TimerLabel")
+combo_amount_label = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control/TextureProgressBar/ComboAmountLabel")
+combo_timer_label = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control/ComboTimerLabel")
+combo_circular_timer = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control/TextureProgressBar")
 combo_timer_base_color = Color(0, 0.74509805, 0, 1)
 combo_timer_half_color = Color(0.7921569, 0.69411767, 0, 1)
 combo_timer_low_color = Color(1, 0, 0, 1)
-objective_label1 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective")
-objective_label2 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective2")
-objective_label3 = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective3")
-windows_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned")
-floors_label = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier")
-windows_rising_text_pool = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool")
-floors_rising_text_pool = NodePath("GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool")
+combo_timer_stoped_color = Color(0.446777, 0.44677705, 0.4467771, 1)
+objective_label1 = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective")
+objective_label2 = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective2")
+objective_label3 = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect2/VBoxContainer/LabelObjective3")
+windows_label = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI/WindowsCleaned")
+floors_label = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2/FloorMultiplier")
+final_windows_label = NodePath("GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2/VBoxContainer/Final_Windows_Label")
+final_spots_label = NodePath("GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2/VBoxContainer/Final_Spots_Label")
+final_floor_label = NodePath("GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2/VBoxContainer/Final_Floors_Label")
+final_combo_label = NodePath("GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2/VBoxContainer/Final_Combo_Label")
+final_coins_label = NodePath("GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2/Final_Coins_Label")
+windows_rising_text_pool = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI/WindowsCleaned/RisingTextPool")
+floors_rising_text_pool = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2/FloorMultiplier/RisingTextPool")
+end_stats_panel = NodePath("GameplayUI/RunStatsUI")
+end_day_button = NodePath("GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/Button")
+end_day_button_grace_period = 1.0
+combo_ui = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI")
+floors_ui = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI")
 
 [node name="GameplayUI" type="MarginContainer" parent="." unique_id=1607867072]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -143.0
-offset_right = -1.3649902
-offset_bottom = 143.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="SideMenu" type="MarginContainer" parent="GameplayUI" unique_id=101436442]
+[node name="RunStatsUI" type="TextureRect" parent="GameplayUI" unique_id=1405472517]
+layout_mode = 2
+texture = ExtResource("2_dwyif")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/RunStatsUI" unique_id=1663680279]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+theme_override_constants/margin_left = 47
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 223
+theme_override_constants/margin_bottom = 40
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GameplayUI/RunStatsUI/MarginContainer" unique_id=2093681027]
+layout_mode = 2
+texture = ExtResource("2_dfbn1")
+
+[node name="Label" type="Label" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect" unique_id=2020518431]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 7.0
+offset_right = 48.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_orthm")
+theme_override_font_sizes/font_size = 24
+text = "End of day"
+
+[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect" unique_id=2111005301]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 33
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer" unique_id=179357594]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2" unique_id=334415822]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2/VBoxContainer" unique_id=1084992571]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_orthm")
+text = "Another good day at work! Look at everything you acomplished:"
+autowrap_mode = 2
+
+[node name="Final_Windows_Label" type="Label" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2/VBoxContainer" unique_id=1826552388]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_orthm")
+text = "- x Windows cleaned"
+autowrap_mode = 2
+
+[node name="Final_Spots_Label" type="Label" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2/VBoxContainer" unique_id=996329682]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_orthm")
+text = "- x Spots cleaned"
+autowrap_mode = 2
+
+[node name="Final_Floors_Label" type="Label" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2/VBoxContainer" unique_id=171592899]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_orthm")
+text = "- x Floors cleaned"
+autowrap_mode = 2
+
+[node name="Final_Combo_Label" type="Label" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2/VBoxContainer" unique_id=705142063]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_orthm")
+text = "- x Max combo"
+autowrap_mode = 2
+
+[node name="Label5" type="Label" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2" unique_id=1227326399]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_orthm")
+text = "An here's the pay for the day:"
+autowrap_mode = 2
+
+[node name="Final_Coins_Label" type="Label" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2" unique_id=1794369262]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_orthm")
+text = "XXXX argentinian pesos!"
+autowrap_mode = 2
+
+[node name="Label6" type="Label" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer2" unique_id=1637746661]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_orthm")
+text = "Now go rest! There's more work to be done tomorrow."
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect" unique_id=56354691]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -63.70999
+offset_top = -27.23999
+offset_right = -7.569977
+offset_bottom = -6.11499
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(1, 1)
+theme_override_fonts/font = ExtResource("4_orthm")
+text = "End day"
+
+[node name="SideUI" type="MarginContainer" parent="GameplayUI" unique_id=101436442]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideMenu" unique_id=918763193]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideUI" unique_id=918763193]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="NinePatchRect3" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=1742635693]
+[node name="NinePatchRect3" type="NinePatchRect" parent="GameplayUI/SideUI/VBoxContainer" unique_id=1742635693]
 custom_minimum_size = Vector2(171.495, 77.305)
 layout_mode = 2
-texture = ExtResource("1_5x6se")
-region_rect = Rect2(0, 33, 32, 31.693665)
+texture = ExtResource("2_dfbn1")
+region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 14
 patch_margin_top = 13
 patch_margin_right = 11
 patch_margin_bottom = 14
 
-[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3" unique_id=56711704]
+[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3" unique_id=56711704]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -76,14 +211,14 @@ offset_bottom = 40.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 10
 
-[node name="ObjTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/MarginContainer" unique_id=683950442]
+[node name="ObjTitleLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/MarginContainer" unique_id=683950442]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Stats"
 label_settings = SubResource("LabelSettings_dmca1")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3" unique_id=1908640505]
+[node name="Windows_UI" type="VBoxContainer" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3" unique_id=1908640505]
 custom_minimum_size = Vector2(169.49, 0)
 custom_maximum_size = Vector2(78.185, 53.3)
 layout_mode = 1
@@ -96,7 +231,7 @@ offset_bottom = -3.0517578e-05
 grow_vertical = 0
 alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer" unique_id=1878331547]
+[node name="RichTextLabel2" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI" unique_id=1878331547]
 custom_minimum_size = Vector2(17.925, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -114,7 +249,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WindowsCleaned" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer" unique_id=416437817]
+[node name="WindowsCleaned" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI" unique_id=416437817]
 custom_minimum_size = Vector2(17.925, 0)
 clip_contents = false
 layout_mode = 2
@@ -133,7 +268,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RisingTextPool" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned" unique_id=1225182789]
+[node name="RisingTextPool" type="Control" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI/WindowsCleaned" unique_id=1225182789]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -148,7 +283,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_2ovgp")
 
-[node name="WindowsCleaned" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=523936947]
+[node name="WindowsCleaned" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI/WindowsCleaned/RisingTextPool" unique_id=523936947]
 visible = false
 custom_minimum_size = Vector2(19.92, 42.045)
 clip_contents = false
@@ -182,7 +317,7 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="WindowsCleaned2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=639474355]
+[node name="WindowsCleaned2" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI/WindowsCleaned/RisingTextPool" unique_id=639474355]
 visible = false
 custom_minimum_size = Vector2(17.925, 42.045)
 clip_contents = false
@@ -216,7 +351,7 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="WindowsCleaned3" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=1281057904]
+[node name="WindowsCleaned3" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI/WindowsCleaned/RisingTextPool" unique_id=1281057904]
 visible = false
 custom_minimum_size = Vector2(17.925, 42.045)
 clip_contents = false
@@ -250,7 +385,7 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="WindowsCleaned4" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=1403149464]
+[node name="WindowsCleaned4" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI/WindowsCleaned/RisingTextPool" unique_id=1403149464]
 visible = false
 custom_minimum_size = Vector2(17.925, 42.045)
 clip_contents = false
@@ -284,7 +419,7 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="WindowsCleaned5" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=879742995]
+[node name="WindowsCleaned5" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI/WindowsCleaned/RisingTextPool" unique_id=879742995]
 visible = false
 custom_minimum_size = Vector2(17.925, 42.045)
 clip_contents = false
@@ -318,7 +453,7 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="WindowsCleaned6" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer/WindowsCleaned/RisingTextPool" unique_id=2064603043]
+[node name="WindowsCleaned6" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Windows_UI/WindowsCleaned/RisingTextPool" unique_id=2064603043]
 visible = false
 custom_minimum_size = Vector2(17.925, 42.045)
 clip_contents = false
@@ -352,7 +487,12 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3" unique_id=249999471]
+[node name="Floors_UI" type="Control" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3" unique_id=1105129168]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI" unique_id=249999471]
 custom_minimum_size = Vector2(176.14, 0)
 custom_maximum_size = Vector2(77.21, 202.93)
 layout_mode = 1
@@ -361,15 +501,18 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -77.21
-offset_top = -50.0
-offset_bottom = -7.6293945e-05
+offset_left = 54.78997
+offset_top = -22.000076
+offset_right = 131.99997
+offset_bottom = 37.999924
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_constants/separation = 0
 alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2" unique_id=1514851378]
+[node name="RichTextLabel2" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2" unique_id=1514851378]
 custom_minimum_size = Vector2(17.925, 0)
+clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -379,14 +522,14 @@ theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 14
 theme_override_font_sizes/italics_font_size = 14
 bbcode_enabled = true
-text = "Floors"
+text = "Floors bonus"
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FloorMultiplier" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2" unique_id=574765261]
+[node name="FloorMultiplier" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2" unique_id=574765261]
 custom_minimum_size = Vector2(17.925, 0)
 clip_contents = false
 layout_mode = 2
@@ -405,7 +548,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RisingTextPool" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier" unique_id=1021271246]
+[node name="RisingTextPool" type="Control" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2/FloorMultiplier" unique_id=1021271246]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -420,7 +563,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_2ovgp")
 
-[node name="WindowsCleaned" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=104835360]
+[node name="WindowsCleaned" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=104835360]
 visible = false
 custom_minimum_size = Vector2(19.92, 42.045)
 clip_contents = false
@@ -454,7 +597,7 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="WindowsCleaned2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=2029106919]
+[node name="WindowsCleaned2" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=2029106919]
 visible = false
 custom_minimum_size = Vector2(17.925, 42.045)
 clip_contents = false
@@ -488,7 +631,7 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="WindowsCleaned3" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=1387898724]
+[node name="WindowsCleaned3" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=1387898724]
 visible = false
 custom_minimum_size = Vector2(17.925, 42.045)
 clip_contents = false
@@ -522,7 +665,7 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="WindowsCleaned4" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=1082584252]
+[node name="WindowsCleaned4" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=1082584252]
 visible = false
 custom_minimum_size = Vector2(17.925, 42.045)
 clip_contents = false
@@ -556,7 +699,7 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="WindowsCleaned5" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=2110171377]
+[node name="WindowsCleaned5" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=2110171377]
 visible = false
 custom_minimum_size = Vector2(17.925, 42.045)
 clip_contents = false
@@ -590,7 +733,7 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="WindowsCleaned6" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=1614361299]
+[node name="WindowsCleaned6" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI/VBoxContainer2/FloorMultiplier/RisingTextPool" unique_id=1614361299]
 visible = false
 custom_minimum_size = Vector2(17.925, 42.045)
 clip_contents = false
@@ -624,17 +767,17 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect3" unique_id=542902997]
+[node name="RichTextLabel" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI" unique_id=542902997]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -46.0
-offset_right = 20.0
-offset_bottom = -2.204956
+offset_left = 46.0
+offset_top = -8.0
+offset_right = 86.0
+offset_bottom = 35.795044
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -645,33 +788,33 @@ text = "X"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=844206946]
+[node name="NinePatchRect" type="NinePatchRect" parent="GameplayUI/SideUI/VBoxContainer" unique_id=844206946]
 custom_minimum_size = Vector2(171.495, 124.175)
 layout_mode = 2
-texture = ExtResource("1_5x6se")
-region_rect = Rect2(0, 33, 32, 31.693665)
+texture = ExtResource("2_dfbn1")
+region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 14
 patch_margin_top = 13
 patch_margin_right = 11
 patch_margin_bottom = 14
 
-[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=97674351]
+[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect" unique_id=97674351]
 layout_mode = 1
 offset_right = 66.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 20
 
-[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=1148948539]
+[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer" unique_id=1148948539]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Timer"
 label_settings = SubResource("LabelSettings_dmca1")
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer" unique_id=363559231]
+[node name="Control" type="Control" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer" unique_id=363559231]
 layout_mode = 2
 
-[node name="TimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer/Control" unique_id=1779320711]
+[node name="TimerLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer/Control" unique_id=1779320711]
 layout_mode = 0
 offset_top = 53.0
 offset_right = 60.0
@@ -680,7 +823,7 @@ text = "Timer"
 label_settings = SubResource("LabelSettings_t3gp5")
 horizontal_alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect" unique_id=914278762]
+[node name="Combo_UI" type="MarginContainer" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect" unique_id=914278762]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -690,17 +833,17 @@ offset_bottom = 40.0
 grow_horizontal = 0
 theme_override_constants/margin_right = 20
 
-[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1560435504]
+[node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI" unique_id=1560435504]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Combo"
 label_settings = SubResource("LabelSettings_dmca1")
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2" unique_id=1006008327]
+[node name="Control" type="Control" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI" unique_id=1006008327]
 layout_mode = 2
 
-[node name="ComboTimerLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=1894074982]
+[node name="ComboTimerLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control" unique_id=1894074982]
 layout_mode = 0
 offset_left = -3.97
 offset_top = 101.0
@@ -710,7 +853,7 @@ text = "Timer"
 label_settings = SubResource("LabelSettings_t3gp5")
 horizontal_alignment = 1
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control" unique_id=551243353]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control" unique_id=551243353]
 layout_mode = 0
 offset_left = -3.97
 offset_top = 32.0
@@ -723,7 +866,7 @@ fill_mode = 5
 texture_progress = ExtResource("4_dfbn1")
 tint_progress = Color(0, 0.7432059, 0, 1)
 
-[node name="ComboAmountLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect/MarginContainer2/Control/TextureProgressBar" unique_id=966436463]
+[node name="ComboAmountLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control/TextureProgressBar" unique_id=966436463]
 layout_mode = 0
 offset_left = 1.9699707
 offset_top = 22.999994
@@ -732,17 +875,17 @@ offset_bottom = 44.000023
 label_settings = SubResource("LabelSettings_t3gp5")
 horizontal_alignment = 1
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="GameplayUI/SideMenu/VBoxContainer" unique_id=1202373938]
+[node name="NinePatchRect2" type="NinePatchRect" parent="GameplayUI/SideUI/VBoxContainer" unique_id=1202373938]
 custom_minimum_size = Vector2(171.495, 150)
 layout_mode = 2
-texture = ExtResource("1_5x6se")
-region_rect = Rect2(0, 33, 32, 31.693665)
+texture = ExtResource("2_dfbn1")
+region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 14
 patch_margin_top = 13
 patch_margin_right = 11
 patch_margin_bottom = 14
 
-[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2" unique_id=1702131603]
+[node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect2" unique_id=1702131603]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -753,14 +896,14 @@ offset_bottom = 40.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 10
 
-[node name="ObjTitleLabel" type="Label" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/MarginContainer" unique_id=1064810086]
+[node name="ObjTitleLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect2/MarginContainer" unique_id=1064810086]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Objective"
 label_settings = SubResource("LabelSettings_dmca1")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2" unique_id=1574017930]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect2" unique_id=1574017930]
 custom_minimum_size = Vector2(237.665, 0)
 custom_maximum_size = Vector2(163.97, 202.93)
 layout_mode = 1
@@ -775,7 +918,7 @@ theme_override_constants/separation = 10
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="LabelObjective" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=132683095]
+[node name="LabelObjective" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=132683095]
 custom_minimum_size = Vector2(17.925, 22.785)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -792,7 +935,7 @@ scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
 
-[node name="LabelObjective2" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=1982886260]
+[node name="LabelObjective2" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=1982886260]
 custom_minimum_size = Vector2(17.925, 22.785)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -809,7 +952,7 @@ scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
 
-[node name="LabelObjective3" type="RichTextLabel" parent="GameplayUI/SideMenu/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=2045548230]
+[node name="LabelObjective3" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect2/VBoxContainer" unique_id=2045548230]
 custom_minimum_size = Vector2(17.925, 22.785)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -825,3 +968,5 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 2
 horizontal_alignment = 1
+
+[connection signal="pressed" from="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/Button" to="." method="_on_end_day_button_pressed"]
