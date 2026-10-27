@@ -130,6 +130,10 @@ func apply_upgrade() -> bool:
 			Stats.raise_water_bomb_instant_clean_chance(upgrade_main_amount)
 		modifiable_stat.pelican_spawn_time:
 			Stats.lower_max_pelican_time(upgrade_main_amount)
+		modifiable_stat.water_pelican_chance:
+			Stats.raise_water_pelican_chance(upgrade_main_amount)
+		modifiable_stat.persistent_pelicans_enabled:
+			Stats.enable_persistent_pelicans()
 		modifiable_stat.combo_timer_speed:
 			Stats.lower_combo_timer_speed(upgrade_main_amount)
 	current_level += 1
