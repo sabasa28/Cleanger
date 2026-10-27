@@ -74,12 +74,13 @@ func _process(delta: float) -> void:
 			unpaused_timer -= delta
 			if unpaused_timer <= 0.0:
 				paused = false
+				waiting_to_unpause = false
 		return
 	
 	if Input.is_action_just_pressed("DEBUGfinish_run"):
 		Stats.debug_force_end_run()
 	
-	swiping = Input.is_action_pressed("clean") if !stunned else false
+	swiping = Input.is_action_pressed("clean") if !stunned && !paused else false
 	
 	if stunned:
 		stun_timer -= delta
@@ -89,9 +90,8 @@ func _process(delta: float) -> void:
 	
 	var target_rot : float = cleanerPivot.get_angle_to(get_global_mouse_position())
 	var rot_speed : float = (cleaner_rot_speed_base * delta * cleaner_cleaning_rot_speed_modifier) if cleaner.cleaning else cleaner_rot_speed_base * delta
-	if !stunned:
+	if !stunned && !paused:
 		cleanerPivot.rotate(lerp(0.0, target_rot, rot_speed))
-	#cleanerPivot.look_at(get_global_mouse_position())
 	
 	cleaner.player_dir = linear_velocity.normalized()
 	if swipe_current_cooldown > 0.0:
@@ -132,17 +132,17 @@ func _process(delta: float) -> void:
 			playing_swipe_anim = false
 			cleaning_timer = 0.0
 	
-	if impulsing:
-		time_impulsing += delta
-		if Input.is_action_just_released("impulse"):
-			impulsing = false
-			gravity_scale = initial_gravity_scale
-			apply_force((cleanerPivot.global_position - cleaner.global_position).normalized() * BASE_strength * impulse_strength_modifier * minf(time_impulsing / time_for_max_impulse, 1.0))
-	
-	if !swiping && Input.is_action_just_pressed("impulse"): #si queda aplicar stun
-		impulsing = true
-		gravity_scale = 0.0
-		time_impulsing = 0.0 
+	#if impulsing:
+		#time_impulsing += delta
+		#if Input.is_action_just_released("impulse"):
+			#impulsing = false
+			#gravity_scale = initial_gravity_scale
+			#apply_force((cleanerPivot.global_position - cleaner.global_position).normalized() * BASE_strength * impulse_strength_modifier * minf(time_impulsing / time_for_max_impulse, 1.0))
+	#
+	#if !swiping && Input.is_action_just_pressed("impulse"): #si queda aplicar stun
+		#impulsing = true
+		#gravity_scale = 0.0
+		#time_impulsing = 0.0 
 	
 	if pasive_water_bomb_unlocked:
 		pasive_water_bomb_timer -= delta
@@ -184,6 +184,8 @@ func update_rot_speed(new_rot_speed : float) -> void:
 	cleaner_cleaning_rot_speed_modifier = new_rot_speed
 
 func unpause() -> void:
+	if !paused:
+		return
 	waiting_to_unpause = true
 	unpaused_timer = time_to_unpause
 

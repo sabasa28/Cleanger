@@ -20,6 +20,7 @@ var max_time_between_pelican_spawn : float
 @export var min_pelican_height_spawn : float
 var time_until_next_pelican_spawn : float
 var pelican_spawn_timer : float = 0.0
+var water_pelican_chance : float = 0.0
 @export var left_limit : float
 @export var right_limit : float
 var map_length : float
@@ -37,6 +38,7 @@ func _ready() -> void:
 	time_until_next_pelican_spawn = randf_range(min_time_between_pelican_spawn, max_time_between_pelican_spawn)
 
 func start_cleaning_phase() -> void:
+	water_pelican_chance = Stats.water_pelican_chance
 	upgrades_ui.visible = false
 	on_cleaning_phase = true
 	player.reset()
@@ -83,9 +85,10 @@ func _process(delta: float) -> void:
 			var going_right = true if randi_range(0,1) == 0 else false
 			var spawn_pos_x : float = left_limit if going_right else right_limit
 			var spawn_pos : Vector2 = Vector2(spawn_pos_x, minf(player.global_position.y, min_pelican_height_spawn) - randf_range(0.0, pelican_max_heigh_dist_to_player))
+			var is_water_pelican : bool = water_pelican_chance > randf()
 			spawned_pelican.global_position = spawn_pos
 			add_child(spawned_pelican)
-			spawned_pelican.initialize(going_right, map_length)
+			spawned_pelican.initialize(going_right, map_length, is_water_pelican, Stats.persistent_pelicans_enabled)
 			pelican_spawn_timer = 0.0
 			time_until_next_pelican_spawn = randf_range(min_time_between_pelican_spawn, max_time_between_pelican_spawn)
 

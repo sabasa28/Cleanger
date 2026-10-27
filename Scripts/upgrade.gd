@@ -46,6 +46,8 @@ enum modifiable_stat
 	spots_to_trigger_explotion,
 	water_bomb_instant_clean_chance,
 	pelican_spawn_time,
+	water_pelican_chance,
+	persistent_pelicans_enabled,
 	combo_timer_speed
 }
 

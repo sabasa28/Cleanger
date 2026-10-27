@@ -70,6 +70,8 @@ var spots_trigger_explotion_unlocked : bool = false
 
 var min_time_pelican_spawn = 1.0
 var max_time_pelican_spawn = 8.0
+var water_pelican_chance = 0.0
+var persistent_pelicans_enabled = false
 
 #prefabs
 var water_bomb_prefab = preload("res://Scenes/water_bomb.tscn")
@@ -260,6 +262,12 @@ func lower_max_pelican_time(amount_to_lower : float) -> void:
 
 func lower_combo_timer_speed(amount_to_lower : float) -> void:
 	combo_time_lowering_speed -= amount_to_lower
+
+func raise_water_pelican_chance(amount_to_raise : float) -> void:
+	water_pelican_chance += amount_to_raise
+
+func enable_persistent_pelicans() -> void:
+	persistent_pelicans_enabled = true
 
 func get_strength_modifier() -> float:
 	return strength_modifier
