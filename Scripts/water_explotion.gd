@@ -1,8 +1,9 @@
 extends Area2D
 
 @export var collider : CollisionShape2D
-const range_base : float = 150.0
-var range : float
+const range_base : float = 300.0
+const range_base_water_bomb : float = 150.0
+var range : float #multiplier
 const time_before_despawn : float = 0.5
 var timer : float = 0.0
 var instacleans : bool = false
@@ -16,20 +17,27 @@ func _process(delta: float) -> void:
 		queue_free()
 
 func get_range() -> float:
-	return range * range_base
+	return range * (range_base if origin == Stats.explotion_origin.regular_explotion else range_base_water_bomb)
 
 func set_data(new_origin : Stats.explotion_origin, new_instacleans : bool = false) -> void:
 	origin = new_origin
 	instacleans = new_instacleans
+	var scale_multiplier = 1.0
 	match origin:
+		Stats.explotion_origin.super_water_bomb:
+			range = Stats.super_water_bomb_explotion_range
+			scale_multiplier = 0.5
 		Stats.explotion_origin.water_bomb:
 			range = Stats.water_bomb_explotion_range
+			scale_multiplier = 0.5
 		Stats.explotion_origin.regular_explotion:
 			range = Stats.cleaner_explotion_range
+			scale_multiplier = 1.0
 			if Stats.cleaner_explotion_water_bomb_chance > 0.0:
-				if randf() <= Stats.cleaner_explotion_water_bomb_chance:
+				if randf() < Stats.cleaner_explotion_water_bomb_chance:
 					var spawned_bomb = Stats.water_bomb_prefab.instantiate()
 					spawned_bomb.global_position = global_position
 					add_sibling(spawned_bomb)
 					spawned_bomb.initialize()
-	scale = Vector2.ONE * range
+	range += Stats.all_explotions_range_buff
+	scale = Vector2.ONE * range * scale_multiplier

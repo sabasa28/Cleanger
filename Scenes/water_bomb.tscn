@@ -42,9 +42,10 @@ _data = {
 &"RESET": SubResource("Animation_dblei")
 }
 
-[node name="water_bomb" type="RigidBody2D" unique_id=960512703]
+[node name="water_bomb" type="RigidBody2D" unique_id=960512703 node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_hly8g")
 thrown_strength = 100000.0
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1773508112]
 z_index = 7

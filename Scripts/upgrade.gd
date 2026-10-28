@@ -31,24 +31,21 @@ enum modifiable_stat
 	cleaner_strength,
 	cleaner_width,
 	cleaner_speed,
-	water_supply,
-	water_explotion_cd,
-	water_explotion_range,
-	water_explotion_water_bomb_chance,
 	water_bomb_cd,
-	water_carrying_bird_cd,
-	cleaner_rot_speed,
-	bomb_carrying_bird_cd,
 	necessary_cleanlyness,
-	cleaner_explotion_time,
+	cleaner_explotion_times,
 	cleaner_explotion_range,
 	explotion_water_bomb_chance,
-	spots_to_trigger_explotion,
+	spots_chance_to_trigger_explotion,
 	water_bomb_instant_clean_chance,
+	water_bomb_explotion_range,
+	super_water_bomb_enabled,
 	pelican_spawn_time,
 	water_pelican_chance,
 	persistent_pelicans_enabled,
-	combo_timer_speed
+	combo_timer_speed,
+	stun_resistance,
+	explotions_range_buff
 }
 
 func try_init(upgrade_num : int) -> void:
@@ -99,35 +96,24 @@ func apply_upgrade() -> bool:
 			Stats.raise_width_level(upgrade_main_amount)
 		modifiable_stat.cleaner_speed:
 			Stats.raise_speed_level(upgrade_main_amount)
-		modifiable_stat.water_supply:
-			pass
-		modifiable_stat.water_explotion_cd:
-			pass
-		modifiable_stat.water_explotion_range:
-			pass
-		modifiable_stat.water_explotion_water_bomb_chance:
-			pass
 		modifiable_stat.water_bomb_cd:
-			Stats.lower_pasive_water_bomb_cd(upgrade_main_amount)
-			pass
-		modifiable_stat.water_carrying_bird_cd:
-			pass
-		modifiable_stat.cleaner_rot_speed:
-			pass
-		modifiable_stat.bomb_carrying_bird_cd:
-			pass
+			Stats.lower_pasive_water_bomb_max_cd(upgrade_main_amount)
 		modifiable_stat.necessary_cleanlyness:
 			Stats.lower_necessary_cleanlyness_value(upgrade_main_amount)
-		modifiable_stat.cleaner_explotion_time:
-			Stats.lower_cleaner_explotion_time(upgrade_main_amount)
+		modifiable_stat.cleaner_explotion_times:
+			Stats.lower_cleaner_explotion_times(upgrade_main_amount)
 		modifiable_stat.cleaner_explotion_range:
 			Stats.raise_cleaner_explotion_range(upgrade_main_amount)
 		modifiable_stat.explotion_water_bomb_chance:
 			Stats.raise_cleaner_explotion_water_bomb_chance(upgrade_main_amount)
-		modifiable_stat.spots_to_trigger_explotion:
+		modifiable_stat.spots_chance_to_trigger_explotion:
 			Stats.raise_spots_explotion_chance(upgrade_main_amount)
 		modifiable_stat.water_bomb_instant_clean_chance:
 			Stats.raise_water_bomb_instant_clean_chance(upgrade_main_amount)
+		modifiable_stat.water_bomb_explotion_range:
+			Stats.raise_water_bomb_explotion_range(upgrade_main_amount)
+		modifiable_stat.super_water_bomb_enabled:
+			Stats.enable_super_water_bomb()
 		modifiable_stat.pelican_spawn_time:
 			Stats.lower_max_pelican_time(upgrade_main_amount)
 		modifiable_stat.water_pelican_chance:
@@ -136,6 +122,10 @@ func apply_upgrade() -> bool:
 			Stats.enable_persistent_pelicans()
 		modifiable_stat.combo_timer_speed:
 			Stats.lower_combo_timer_speed(upgrade_main_amount)
+		modifiable_stat.stun_resistance:
+			Stats.raise_stun_resistance(upgrade_main_amount)
+		modifiable_stat.explotions_range_buff:
+			Stats.raise_all_explotions_range_buff(upgrade_main_amount)
 	current_level += 1
 	if current_level == 1:
 		button_node.on_bought()

@@ -4,12 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://jfghx83mtrou" path="res://Scenes/drawing.tscn" id="1_mrasg"]
 [ext_resource type="Texture2D" uid="uid://dej2q60pxukgx" path="res://Assets/Sprites/window_1.png" id="3_a0uui"]
 [ext_resource type="Texture2D" uid="uid://ct1ji7owao41e" path="res://Assets/Sprites/dirt_1.png" id="4_a0uui"]
+[ext_resource type="Texture2D" uid="uid://c4v8etg45c8vd" path="res://Assets/Sprites/window_anim.png" id="5_xknmi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okk06"]
 
-[node name="WindowSquare" type="Node2D" unique_id=1723022974 node_paths=PackedStringArray("window_ref")]
+[node name="WindowSquare" type="Node2D" unique_id=1723022974 node_paths=PackedStringArray("window_ref", "clean_anim_sprite")]
 script = ExtResource("1_a0uui")
 window_ref = NodePath("Drawing")
+clean_anim_sprite = NodePath("Drawing/Sprite2D2")
+clean_anim_time = 1.0
 
 [node name="Drawing" parent="." unique_id=609080944 node_paths=PackedStringArray("collision", "window") instance=ExtResource("1_mrasg")]
 z_index = 1
@@ -25,6 +28,13 @@ window = NodePath("..")
 z_as_relative = false
 scale = Vector2(8, 8)
 texture = ExtResource("3_a0uui")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Drawing" unique_id=1155299013]
+visible = false
+scale = Vector2(8, 8)
+texture = ExtResource("5_xknmi")
+hframes = 8
+region_rect = Rect2(0, 0, 62, 104)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=451895026]
 

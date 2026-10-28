@@ -5,6 +5,10 @@ var stage_manager
 var window_num
 var has_spot : bool = false
 @export var window_ref : Node2D
+@export var clean_anim_sprite : Sprite2D
+@export var clean_anim_time : float
+var clean_anim_timer : float = 0.0
+var playing_clean_anim : bool = false
 var spot : Node2D
 var spot_pos_offset : Vector2
 
@@ -24,6 +28,16 @@ func _ready() -> void:
 		spot.window_ref = self
 		add_sibling(spot)
 
+func _process(delta: float) -> void:
+	if playing_clean_anim:
+		if clean_anim_timer < clean_anim_time:
+			clean_anim_timer += delta
+			var anim_frame_time = clean_anim_time / 8.0 # i like my numbers like i like my mikes
+			clean_anim_sprite.frame = int(clean_anim_timer / anim_frame_time)
+		else:
+			playing_clean_anim = false
+			clean_anim_sprite.visible = false
+
 func on_base_cleaned() -> void:
 	base_cleaned = true
 	if has_spot == false:
@@ -36,6 +50,8 @@ func on_spot_cleaned() -> void:
 
 func on_window_cleaned() -> void:
 	stage_manager.on_window_cleaned(window_num)
+	playing_clean_anim = true
+	clean_anim_sprite.visible = true
 	# HERE WE PLAY SATISFYING CLEAN GLASS ANIMATION + SOUND
 
 func delete_window() -> void:

@@ -128,7 +128,7 @@ func _process(delta: float) -> void:
 					spawned_explotion.global_position = cleaner.global_position
 					add_sibling(spawned_explotion)
 					spawned_explotion.set_data(Stats.explotion_origin.regular_explotion)
-					cleaner_swipes_left_before_explotion = Stats.cleaner_explotion_time as int
+					cleaner_swipes_left_before_explotion = Stats.cleaner_explotion_times as int
 			playing_swipe_anim = false
 			cleaning_timer = 0.0
 	
@@ -151,9 +151,8 @@ func _process(delta: float) -> void:
 			spawned_bomb.global_position = global_position
 			add_sibling(spawned_bomb)
 			spawned_bomb.initialize()
-			pasive_water_bomb_timer = Stats.pasive_water_bomb_cd
+			pasive_water_bomb_timer = randf_range(0.5, Stats.pasive_water_bomb_max_cd)
 	
-
 	
 	height_checking_timer -= delta
 	if height_checking_timer < 0:
@@ -178,7 +177,7 @@ func reset() -> void:
 	swipe_current_cooldown = 0.0
 	ready_to_swipe = true
 	strength_modifier = Stats.get_strength_modifier()
-	cleaner_swipes_left_before_explotion = Stats.cleaner_explotion_time as int
+	cleaner_swipes_left_before_explotion = Stats.cleaner_explotion_times as int
 
 func update_rot_speed(new_rot_speed : float) -> void:
 	cleaner_cleaning_rot_speed_modifier = new_rot_speed
@@ -203,6 +202,10 @@ func unlock_pasive_water_bomb() -> void:
 	pasive_water_bomb_unlocked = true
 
 func stun(stun_time : float) -> void:
+	var stun_resistance = Stats.stun_resistance
+	if stun_resistance >= 1.0:
+		return
+	stun_time *= (1.0 - stun_resistance)
 	if stun_timer < stun_time:
 		stun_timer = stun_time
 		stunned = true

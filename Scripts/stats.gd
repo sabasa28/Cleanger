@@ -52,7 +52,8 @@ var cleaner_speed_level : int = 0
 
 var necessary_cleanlyness : float = 0.95
 
-var pasive_water_bomb_cd : float = 10.0
+
+var pasive_water_bomb_max_cd : float = 10.0
 var pasive_water_bomb_unlocked : bool = false
 var water_bomb_explotion_time_min : float = 0.4
 var water_bomb_explotion_time_max : float = 0.7
@@ -60,18 +61,24 @@ var water_bomb_explotion_range : float = 1.0 #actually a multiplier
 var water_bomb_water_bomb_chance : float = 0.0
 var water_bomb_instant_clean_unlocked : bool = false
 var water_bomb_instant_clean_chance : float = 0.0
+var super_water_bomb_enabled : bool = false
+var super_water_bomb_explotion_range : float = 4.0 #multiplier
 
-var cleaner_explotion_time : float = 10.0
+var cleaner_explotion_times : float = 10.0
 var cleaner_explotion_unlocked : bool = false
-var cleaner_explotion_range : float = 2.0 #actually a multiplier
+var cleaner_explotion_range : float = 1.0 #actually a multiplier
 var cleaner_explotion_water_bomb_chance : float = 0.0
 var spots_explotion_chance : float = 0.0
 var spots_trigger_explotion_unlocked : bool = false
+
+var all_explotions_range_buff : float = 0.0
 
 var min_time_pelican_spawn = 1.0
 var max_time_pelican_spawn = 8.0
 var water_pelican_chance = 0.0
 var persistent_pelicans_enabled = false
+
+var stun_resistance : float = 0.0
 
 #prefabs
 var water_bomb_prefab = preload("res://Scenes/water_bomb.tscn")
@@ -83,6 +90,7 @@ var pelican_prefab = preload("res://Scenes/pelican.tscn")
 enum explotion_origin
 {
 	water_bomb,
+	super_water_bomb,
 	regular_explotion
 }
 
@@ -129,6 +137,12 @@ func try_remove_coins_from_total(coins_to_remove : int) -> bool:
 
 func add_floor_cleaned(floor_cleaned : int) -> void:
 	floors_cleaned += 1
+	if super_water_bomb_enabled:
+		var spawned_bomb = Stats.water_bomb_prefab.instantiate()
+		var player : Node = gameplay_controller.player
+		spawned_bomb.global_position = player.global_position
+		player.add_sibling(spawned_bomb)
+		spawned_bomb.initialize(false, true)
 	if floor_value != 0.0:
 		InGameUi.update_floor_multiplier_label(1.0 + floors_cleaned * floor_value, floor_value)
 		on_floor_cleaned.emit(floor_cleaned, floors_cleaned)
@@ -226,12 +240,12 @@ func raise_speed_level(amount_to_raise : float) -> void:
 func lower_necessary_cleanlyness_value(amount_to_lower : float) -> void:
 	necessary_cleanlyness -= amount_to_lower
 
-func lower_cleaner_explotion_time(amount_to_lower : float) -> void:
+func lower_cleaner_explotion_times(amount_to_lower : float) -> void:
 	if !cleaner_explotion_unlocked:
 		cleaner_explotion_unlocked = true
 		on_cleaner_explotion_unlocked.emit()
 	else:
-		cleaner_explotion_time -= amount_to_lower
+		cleaner_explotion_times -= amount_to_lower
 
 func raise_cleaner_explotion_range(amount_to_raise : float) -> void:
 	cleaner_explotion_range += amount_to_raise
@@ -239,12 +253,15 @@ func raise_cleaner_explotion_range(amount_to_raise : float) -> void:
 func raise_cleaner_explotion_water_bomb_chance(amount_to_raise : float) -> void:
 	cleaner_explotion_water_bomb_chance += amount_to_raise
 
-func lower_pasive_water_bomb_cd(amount_to_lower : float) -> void:
+func lower_pasive_water_bomb_max_cd(amount_to_lower : float) -> void:
 	if pasive_water_bomb_unlocked:
-		pasive_water_bomb_cd -= amount_to_lower
+		pasive_water_bomb_max_cd -= amount_to_lower
 	else:
 		pasive_water_bomb_unlocked = true
 		on_pasive_water_bomb_unlocked.emit()
+
+func raise_water_bomb_explotion_range(amount_to_raise : float) -> void:
+	water_bomb_explotion_range += amount_to_raise
 
 func raise_water_bomb_water_bomb_chance(amount_to_raise : float) -> void:
 	water_bomb_water_bomb_chance += amount_to_raise
@@ -266,8 +283,17 @@ func lower_combo_timer_speed(amount_to_lower : float) -> void:
 func raise_water_pelican_chance(amount_to_raise : float) -> void:
 	water_pelican_chance += amount_to_raise
 
+func raise_stun_resistance(amount_to_raise : float) -> void:
+	stun_resistance += amount_to_raise
+
+func raise_all_explotions_range_buff(amount_to_raise : float) -> void:
+	all_explotions_range_buff += amount_to_raise
+
 func enable_persistent_pelicans() -> void:
 	persistent_pelicans_enabled = true
+
+func enable_super_water_bomb() -> void:
+	super_water_bomb_enabled = true
 
 func get_strength_modifier() -> float:
 	return strength_modifier

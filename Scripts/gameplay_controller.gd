@@ -85,7 +85,7 @@ func _process(delta: float) -> void:
 			var going_right = true if randi_range(0,1) == 0 else false
 			var spawn_pos_x : float = left_limit if going_right else right_limit
 			var spawn_pos : Vector2 = Vector2(spawn_pos_x, minf(player.global_position.y, min_pelican_height_spawn) - randf_range(0.0, pelican_max_heigh_dist_to_player))
-			var is_water_pelican : bool = water_pelican_chance > randf()
+			var is_water_pelican : bool = randf() < water_pelican_chance
 			spawned_pelican.global_position = spawn_pos
 			add_child(spawned_pelican)
 			spawned_pelican.initialize(going_right, map_length, is_water_pelican, Stats.persistent_pelicans_enabled)
