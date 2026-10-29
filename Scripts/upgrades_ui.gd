@@ -7,15 +7,11 @@ signal on_upgrades_finished
 func _ready() -> void:
 	Stats.on_coins_changed.connect(update_coins_text)
 
-func _process(delta: float) -> void:
-	pass
-
 func _on_button_upgrade_button_down(upgrade_num : int) -> void:
 	on_upgrade_button_pressed(upgrade_num)
 
 func _on_button_upgrade_finished_button_down() -> void:
 	on_upgrades_finished.emit()
-	print("Upgrades finished")
 
 func on_upgrade_button_pressed(button_num : int) -> void:
 	if button_num < 0 || button_num >= all_upgrades.size():

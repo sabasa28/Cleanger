@@ -6,22 +6,20 @@ var explotion_time : float
 var timer : float = 0.0
 var is_super_bomb : bool = false
 @export var sprite : Sprite2D
+var h_limits : Vector2
+@export var dist_to_limit_before_exploding : float
+var exploded : bool = false
 
 func _process(delta: float) -> void:
-	print("WATER BOMB SCALE: ", global_scale)
+	if exploded:
+		return
+	
 	timer += delta
-	if timer >= explotion_time:
-		var spawned_explotion = Stats.explotion_prefab.instantiate()
-		spawned_explotion.global_position = global_position
-		var will_instaclean = false
-		if Stats.water_bomb_instant_clean_unlocked:
-			if randf() < Stats.water_bomb_instant_clean_chance:
-				will_instaclean = true
-		spawned_explotion.set_data(Stats.explotion_origin.super_water_bomb if is_super_bomb else Stats.explotion_origin.water_bomb, will_instaclean)
-		add_sibling(spawned_explotion)
-		queue_free()
+	if global_position.x < h_limits.x || global_position.x > h_limits.y || timer >= explotion_time:
+		explode()
 
 func initialize(is_clone : bool = false, new_is_super_bomb : bool = false) -> void:
+	h_limits = Stats.get_map_h_limits() + Vector2(dist_to_limit_before_exploding, -dist_to_limit_before_exploding)
 	is_super_bomb = new_is_super_bomb
 	if is_super_bomb:
 		initialize_super_bomb()
@@ -41,3 +39,15 @@ func initialize_super_bomb() -> void:
 	var dir : Vector2 = Vector2.UP
 	sprite.scale *= 3.0
 	apply_force(dir * thrown_strength)
+
+func explode() -> void:
+	exploded = true
+	var spawned_explotion = Stats.explotion_prefab.instantiate()
+	spawned_explotion.global_position = global_position
+	var will_instaclean = false
+	if Stats.water_bomb_instant_clean_unlocked:
+		if randf() < Stats.water_bomb_instant_clean_chance:
+			will_instaclean = true
+	spawned_explotion.set_data(Stats.explotion_origin.super_water_bomb if is_super_bomb else Stats.explotion_origin.water_bomb, will_instaclean)
+	add_sibling(spawned_explotion)
+	queue_free()

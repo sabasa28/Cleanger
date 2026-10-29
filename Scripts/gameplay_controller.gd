@@ -18,14 +18,18 @@ var min_time_between_pelican_spawn : float
 var max_time_between_pelican_spawn : float
 @export var pelican_max_heigh_dist_to_player : float
 @export var min_pelican_height_spawn : float
+@export var pelican_offset_to_limits : float
 var time_until_next_pelican_spawn : float
 var pelican_spawn_timer : float = 0.0
 var water_pelican_chance : float = 0.0
-@export var left_limit : float
-@export var right_limit : float
+var left_limit : float
+var right_limit : float
 var map_length : float
 
 func _ready() -> void:
+	var map_limits = Stats.get_map_h_limits()
+	left_limit = map_limits.x
+	right_limit = map_limits.y
 	InGameUi.on_day_end.connect(end_day)
 	map_length = right_limit - left_limit
 	Stats.gameplay_controller = self
@@ -83,12 +87,12 @@ func _process(delta: float) -> void:
 		if pelican_spawn_timer >= time_until_next_pelican_spawn:
 			var spawned_pelican : Node2D = Stats.pelican_prefab.instantiate()
 			var going_right = true if randi_range(0,1) == 0 else false
-			var spawn_pos_x : float = left_limit if going_right else right_limit
+			var spawn_pos_x : float = left_limit - pelican_offset_to_limits if going_right else right_limit + pelican_offset_to_limits
 			var spawn_pos : Vector2 = Vector2(spawn_pos_x, minf(player.global_position.y, min_pelican_height_spawn) - randf_range(0.0, pelican_max_heigh_dist_to_player))
 			var is_water_pelican : bool = randf() < water_pelican_chance
 			spawned_pelican.global_position = spawn_pos
 			add_child(spawned_pelican)
-			spawned_pelican.initialize(going_right, map_length, is_water_pelican, Stats.persistent_pelicans_enabled)
+			spawned_pelican.initialize(going_right, map_length + pelican_offset_to_limits * 2, is_water_pelican, Stats.persistent_pelicans_enabled)
 			pelican_spawn_timer = 0.0
 			time_until_next_pelican_spawn = randf_range(min_time_between_pelican_spawn, max_time_between_pelican_spawn)
 

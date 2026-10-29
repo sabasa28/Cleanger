@@ -3,7 +3,7 @@ extends Node2D
 
 @export var window_interval : Vector2
 @export var window_spawn_origin : Vector2
-@export var columns_and_rows : Vector2i
+var columns_and_rows : Vector2i
 var windows_state : Array[bool]
 var floors_state : Array[bool]
 
@@ -28,6 +28,7 @@ func on_window_cleaned(window_num : int) -> void:
 		Stats.add_floor_cleaned(floor)
 
 func reset_windows() -> void:
+	columns_and_rows = Stats.get_map_window_size()
 	on_reset_windows.emit()
 	windows_state.clear()
 	floors_state.clear()

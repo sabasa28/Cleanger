@@ -1,8 +1,24 @@
 class_name upgrade
 extends Resource
 
+enum description_modifiers
+{
+	none,
+	percentage,
+	modifier_N_minus_val,
+}
+
 @export var name : String
-@export var description : String
+@export var initial_description : String ## & se reemplaza por Upgrade Main Amount y @ por Upgrade Extra Amount
+@export var description : String ## & se reemplaza por Upgrade Main Amount y @ por Upgrade Extra Amount
+@export_group("Description modifier")
+var char_to_replace : String = "&"
+var extra_char_to_replace : String = "@"
+@export var description_modifier : description_modifiers
+@export var modifier_N : float = 0.0
+@export var extra_modifier_N : float = 0.0
+@export var force_to_int : bool = true
+@export_group("")
 @export var upgrade_price : Array[int]
 @export var upgrade_main_amount : float
 @export_group("Extra")
@@ -51,12 +67,14 @@ enum modifiable_stat
 func try_init(upgrade_num : int) -> void:
 	if initiated == true:
 		return
+	if initial_description == "":
+		initial_description = description
 	upgrade_times = upgrade_price.size()
 
 func update_button_and_menu() -> void:
 	#aca segun si esta desbloqueda y si no tiene dependencia bloqueda seteamos si se ve y si se ve gris o normal
 	if available && current_level < upgrade_times:
-		button_node.get_child(0).update_ui(name, description, upgrade_price[current_level])
+		button_node.get_child(0).update_ui(name, get_description_text(), upgrade_price[current_level])
 		button_node.on_unlock()
 	else:
 		button_node.get_child(0).change_enabled_state(false)
@@ -133,3 +151,48 @@ func apply_upgrade() -> bool:
 		button_node.on_maxed()
 	update_button_and_menu()
 	return true
+
+func get_description_text() -> String:
+	var final_string : String = initial_description if current_level == 0 else description
+	var replacement_num : float
+	var replacement_prev_num : float
+	var extra_replacement_num : float
+	var extra_replacement_prev_num : float
+	
+	var lvl_multiplier : int = current_level + 1
+	
+	match description_modifier:
+		description_modifiers.none:
+			replacement_num = upgrade_main_amount * lvl_multiplier
+			extra_replacement_num = upgrade_extra_amount * lvl_multiplier
+			replacement_prev_num = upgrade_main_amount * (lvl_multiplier - 1.0)
+			extra_replacement_prev_num = upgrade_extra_amount * (lvl_multiplier - 1.0)
+		description_modifiers.percentage:
+			replacement_num = upgrade_main_amount * lvl_multiplier * 100.0
+			extra_replacement_num = upgrade_extra_amount * lvl_multiplier * 100.0
+			replacement_prev_num = upgrade_main_amount * (lvl_multiplier - 1.0) * 100.0
+			extra_replacement_prev_num = upgrade_extra_amount * (lvl_multiplier - 1.0) * 100.0
+		description_modifiers.modifier_N_minus_val:
+			replacement_num = modifier_N - upgrade_main_amount * lvl_multiplier
+			extra_replacement_num = extra_modifier_N - upgrade_extra_amount * lvl_multiplier
+			replacement_prev_num = modifier_N - upgrade_main_amount * (lvl_multiplier - 1.0)
+			extra_replacement_prev_num = extra_modifier_N - upgrade_extra_amount * (lvl_multiplier - 1.0)
+	
+	var replacement_string : String = str(int(replacement_num) if force_to_int else replacement_num)
+	var extra_replacement_string : String = str(int(extra_replacement_num) if force_to_int else extra_replacement_num)
+	if description_modifier == description_modifiers.percentage:
+		replacement_string += "%"
+		extra_replacement_string += "%"
+	
+	if current_level != 0:
+		var replacement_prev_string : String = str(int(replacement_prev_num) if force_to_int else replacement_prev_num)
+		var extra_replacement_prev_string : String = str(int(extra_replacement_prev_num) if force_to_int else extra_replacement_prev_num)
+		if description_modifier == description_modifiers.percentage:
+			replacement_prev_string += "%"
+			extra_replacement_prev_string += "%"
+		replacement_string = str("[i]", replacement_prev_string, "[/i]", " => ", replacement_string)
+		extra_replacement_string = str("[i]", extra_replacement_prev_string, "[/i]", " => ", extra_replacement_string)
+	
+	final_string = final_string.replace(char_to_replace, replacement_string)
+	final_string = final_string.replace(extra_char_to_replace, extra_replacement_string)
+	return final_string

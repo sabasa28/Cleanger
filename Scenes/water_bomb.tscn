@@ -46,6 +46,7 @@ _data = {
 script = ExtResource("1_hly8g")
 thrown_strength = 100000.0
 sprite = NodePath("Sprite2D")
+dist_to_limit_before_exploding = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1773508112]
 z_index = 7

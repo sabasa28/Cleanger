@@ -6,5 +6,4 @@
 script = ExtResource("1_883fa")
 pelican_max_heigh_dist_to_player = 2500.0
 min_pelican_height_spawn = -850.0
-left_limit = -2000.0
-right_limit = 2000.0
+pelican_offset_to_limits = 350.0

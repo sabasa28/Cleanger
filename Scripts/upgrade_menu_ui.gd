@@ -10,6 +10,10 @@ func update_ui(upgrade_name : String, upgrade_description : String, upgrade_cost
 	upgrade_name_text.text = upgrade_name
 	upgrade_description_text.text = upgrade_description
 	upgrade_cost_text.text = str("Cost: ", upgrade_cost)
+	#if greyed_out:
+		#modulate.v = 0.55
+	#else:
+		#modulate.v = 1.0
 
 func change_enabled_state(new_state : bool) -> void:
 	enabled = new_state

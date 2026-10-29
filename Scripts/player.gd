@@ -210,7 +210,6 @@ func stun(stun_time : float) -> void:
 		stun_timer = stun_time
 		stunned = true
 
-
 func _on_stop_lunge_animation_finished(anim_name: StringName) -> void:
 	if anim_name == lunge_end_anim_name:
 		ready_to_swipe = true

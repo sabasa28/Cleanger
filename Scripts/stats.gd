@@ -15,7 +15,6 @@ signal on_pasive_water_bomb_unlocked()
 
 var gameplay_controller : GameplayController
 
-const window_size : Vector2i = Vector2i(512,832)
 
 var total_coins : int = 1000000000000000
 var floors_cleaned : int
@@ -52,7 +51,6 @@ var cleaner_speed_level : int = 0
 
 var necessary_cleanlyness : float = 0.95
 
-
 var pasive_water_bomb_max_cd : float = 10.0
 var pasive_water_bomb_unlocked : bool = false
 var water_bomb_explotion_time_min : float = 0.4
@@ -79,6 +77,12 @@ var water_pelican_chance = 0.0
 var persistent_pelicans_enabled = false
 
 var stun_resistance : float = 0.0
+
+#map stuff
+var current_map : int = 0
+const h_limit : Array[Vector2] = [Vector2(-1650.0,1650.0)] #x left, y right
+const windows_amount : Array[Vector2i] = [Vector2i(6,10)] #x width, y height
+const window_size : Vector2i = Vector2i(512,832)
 
 #prefabs
 var water_bomb_prefab = preload("res://Scenes/water_bomb.tscn")
@@ -300,3 +304,9 @@ func get_strength_modifier() -> float:
 
 func debug_force_end_run() -> void:
 	gameplay_controller.end_cleaning_phase()
+
+func get_map_h_limits() -> Vector2:
+	return h_limit[current_map]
+
+func get_map_window_size() -> Vector2i:
+	return windows_amount[current_map]
