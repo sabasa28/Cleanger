@@ -6,6 +6,7 @@ enum description_modifiers
 	none,
 	percentage,
 	modifier_N_minus_val,
+	modifier_N_plus_val
 }
 
 @export var name : String
@@ -31,8 +32,7 @@ var current_level : int = 0
 @export var button : NodePath
 
 @export_category("Dependencies")
-@export var dependency_upgrade : upgrade
-@export var lvl_of_dependency : int
+@export var dependencies : Array[upgrade_dependency]
 #export var dependency_achievement : achievement
 
 var button_node : upgrade_button
@@ -61,7 +61,9 @@ enum modifiable_stat
 	persistent_pelicans_enabled,
 	combo_timer_speed,
 	stun_resistance,
-	explotions_range_buff
+	explotions_range_buff,
+	water_bombs_per_frenesi,
+	coins_per_windows_and_spots
 }
 
 func try_init(upgrade_num : int) -> void:
@@ -82,11 +84,10 @@ func update_button_and_menu() -> void:
 func update_available() -> void:
 	if available:
 		return
-	var turn_available : bool = false
-	if dependency_upgrade == null:
-		turn_available = true
-	elif dependency_upgrade.current_level >= lvl_of_dependency:
-		turn_available = true
+	var turn_available : bool = true
+	for i in dependencies:
+		if i.dependency_upgrade.current_level < i.lvl_of_dependency:
+			turn_available = false
 	
 	if turn_available:
 		available = true
@@ -144,6 +145,11 @@ func apply_upgrade() -> bool:
 			Stats.raise_stun_resistance(upgrade_main_amount)
 		modifiable_stat.explotions_range_buff:
 			Stats.raise_all_explotions_range_buff(upgrade_main_amount)
+		modifiable_stat.water_bombs_per_frenesi:
+			Stats.raise_water_bombs_per_frenesi(upgrade_main_amount)
+		modifiable_stat.coins_per_windows_and_spots:
+			Stats.raise_window_value(upgrade_main_amount)
+			Stats.raise_spot_value(upgrade_extra_amount)
 	current_level += 1
 	if current_level == 1:
 		button_node.on_bought()
@@ -177,6 +183,11 @@ func get_description_text() -> String:
 			extra_replacement_num = extra_modifier_N - upgrade_extra_amount * lvl_multiplier
 			replacement_prev_num = modifier_N - upgrade_main_amount * (lvl_multiplier - 1.0)
 			extra_replacement_prev_num = extra_modifier_N - upgrade_extra_amount * (lvl_multiplier - 1.0)
+		description_modifiers.modifier_N_plus_val:
+			replacement_num = modifier_N + upgrade_main_amount * lvl_multiplier
+			extra_replacement_num = extra_modifier_N + upgrade_extra_amount * lvl_multiplier
+			replacement_prev_num = modifier_N + upgrade_main_amount * (lvl_multiplier - 1.0)
+			extra_replacement_prev_num = extra_modifier_N + upgrade_extra_amount * (lvl_multiplier - 1.0)
 	
 	var replacement_string : String = str(int(replacement_num) if force_to_int else replacement_num)
 	var extra_replacement_string : String = str(int(extra_replacement_num) if force_to_int else extra_replacement_num)

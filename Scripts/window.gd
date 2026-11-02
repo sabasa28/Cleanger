@@ -5,6 +5,7 @@ var stage_manager
 var window_num
 var has_spot : bool = false
 @export var window_ref : Node2D
+@export var clean_sprite : Sprite2D
 @export var clean_anim_sprite : Sprite2D
 @export var clean_anim_time : float
 var clean_anim_timer : float = 0.0
@@ -53,6 +54,9 @@ func on_window_cleaned() -> void:
 	playing_clean_anim = true
 	clean_anim_sprite.visible = true
 	# HERE WE PLAY SATISFYING CLEAN GLASS ANIMATION + SOUND
+
+func change_clean_sprite(new_sprite : Texture2D) -> void:
+	clean_sprite.texture = new_sprite
 
 func delete_window() -> void:
 	if spot != null:

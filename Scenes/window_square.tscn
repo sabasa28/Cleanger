@@ -8,10 +8,11 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okk06"]
 
-[node name="WindowSquare" type="Node2D" unique_id=1723022974 node_paths=PackedStringArray("window_ref", "clean_anim_sprite")]
+[node name="WindowSquare" type="Node2D" unique_id=1723022974 node_paths=PackedStringArray("window_ref", "clean_sprite", "clean_anim_sprite")]
 script = ExtResource("1_a0uui")
 window_ref = NodePath("Drawing")
-clean_anim_sprite = NodePath("Drawing/Sprite2D2")
+clean_sprite = NodePath("Drawing/Sprite2D")
+clean_anim_sprite = NodePath("Drawing/Sprite2DAnimation")
 clean_anim_time = 1.0
 
 [node name="Drawing" parent="." unique_id=609080944 node_paths=PackedStringArray("collision", "window") instance=ExtResource("1_mrasg")]
@@ -29,7 +30,7 @@ z_as_relative = false
 scale = Vector2(8, 8)
 texture = ExtResource("3_a0uui")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Drawing" unique_id=1155299013]
+[node name="Sprite2DAnimation" type="Sprite2D" parent="Drawing" unique_id=1155299013]
 visible = false
 scale = Vector2(8, 8)
 texture = ExtResource("5_xknmi")

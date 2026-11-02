@@ -38,7 +38,7 @@ func on_bought() -> void: # bought == first level or higher
 func raise_offset_index() -> void:
 	current_offset+= 1
 	if current_offset < offset_position.size():
-		global_position = initial_pos + offset_position[current_offset]
+		global_position = global_position + offset_position[current_offset]
 
 func _display_description() -> void:
 	if description_displayer.enabled:

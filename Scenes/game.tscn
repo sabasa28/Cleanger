@@ -4,21 +4,23 @@
 [ext_resource type="PackedScene" uid="uid://g8wpn202bavb" path="res://Scenes/stage_spawner.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://6hewuwb4fk7i" path="res://Scenes/gameplay_controller.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://djgoa64krtup5" path="res://Scenes/upgrades_ui.tscn" id="4_wowpa"]
+[ext_resource type="Texture2D" uid="uid://62fe08mfdnso" path="res://Assets/Sprites/pelican.png" id="5_wowpa"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ebmjs"]
 distance = -1.3
 
 [node name="Game" type="Node2D" unique_id=2052166346]
 
-[node name="Player" parent="." unique_id=1559178234 instance=ExtResource("1_ebmjs")]
+[node name="Player" parent="." unique_id=1559178234 node_paths=PackedStringArray("camera") instance=ExtResource("1_ebmjs")]
 position = Vector2(0, -456)
 gravity_scale = 2.0
 time_to_unpause = 2.0
+camera = NodePath("Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2146928479]
 position = Vector2(0, -593)
 offset = Vector2(500, 0)
-zoom = Vector2(0.13, 0.13)
+zoom = Vector2(0.125, 0.125)
 process_callback = 0
 limit_enabled = false
 limit_left = -2750
@@ -52,3 +54,37 @@ upgrades_ui = NodePath("../upgrades_ui")
 
 [node name="upgrades_ui" parent="." unique_id=820732258 instance=ExtResource("4_wowpa")]
 visible = false
+
+[node name="Pelican" type="Sprite2D" parent="." unique_id=420780228]
+z_index = 204
+position = Vector2(-431, -790)
+texture = ExtResource("5_wowpa")
+
+[node name="Pelican2" type="Sprite2D" parent="." unique_id=1328290219]
+visible = false
+z_index = 204
+position = Vector2(-997.015, -1639)
+scale = Vector2(2, 2)
+texture = ExtResource("5_wowpa")
+
+[node name="Pelican3" type="Sprite2D" parent="." unique_id=1403635077]
+visible = false
+z_index = 204
+position = Vector2(-487, -1659)
+scale = Vector2(3, 3)
+texture = ExtResource("5_wowpa")
+
+[node name="Pelican4" type="Sprite2D" parent="." unique_id=1786039792]
+visible = false
+z_index = 204
+position = Vector2(210, -1702)
+scale = Vector2(4, 4)
+texture = ExtResource("5_wowpa")
+
+[node name="Pelican5" type="Sprite2D" parent="." unique_id=742718273]
+visible = false
+z_index = 204
+texture_filter = 1
+position = Vector2(405.00006, -758.00006)
+scale = Vector2(12.23, 12.23)
+texture = ExtResource("5_wowpa")

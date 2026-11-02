@@ -9,7 +9,7 @@ height = 70.0
 
 [sub_resource type="Animation" id="Animation_7ff18"]
 resource_name = "Flying"
-length = 1.8499999999999999
+length = 1.8
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -45,7 +45,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [-11.0, 6.0, 15.0, 19.5, 32.0]
+"values": [-11.0, 6.0, 15.0, 20.0, 32.0]
 }
 
 [sub_resource type="Animation" id="Animation_uveg6"]
@@ -107,7 +107,7 @@ shape = SubResource("CapsuleShape2D_bdm6k")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1807812791]
 z_index = 4
-position = Vector2(0, -17.4)
+position = Vector2(0, -17)
 texture = ExtResource("2_3q41l")
 region_enabled = true
 region_rect = Rect2(0, 0, 96, 80)

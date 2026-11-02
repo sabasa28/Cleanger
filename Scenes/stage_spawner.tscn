@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://g8wpn202bavb"]
 
 [ext_resource type="Script" uid="uid://cgqxoft07lot0" path="res://Scripts/stage_spawner.gd" id="1_dwc7r"]
+[ext_resource type="Texture2D" uid="uid://cw3cb6agskpum" path="res://Assets/Sprites/gorrito 1.png" id="2_afsgv"]
+[ext_resource type="Texture2D" uid="uid://b2kr3l7b0h6u0" path="res://Assets/Sprites/Circle64x64.png" id="3_l5x46"]
 
 [node name="stage_spawner" type="Node2D" unique_id=1041670152]
 script = ExtResource("1_dwc7r")
 window_interval = Vector2(512, 512)
 window_spawn_origin = Vector2(-1280, -512)
+weird_window_sprites = Array[Texture2D]([ExtResource("2_afsgv")])
+very_weird_window_sprite = ExtResource("3_l5x46")

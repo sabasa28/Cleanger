@@ -12,6 +12,7 @@ signal on_speed_modified(new_speed_modifier : float, new_speed_level : int)
 signal on_width_modified(new_width_level : int)
 signal on_cleaner_explotion_unlocked()
 signal on_pasive_water_bomb_unlocked()
+signal on_water_bomb_frenesi_started()
 
 var gameplay_controller : GameplayController
 
@@ -61,6 +62,12 @@ var water_bomb_instant_clean_unlocked : bool = false
 var water_bomb_instant_clean_chance : float = 0.0
 var super_water_bomb_enabled : bool = false
 var super_water_bomb_explotion_range : float = 4.0 #multiplier
+var water_bomb_frenesi_enabled : bool = false
+const water_bomb_frenesi_time : float = 3.0
+var water_bomb_cd_on_frenesi : float
+var water_bombs_per_frenesi : int = 0
+var windows_before_water_bomb_frenesi : int = 15
+var current_windows_before_water_bomb_frenesi : int = 20
 
 var cleaner_explotion_times : float = 10.0
 var cleaner_explotion_unlocked : bool = false
@@ -122,6 +129,7 @@ func end_run() -> void:
 	current_combo_coins = 0
 	current_combo_num = 0
 	max_run_combo = 0
+	current_windows_before_water_bomb_frenesi = windows_before_water_bomb_frenesi
 	InGameUi.reset_combo_amount_text()
 	on_run_ended.emit()
 
@@ -153,6 +161,10 @@ func add_floor_cleaned(floor_cleaned : int) -> void:
 
 func add_window_cleaned() -> void:
 	windows_cleaned += 1
+	if water_bomb_frenesi_enabled:
+		current_windows_before_water_bomb_frenesi -= 1
+		if current_windows_before_water_bomb_frenesi == 0:
+			on_water_bomb_frenesi_started.emit()
 	try_add_combo()
 	update_window_related_ui(window_value)
 	on_window_cleaned.emit(windows_cleaned)
@@ -277,6 +289,15 @@ func raise_spots_explotion_chance(amount_to_raise : float) -> void:
 func raise_water_bomb_instant_clean_chance(amount_to_raise : float) -> void:
 	water_bomb_instant_clean_unlocked = true
 	water_bomb_instant_clean_chance += amount_to_raise
+
+func raise_water_bombs_per_frenesi(amount_to_raise : float) -> void:
+	if !water_bomb_frenesi_enabled:
+		water_bomb_frenesi_enabled = true
+	water_bombs_per_frenesi += int(amount_to_raise)
+	water_bomb_cd_on_frenesi = water_bomb_frenesi_time / water_bombs_per_frenesi
+
+func stop_water_bomb_frenesi() -> void:
+	current_windows_before_water_bomb_frenesi = windows_before_water_bomb_frenesi
 
 func lower_max_pelican_time(amount_to_lower : float) -> void:
 	max_time_pelican_spawn -= amount_to_lower

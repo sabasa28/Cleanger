@@ -6,6 +6,8 @@ extends Node2D
 var columns_and_rows : Vector2i
 var windows_state : Array[bool]
 var floors_state : Array[bool]
+@export var weird_window_sprites : Array[Texture2D]
+@export var very_weird_window_sprite : Texture2D
 
 signal on_reset_windows
 
@@ -37,15 +39,26 @@ func reset_windows() -> void:
 	floors_state.resize(columns_and_rows.y)
 	for floor in floors_state:
 		floor = false
+	var weird_window_column_1 : int
+	var weird_window_column_2 : int
 	for rows in columns_and_rows.y:
+		weird_window_column_1 = randi_range(0, 10)
+		weird_window_column_2 = randi_range(0, 10)
 		for columns in columns_and_rows.x:
 			spawned_window = Stats.window_prefab.instantiate()
 			on_reset_windows.connect(spawned_window.delete_window) 
 			spawned_window.has_spot = randi() % 2
 			spawned_window.global_position = window_spawn_origin + Vector2 (window_interval.x * columns, -window_interval.y * rows)
 			spawned_window.stage_manager = self
+			if columns == weird_window_column_1 || columns == weird_window_column_2:
+				spawned_window.change_clean_sprite(get_weird_window_sprite())
 			var current_window_num = rows * columns_and_rows.x + columns
 			spawned_window.window_num = current_window_num
 			windows_state[current_window_num] = false
 			print("window pos ", spawned_window.global_position)
 			add_child(spawned_window)
+
+func get_weird_window_sprite() -> Texture2D:
+	if randf() <= 0.5:
+		return very_weird_window_sprite
+	return weird_window_sprites.pick_random()

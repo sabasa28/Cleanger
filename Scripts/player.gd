@@ -39,16 +39,21 @@ var cleaner_swipes_left_before_explotion : int = 0.0
 
 var pasive_water_bomb_unlocked : bool = false
 var pasive_water_bomb_timer : float = 0.0
+var on_water_bomb_frenesi : bool = false
+var water_bomb_frenesi_timer : float
 
 @export var cleaner_anim : AnimationPlayer
 @export var lunge_end_anim_name : StringName
 var swipe_anim_cooldown : float
 var swipe_anim_timer : float = 0.0
 var playing_swipe_anim : bool = false
+@export var camera : Camera2D
+var camera_offest : Vector2
 
 @export var sprite : Sprite2D
 
 func _ready() -> void:
+	camera_offest = camera.position
 	swipe_modified_cooldown = swipe_base_cooldown / Stats.speed_modifier
 	unpaused_timer = time_to_unpause
 	Stats.on_rotation_speed_changed.connect(update_rot_speed)
@@ -56,6 +61,7 @@ func _ready() -> void:
 	Stats.on_width_modified.connect(raise_cleaner_width_level)
 	Stats.on_cleaner_explotion_unlocked.connect(unlock_cleaner_explotions)
 	Stats.on_pasive_water_bomb_unlocked.connect(unlock_pasive_water_bomb)
+	Stats.on_water_bomb_frenesi_started.connect(on_water_bomb_frenesi_started)
 	cleaner_cleaning_rot_speed_modifier = Stats.rotation_speed
 	initial_pos = global_position
 	last_checked_height = global_position.y
@@ -147,18 +153,21 @@ func _process(delta: float) -> void:
 	if pasive_water_bomb_unlocked:
 		pasive_water_bomb_timer -= delta
 		if pasive_water_bomb_timer <= 0.0:
-			var spawned_bomb = Stats.water_bomb_prefab.instantiate()
-			spawned_bomb.global_position = global_position
-			add_sibling(spawned_bomb)
-			spawned_bomb.initialize()
-			pasive_water_bomb_timer = randf_range(0.5, Stats.pasive_water_bomb_max_cd)
+			throw_water_bomb()
 	
+	if on_water_bomb_frenesi:
+		water_bomb_frenesi_timer -= delta
+		if water_bomb_frenesi_timer <= 0.0:
+			on_water_bomb_frenesi = false
+			Stats.stop_water_bomb_frenesi()
 	
 	height_checking_timer -= delta
 	if height_checking_timer < 0:
 		height_checking_timer = height_checking_cooldown
 		Stats.check_height(global_position.y, last_checked_height)
 		last_checked_height = global_position.y
+	
+	camera.global_position = (global_position + camera_offest).round()
 
 func start_cleaning_dirty_spot() -> void:
 	linear_velocity *= 0.7
@@ -171,6 +180,7 @@ func pause() -> void:
 func reset() -> void:
 	unpause()
 	stun_timer = 0.0
+	on_water_bomb_frenesi = false
 	stunned = false
 	global_position = initial_pos
 	gravity_scale = initial_gravity_scale
@@ -198,8 +208,21 @@ func raise_cleaner_width_level(new_width_level : int) -> void:
 func unlock_cleaner_explotions() -> void:
 	cleaner_explotions_unlocked = true
 
+func throw_water_bomb() -> void:
+	var spawned_bomb = Stats.water_bomb_prefab.instantiate()
+	spawned_bomb.global_position = global_position
+	add_sibling(spawned_bomb)
+	spawned_bomb.initialize()
+	pasive_water_bomb_timer += Stats.water_bomb_cd_on_frenesi if on_water_bomb_frenesi else randf_range(0.5, Stats.pasive_water_bomb_max_cd)
+
 func unlock_pasive_water_bomb() -> void:
 	pasive_water_bomb_unlocked = true
+
+func on_water_bomb_frenesi_started() -> void:
+	on_water_bomb_frenesi = true
+	water_bomb_frenesi_timer = Stats.water_bomb_frenesi_time
+	pasive_water_bomb_timer = 0.0
+	throw_water_bomb()
 
 func stun(stun_time : float) -> void:
 	var stun_resistance = Stats.stun_resistance

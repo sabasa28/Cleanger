@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dio411ybm74ah" path="res://Scripts/upgrades_ui.gd" id="1_r7ofa"]
 [ext_resource type="Texture2D" uid="uid://bqd8c5t4rkouj" path="res://Assets/Sprites/placeholder_upgrades_background.png" id="2_55cvm"]
 [ext_resource type="Script" uid="uid://b13bbk8g4cak" path="res://Scripts/upgrade.gd" id="2_mnydp"]
+[ext_resource type="Script" uid="uid://bjten1lq0xe2e" path="res://Scripts/upgrade_dependency.gd" id="3_im2lx"]
 [ext_resource type="Texture2D" uid="uid://cr8cwpf0ourmf" path="res://Assets/Sprites/greySquare.png" id="4_8o8co"]
 [ext_resource type="FontFile" uid="uid://3p7hsboevt12" path="res://Fonts/bptypewrite.italic.otf" id="4_n72eg"]
 [ext_resource type="Script" uid="uid://bqe4ra5vv8fw6" path="res://Scripts/upgrade_menu_ui.gd" id="4_tyk1r"]
@@ -23,6 +24,12 @@ upgrade_main_amount = 0.1
 button = NodePath("MarginContainer/Control/ButtonUpgrade19")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
+[sub_resource type="Resource" id="Resource_di7eb"]
+script = ExtResource("3_im2lx")
+dependency_upgrade = SubResource("Resource_qxkgt")
+lvl_of_dependency = 1
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
+
 [sub_resource type="Resource" id="Resource_mnydp"]
 script = ExtResource("2_mnydp")
 name = "Más monedas"
@@ -31,9 +38,14 @@ upgrade_price = Array[int]([10, 20, 40, 70, 110, 160, 220, 310, 420, 550])
 upgrade_main_amount = 1.0
 stat_to_modify = 1
 button = NodePath("MarginContainer/Control/ButtonUpgrade20")
-dependency_upgrade = SubResource("Resource_qxkgt")
-lvl_of_dependency = 1
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_di7eb")])
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
+
+[sub_resource type="Resource" id="Resource_pxa0e"]
+script = ExtResource("3_im2lx")
+dependency_upgrade = SubResource("Resource_mnydp")
+lvl_of_dependency = 10
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
 
 [sub_resource type="Resource" id="Resource_hn3xb"]
 script = ExtResource("2_mnydp")
@@ -43,9 +55,14 @@ upgrade_price = Array[int]([1000, 2000, 3000, 4000, 5000])
 upgrade_main_amount = 2.0
 stat_to_modify = 1
 button = NodePath("MarginContainer/Control/ButtonUpgrade21")
-dependency_upgrade = SubResource("Resource_mnydp")
-lvl_of_dependency = 10
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_pxa0e")])
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
+
+[sub_resource type="Resource" id="Resource_77ywq"]
+script = ExtResource("3_im2lx")
+dependency_upgrade = SubResource("Resource_mnydp")
+lvl_of_dependency = 5
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
 
 [sub_resource type="Resource" id="Resource_8o8co"]
 script = ExtResource("2_mnydp")
@@ -54,10 +71,15 @@ description = "Gana & monedas extra por limpiar una mancha."
 upgrade_price = Array[int]([20, 40, 60, 80, 100, 120, 140, 160, 180, 200])
 upgrade_main_amount = 1.0
 stat_to_modify = 2
-button = NodePath("MarginContainer/Control/ButtonUpgrade2")
-dependency_upgrade = SubResource("Resource_mnydp")
-lvl_of_dependency = 5
+button = NodePath("MarginContainer/Control/ButtonUpgrade29")
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_77ywq")])
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
+
+[sub_resource type="Resource" id="Resource_om4s6"]
+script = ExtResource("3_im2lx")
+dependency_upgrade = SubResource("Resource_8o8co")
+lvl_of_dependency = 10
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
 
 [sub_resource type="Resource" id="Resource_5symo"]
 script = ExtResource("2_mnydp")
@@ -66,9 +88,8 @@ description = "Gana & monedas extra por limpiar una mancha."
 upgrade_price = Array[int]([2000, 4000, 6000, 8000, 10000])
 upgrade_main_amount = 10.0
 stat_to_modify = 2
-button = NodePath("MarginContainer/Control/ButtonUpgrade3")
-dependency_upgrade = SubResource("Resource_8o8co")
-lvl_of_dependency = 10
+button = NodePath("MarginContainer/Control/ButtonUpgrade2")
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_om4s6")])
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
 [sub_resource type="Resource" id="Resource_vgqql"]
@@ -81,6 +102,12 @@ stat_to_modify = 3
 button = NodePath("MarginContainer/Control/ButtonUpgrade4")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
+[sub_resource type="Resource" id="Resource_0t6cm"]
+script = ExtResource("3_im2lx")
+dependency_upgrade = SubResource("Resource_mnydp")
+lvl_of_dependency = 1
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
+
 [sub_resource type="Resource" id="Resource_tyk1r"]
 script = ExtResource("2_mnydp")
 name = "Más fuerza"
@@ -89,9 +116,14 @@ upgrade_price = Array[int]([100, 500, 1000, 1500, 2000, 3000])
 upgrade_main_amount = 0.1
 stat_to_modify = 4
 button = NodePath("MarginContainer/Control/ButtonUpgrade5")
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_0t6cm")])
+metadata/_custom_type_script = "uid://b13bbk8g4cak"
+
+[sub_resource type="Resource" id="Resource_iul44"]
+script = ExtResource("3_im2lx")
 dependency_upgrade = SubResource("Resource_mnydp")
 lvl_of_dependency = 1
-metadata/_custom_type_script = "uid://b13bbk8g4cak"
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
 
 [sub_resource type="Resource" id="Resource_ws6wd"]
 script = ExtResource("2_mnydp")
@@ -101,9 +133,14 @@ upgrade_price = Array[int]([100, 500, 1000, 2000, 4000, 10000])
 upgrade_main_amount = 1.0
 stat_to_modify = 5
 button = NodePath("MarginContainer/Control/ButtonUpgrade6")
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_iul44")])
+metadata/_custom_type_script = "uid://b13bbk8g4cak"
+
+[sub_resource type="Resource" id="Resource_4kwkh"]
+script = ExtResource("3_im2lx")
 dependency_upgrade = SubResource("Resource_mnydp")
 lvl_of_dependency = 1
-metadata/_custom_type_script = "uid://b13bbk8g4cak"
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
 
 [sub_resource type="Resource" id="Resource_n72eg"]
 script = ExtResource("2_mnydp")
@@ -113,8 +150,7 @@ upgrade_price = Array[int]([75, 150, 350, 800, 1500, 2500])
 upgrade_main_amount = 0.1
 stat_to_modify = 6
 button = NodePath("MarginContainer/Control/ButtonUpgrade7")
-dependency_upgrade = SubResource("Resource_mnydp")
-lvl_of_dependency = 1
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_4kwkh")])
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
 [sub_resource type="Resource" id="Resource_dmca1"]
@@ -128,7 +164,7 @@ stat_to_modify = 8
 button = NodePath("MarginContainer/Control/ButtonUpgrade8")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
-[sub_resource type="Resource" id="Resource_di7eb"]
+[sub_resource type="Resource" id="Resource_pcqwb"]
 script = ExtResource("2_mnydp")
 name = "Explosión de agua"
 description = "Cada & impulsos con tu limpiador causa una explosión de agua que limpia a su alrededor."
@@ -141,6 +177,12 @@ button = NodePath("MarginContainer/Control/ButtonUpgrade9")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
 [sub_resource type="Resource" id="Resource_dhxif"]
+script = ExtResource("3_im2lx")
+dependency_upgrade = SubResource("Resource_pcqwb")
+lvl_of_dependency = 1
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
+
+[sub_resource type="Resource" id="Resource_iec8w"]
 script = ExtResource("2_mnydp")
 name = "Explosión mejorada"
 description = "Aumenta el tamaño de tu explosión de agua un &"
@@ -149,11 +191,16 @@ upgrade_price = Array[int]([400, 800, 1200, 2000, 3000])
 upgrade_main_amount = 0.1
 stat_to_modify = 10
 button = NodePath("MarginContainer/Control/ButtonUpgrade10")
-dependency_upgrade = SubResource("Resource_di7eb")
-lvl_of_dependency = 1
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_dhxif")])
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
-[sub_resource type="Resource" id="Resource_pxa0e"]
+[sub_resource type="Resource" id="Resource_o48mn"]
+script = ExtResource("3_im2lx")
+dependency_upgrade = SubResource("Resource_iec8w")
+lvl_of_dependency = 1
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
+
+[sub_resource type="Resource" id="Resource_gdbay"]
 script = ExtResource("2_mnydp")
 name = "Explosón con bombita"
 description = "La explosión de agua tiene un & de probabilidad de lanzar una bombita de agua adicional en una dirección aleatoria."
@@ -162,7 +209,7 @@ upgrade_price = Array[int]([1000, 2500, 4000, 6000, 1000])
 upgrade_main_amount = 0.2
 stat_to_modify = 11
 button = NodePath("MarginContainer/Control/ButtonUpgrade11")
-dependency_upgrade = SubResource("Resource_dhxif")
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_o48mn")])
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
 [sub_resource type="Resource" id="Resource_y0t3v"]
@@ -198,7 +245,7 @@ stat_to_modify = 12
 button = NodePath("MarginContainer/Control/ButtonUpgrade14")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
-[sub_resource type="Resource" id="Resource_4kwkh"]
+[sub_resource type="Resource" id="Resource_qt5nw"]
 script = ExtResource("2_mnydp")
 name = "Bombitas eficientes"
 description = "Tus bombitas de agua tienen un & de probabilidad de limpiar manchas instantáneamente."
@@ -219,6 +266,12 @@ stat_to_modify = 16
 button = NodePath("MarginContainer/Control/ButtonUpgrade16")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
+[sub_resource type="Resource" id="Resource_im2lx"]
+script = ExtResource("3_im2lx")
+dependency_upgrade = SubResource("Resource_vgqql")
+lvl_of_dependency = 5
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
+
 [sub_resource type="Resource" id="Resource_q746k"]
 script = ExtResource("2_mnydp")
 name = "Combo mejorado"
@@ -227,10 +280,11 @@ description_modifier = 1
 upgrade_price = Array[int]([20000, 40000, 60000])
 upgrade_main_amount = 0.1
 stat_to_modify = 19
-button = NodePath("MarginContainer/Control/ButtonUpgrade17")
+button = NodePath("MarginContainer/Control/ButtonUpgrade3")
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_im2lx")])
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
-[sub_resource type="Resource" id="Resource_77ywq"]
+[sub_resource type="Resource" id="Resource_ujqth"]
 script = ExtResource("2_mnydp")
 name = "Pelicanos persistentes"
 description = "Los pelicanos ya no se van"
@@ -239,7 +293,7 @@ stat_to_modify = 18
 button = NodePath("MarginContainer/Control/ButtonUpgrade22")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
-[sub_resource type="Resource" id="Resource_om4s6"]
+[sub_resource type="Resource" id="Resource_nvpwg"]
 script = ExtResource("2_mnydp")
 name = "Pelicanos con agua"
 description = "Los pelicanos tienen un & de probabilidad de traer agua que cause una explosión al chocarlos."
@@ -250,7 +304,7 @@ stat_to_modify = 17
 button = NodePath("MarginContainer/Control/ButtonUpgrade23")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
-[sub_resource type="Resource" id="Resource_0t6cm"]
+[sub_resource type="Resource" id="Resource_mgmes"]
 script = ExtResource("2_mnydp")
 name = "Bombitas grandes"
 description = "Aumenta el tamaño de las bombitas de agua un &"
@@ -261,7 +315,7 @@ stat_to_modify = 14
 button = NodePath("MarginContainer/Control/ButtonUpgrade24")
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
-[sub_resource type="Resource" id="Resource_iul44"]
+[sub_resource type="Resource" id="Resource_rwp63"]
 script = ExtResource("2_mnydp")
 name = "Super bombita"
 description = "Al limpiar un piso por completo, lanzá 1 bombita de agua muy grande hacia arriba."
@@ -290,6 +344,41 @@ upgrade_price = Array[int]([12000, 40000, 85000])
 upgrade_main_amount = 0.25
 stat_to_modify = 21
 button = NodePath("MarginContainer/Control/ButtonUpgrade27")
+metadata/_custom_type_script = "uid://b13bbk8g4cak"
+
+[sub_resource type="Resource" id="Resource_kwblu"]
+script = ExtResource("2_mnydp")
+name = "Frenesí de bombitas"
+initial_description = "Cada 15 ventanas limpiadas entras en un frenesí de bombitas por 3 segundos"
+description = "Aumenta la cantidad de bombitas del frenesí en &"
+upgrade_price = Array[int]([4000, 5000, 6000, 7000, 8000])
+upgrade_main_amount = 5.0
+stat_to_modify = 22
+button = NodePath("MarginContainer/Control/ButtonUpgrade28")
+metadata/_custom_type_script = "uid://b13bbk8g4cak"
+
+[sub_resource type="Resource" id="Resource_8hyv4"]
+script = ExtResource("3_im2lx")
+dependency_upgrade = SubResource("Resource_hn3xb")
+lvl_of_dependency = 5
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
+
+[sub_resource type="Resource" id="Resource_8npsx"]
+script = ExtResource("3_im2lx")
+dependency_upgrade = SubResource("Resource_5symo")
+lvl_of_dependency = 5
+metadata/_custom_type_script = "uid://bjten1lq0xe2e"
+
+[sub_resource type="Resource" id="Resource_2uf0n"]
+script = ExtResource("2_mnydp")
+name = "Todavia mas monedas"
+description = "Gana & monedas extra por limpiar una ventana y @ por limpiar una mancha."
+upgrade_price = Array[int]([3000, 20000, 60000, 100000, 200000])
+upgrade_main_amount = 5.0
+upgrade_extra_amount = 15.0
+stat_to_modify = 23
+button = NodePath("MarginContainer/Control/ButtonUpgrade18")
+dependencies = Array[ExtResource("3_im2lx")]([SubResource("Resource_8hyv4"), SubResource("Resource_8npsx")])
 metadata/_custom_type_script = "uid://b13bbk8g4cak"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kwblu"]
@@ -385,6 +474,17 @@ load_path = "res://.godot/imported/room_assets.png-5681fe1e5de25afa16bc2b04f1670
 atlas = SubResource("CompressedTexture2D_gdbay")
 region = Rect2(0, 240, 128, 80)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_im2lx"]
+load_path = "res://.godot/imported/room_assets.png-5681fe1e5de25afa16bc2b04f1670f91.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_om4s6"]
+atlas = SubResource("CompressedTexture2D_im2lx")
+region = Rect2(64, 334, 64, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxa0e"]
+atlas = SubResource("CompressedTexture2D_gdbay")
+region = Rect2(0, 334, 64, 34)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0t6cm"]
 load_path = "res://.godot/imported/Circle32x32.png-1875a1b407d3ca4e9c2193bbea12df93.ctex"
 
@@ -393,7 +493,7 @@ load_path = "res://.godot/imported/Circle32x32.png-1875a1b407d3ca4e9c2193bbea12d
 
 [node name="upgrades_ui" type="CanvasLayer" unique_id=820732258 node_paths=PackedStringArray("coins_text")]
 script = ExtResource("1_r7ofa")
-all_upgrades = Array[ExtResource("2_mnydp")]([SubResource("Resource_qxkgt"), SubResource("Resource_mnydp"), SubResource("Resource_hn3xb"), SubResource("Resource_8o8co"), SubResource("Resource_5symo"), SubResource("Resource_vgqql"), SubResource("Resource_tyk1r"), SubResource("Resource_ws6wd"), SubResource("Resource_n72eg"), SubResource("Resource_dmca1"), SubResource("Resource_di7eb"), SubResource("Resource_dhxif"), SubResource("Resource_pxa0e"), SubResource("Resource_y0t3v"), SubResource("Resource_8sexr"), SubResource("Resource_3dryh"), SubResource("Resource_4kwkh"), SubResource("Resource_tirye"), SubResource("Resource_q746k"), SubResource("Resource_77ywq"), SubResource("Resource_om4s6"), SubResource("Resource_0t6cm"), SubResource("Resource_iul44"), SubResource("Resource_ieqmh"), SubResource("Resource_tw2ol")])
+all_upgrades = Array[ExtResource("2_mnydp")]([SubResource("Resource_qxkgt"), SubResource("Resource_mnydp"), SubResource("Resource_hn3xb"), SubResource("Resource_8o8co"), SubResource("Resource_5symo"), SubResource("Resource_vgqql"), SubResource("Resource_tyk1r"), SubResource("Resource_ws6wd"), SubResource("Resource_n72eg"), SubResource("Resource_dmca1"), SubResource("Resource_pcqwb"), SubResource("Resource_iec8w"), SubResource("Resource_gdbay"), SubResource("Resource_y0t3v"), SubResource("Resource_8sexr"), SubResource("Resource_3dryh"), SubResource("Resource_qt5nw"), SubResource("Resource_tirye"), SubResource("Resource_q746k"), SubResource("Resource_ujqth"), SubResource("Resource_nvpwg"), SubResource("Resource_mgmes"), SubResource("Resource_rwp63"), SubResource("Resource_ieqmh"), SubResource("Resource_tw2ol"), SubResource("Resource_kwblu"), SubResource("Resource_2uf0n")])
 coins_text = NodePath("MarginContainer/Control/Control/RichTextLabel Coins")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=91577738]
@@ -538,10 +638,10 @@ vertical_alignment = 1
 [node name="ButtonUpgrade2" type="TextureButton" parent="MarginContainer/Control" unique_id=1818796104]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 249.0
-offset_top = 49.000004
-offset_right = 377.0
-offset_bottom = 129.00076
+offset_left = 82.00001
+offset_top = 168.00002
+offset_right = 210.0
+offset_bottom = 248.00078
 scale = Vector2(1.25, 1.25)
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -653,9 +753,9 @@ vertical_alignment = 1
 [node name="ButtonUpgrade3" type="TextureButton" parent="MarginContainer/Control" unique_id=195067944]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 307.0
-offset_top = 50.000004
-offset_right = 435.0
+offset_left = 348.00003
+offset_top = 50.0
+offset_right = 476.00003
 offset_bottom = 130.00076
 scale = Vector2(1.25, 1.25)
 size_flags_horizontal = 4
@@ -768,9 +868,9 @@ vertical_alignment = 1
 [node name="ButtonUpgrade4" type="TextureButton" parent="MarginContainer/Control" unique_id=766780866]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 346.0
-offset_top = 49.000004
-offset_right = 474.0
+offset_left = 309.00003
+offset_top = 49.0
+offset_right = 437.00003
 offset_bottom = 129.00076
 scale = Vector2(1.25, 1.25)
 size_flags_horizontal = 4
@@ -2376,9 +2476,9 @@ vertical_alignment = 1
 z_index = -5
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 60.0
+offset_left = 63.0
 offset_top = 235.0
-offset_right = 188.0
+offset_right = 191.0
 offset_bottom = 315.00018
 scale = Vector2(1.25, 1.25)
 size_flags_horizontal = 4
@@ -2388,7 +2488,7 @@ texture_disabled = SubResource("AtlasTexture_kwblu")
 script = ExtResource("6_q746k")
 offset_position = Array[Vector2]([Vector2(0, 0), Vector2(0, -30)])
 bought_texture = SubResource("AtlasTexture_im2lx")
-on_bought_raise_offset_of = [NodePath("../ButtonUpgrade19"), NodePath("."), NodePath("../ButtonUpgrade20"), NodePath("../ButtonUpgrade21")]
+on_bought_raise_offset_of = [NodePath("../ButtonUpgrade19"), NodePath("."), NodePath("../ButtonUpgrade20"), NodePath("../ButtonUpgrade21"), NodePath("../ButtonUpgrade29")]
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade18" unique_id=679990818 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
@@ -2840,13 +2940,130 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ButtonUpgrade29" type="TextureButton" parent="MarginContainer/Control" unique_id=1000566769 node_paths=PackedStringArray("on_bought_raise_offset_of")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 135.0
+offset_top = 131.00002
+offset_right = 263.0
+offset_bottom = 211.00078
+scale = Vector2(1.25, 1.25)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_om4s6")
+texture_disabled = SubResource("AtlasTexture_iec8w")
+script = ExtResource("6_q746k")
+offset_position = Array[Vector2]([Vector2(0, 0), Vector2(0, 55), Vector2(0, -18)])
+bought_texture = SubResource("AtlasTexture_pxa0e")
+on_bought_raise_offset_of = [NodePath(".")]
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade29" unique_id=988763738 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = 92.799995
+offset_top = -50.400005
+offset_right = 992.8
+offset_bottom = 449.6
+scale = Vector2(0.1, 0.1)
+texture = SubResource("NoiseTexture2D_23g7n")
+expand_mode = 1
+script = ExtResource("4_tyk1r")
+upgrade_name_text = NodePath("Control/RichTextLabel")
+upgrade_description_text = NodePath("Control/RichTextLabel2")
+upgrade_cost_text = NodePath("Control/RichTextLabel3")
+
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade29/TextureRect" unique_id=836077]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade29/TextureRect/Control" unique_id=675464453]
+custom_minimum_size = Vector2(64.825, 0)
+custom_maximum_size = Vector2(800, -1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_top = 6.6666665
+offset_right = 144.0
+offset_bottom = 59.666668
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("4_n72eg")
+theme_override_fonts/italics_font = ExtResource("5_8o8co")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+bbcode_enabled = true
+text = "Upgrade name?"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade29/TextureRect/Control" unique_id=27188842]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(894.415, -1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.00003
+offset_top = -169.99998
+offset_right = 444.0
+offset_bottom = 172.21002
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+theme_override_fonts/normal_font = ExtResource("4_n72eg")
+theme_override_fonts/italics_font = ExtResource("5_8o8co")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+bbcode_enabled = true
+text = "This is a test text for the upgrades if you see this I fucked up"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade29/TextureRect/Control" unique_id=1432186529]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -58.36499
+offset_right = 300.0
+offset_bottom = -1.8299866
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0, 1)
+theme_override_fonts/normal_font = ExtResource("4_n72eg")
+theme_override_fonts/italics_font = ExtResource("5_8o8co")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+bbcode_enabled = true
+text = "Cost:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ButtonUpgrade22" type="TextureButton" parent="MarginContainer/Control" unique_id=1783357146]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
 offset_left = 92.00003
-offset_top = 97.000015
+offset_top = 95.000015
 offset_right = 220.00003
-offset_bottom = 177.00076
+offset_bottom = 175.00076
 scale = Vector2(1.25, 1.25)
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -3501,6 +3718,120 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade27/TextureRect/Control" unique_id=502002703]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -58.36499
+offset_right = 300.0
+offset_bottom = -1.8299866
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0, 1)
+theme_override_fonts/normal_font = ExtResource("4_n72eg")
+theme_override_fonts/italics_font = ExtResource("5_8o8co")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+bbcode_enabled = true
+text = "Cost:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonUpgrade28" type="TextureButton" parent="MarginContainer/Control" unique_id=1684199809]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 424.0
+offset_top = 156.0
+offset_right = 552.0
+offset_bottom = 236.00076
+scale = Vector2(1.25, 1.25)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("CompressedTexture2D_kwblu")
+texture_disabled = SubResource("AtlasTexture_di7eb")
+script = ExtResource("6_q746k")
+bought_texture = SubResource("CompressedTexture2D_4kwkh")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade28" unique_id=439767984 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_top = 16.800007
+offset_right = 900.0
+offset_bottom = 516.8
+scale = Vector2(0.1, 0.1)
+texture = SubResource("NoiseTexture2D_23g7n")
+expand_mode = 1
+script = ExtResource("4_tyk1r")
+upgrade_name_text = NodePath("Control/RichTextLabel")
+upgrade_description_text = NodePath("Control/RichTextLabel2")
+upgrade_cost_text = NodePath("Control/RichTextLabel3")
+
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade28/TextureRect" unique_id=1827464788]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade28/TextureRect/Control" unique_id=1145148224]
+custom_minimum_size = Vector2(64.825, 0)
+custom_maximum_size = Vector2(800, -1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.0
+offset_top = 6.6666665
+offset_right = 144.0
+offset_bottom = 59.666668
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("4_n72eg")
+theme_override_fonts/italics_font = ExtResource("5_8o8co")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+bbcode_enabled = true
+text = "Upgrade name?"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade28/TextureRect/Control" unique_id=1176418985]
+custom_minimum_size = Vector2(-1, 0)
+custom_maximum_size = Vector2(894.415, -1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.00003
+offset_top = -169.99998
+offset_right = 444.0
+offset_bottom = 172.21002
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+theme_override_fonts/normal_font = ExtResource("4_n72eg")
+theme_override_fonts/italics_font = ExtResource("5_8o8co")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+bbcode_enabled = true
+text = "This is a test text for the upgrades if you see this I fucked up"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade28/TextureRect/Control" unique_id=1563229848]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 1

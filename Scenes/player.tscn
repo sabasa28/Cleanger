@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://drrj3740hitrm" path="res://Scripts/cleaner.gd" id="3_vgqql"]
 [ext_resource type="Texture2D" uid="uid://cav3oajmmfa27" path="res://Assets/Sprites/frog.png" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://duhj00ct0l6pd" path="res://Assets/Sprites/cleaner.png" id="4_vgqql"]
+[ext_resource type="Shader" uid="uid://bn7wrkmbkcmng" path="res://Scripts/shaders/no_jitter_pixelart.gdshader" id="4_x3wgy"]
 [ext_resource type="Script" uid="uid://b4wtdvwvkranb" path="res://Scripts/reference_holder.gd" id="5_fkybt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
@@ -132,6 +133,9 @@ _data = {
 &"Swipe": SubResource("Animation_fkybt")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x3wgy"]
+shader = ExtResource("4_x3wgy")
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dmca1"]
 radius = 101.53
 height = 487.97
@@ -198,6 +202,8 @@ position = Vector2(374, 0)
 
 [node name="FrogSprite" type="Sprite2D" parent="CleanerPivot" unique_id=1095897705]
 z_index = 10
+texture_filter = 2
+material = SubResource("ShaderMaterial_x3wgy")
 position = Vector2(-107, 7.999995)
 scale = Vector2(4.25, 4.25)
 texture = ExtResource("4_fkybt")

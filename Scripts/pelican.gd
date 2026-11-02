@@ -32,6 +32,7 @@ func initialize(going_right : bool, new_distance_before_despawn: float, new_is_w
 		sprite.region_rect.position.x = 96.0
 
 func _process(delta: float) -> void:
+	print(global_position.y)
 	if fading_in:
 		fade_timer += delta
 		sprite.modulate.a = fade_timer / fade_time
@@ -46,6 +47,7 @@ func _process(delta: float) -> void:
 			queue_free()
 			return
 	global_position.x += direction * flying_speed * delta
+	global_position = global_position.round()
 	if !fading_out && abs(spawn_x - global_position.x) > distance_before_despawn:
 		if is_persistent_pelican:
 			turn_around()
