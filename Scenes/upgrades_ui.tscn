@@ -349,8 +349,8 @@ metadata/_custom_type_script = "uid://b13bbk8g4cak"
 [sub_resource type="Resource" id="Resource_kwblu"]
 script = ExtResource("2_mnydp")
 name = "Frenesí de bombitas"
-initial_description = "Cada 15 ventanas limpiadas entras en un frenesí de bombitas por 3 segundos"
-description = "Aumenta la cantidad de bombitas del frenesí en &"
+initial_description = "Cada 15 ventanas limpiadas entras en frenesí de bombitas por 3 segundos"
+description = "Aumenta en & la cantidad de bombitas que lanzas durante el frenesí"
 upgrade_price = Array[int]([4000, 5000, 6000, 7000, 8000])
 upgrade_main_amount = 5.0
 stat_to_modify = 22
@@ -392,9 +392,11 @@ region = Rect2(0, 0, 1, 1)
 colors = PackedColorArray(0.290337, 0.49642777, 1, 1, 0, 0.27450982, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3evbw"]
+frequency = 0.0004
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_23g7n"]
-width = 1024
+width = 8000
+height = 8000
 generate_mipmaps = false
 noise = SubResource("FastNoiseLite_3evbw")
 color_ramp = SubResource("Gradient_yk0t2")
@@ -524,11 +526,11 @@ expand_mode = 1
 [node name="ButtonUpgrade" type="TextureButton" parent="MarginContainer/Control" unique_id=2084160121]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 164.0
-offset_top = 55.000004
-offset_right = 292.0
-offset_bottom = 135.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 379.0
+offset_top = 76.0
+offset_right = 507.0
+offset_bottom = 156.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -638,11 +640,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade2" type="TextureButton" parent="MarginContainer/Control" unique_id=1818796104]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 82.00001
-offset_top = 168.00002
-offset_right = 210.0
-offset_bottom = 248.00078
-scale = Vector2(1.25, 1.25)
+offset_left = 165.0
+offset_top = 189.00002
+offset_right = 293.0
+offset_bottom = 269.0008
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -753,11 +755,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade3" type="TextureButton" parent="MarginContainer/Control" unique_id=195067944]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 348.00003
-offset_top = 50.0
-offset_right = 476.00003
-offset_bottom = 130.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 470.0
+offset_top = 78.0
+offset_right = 598.0
+offset_bottom = 158.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -868,11 +870,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade4" type="TextureButton" parent="MarginContainer/Control" unique_id=766780866]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 309.00003
-offset_top = 49.0
-offset_right = 437.00003
-offset_bottom = 129.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 539.0
+offset_top = 80.0
+offset_right = 667.0
+offset_bottom = 160.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -983,11 +985,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade5" type="TextureButton" parent="MarginContainer/Control" unique_id=1370597380]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 236.0
-offset_top = 168.0
-offset_right = 364.0
-offset_bottom = 248.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 315.0
+offset_top = 125.0
+offset_right = 443.0
+offset_bottom = 205.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -1098,11 +1100,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade6" type="TextureButton" parent="MarginContainer/Control" unique_id=1573794051]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 263.0
-offset_top = 179.0
-offset_right = 391.0
-offset_bottom = 259.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 390.0
+offset_top = 142.0
+offset_right = 518.0
+offset_bottom = 222.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -1213,11 +1215,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade7" type="TextureButton" parent="MarginContainer/Control" unique_id=236308894]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 358.0
-offset_top = 182.0
-offset_right = 486.0
-offset_bottom = 262.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 461.0
+offset_top = 140.0
+offset_right = 589.0
+offset_bottom = 220.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -1328,11 +1330,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade8" type="TextureButton" parent="MarginContainer/Control" unique_id=468031189]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 391.0
-offset_top = 183.0
-offset_right = 519.0
-offset_bottom = 263.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 546.0
+offset_top = 141.0
+offset_right = 674.0
+offset_bottom = 221.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_pxa0e")
@@ -1443,11 +1445,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade9" type="TextureButton" parent="MarginContainer/Control" unique_id=1245462951]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 556.00006
-offset_top = 49.000004
-offset_right = 684.00006
-offset_bottom = 129.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 835.0
+offset_top = 77.0
+offset_right = 963.0
+offset_bottom = 157.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -1558,11 +1560,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade10" type="TextureButton" parent="MarginContainer/Control" unique_id=729489176]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 546.99994
-offset_top = 128.0
-offset_right = 674.99994
-offset_bottom = 208.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 824.0
+offset_top = 193.0
+offset_right = 952.0
+offset_bottom = 273.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -1673,11 +1675,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade11" type="TextureButton" parent="MarginContainer/Control" unique_id=1947304339]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 601.99994
-offset_top = 170.0
-offset_right = 729.99994
-offset_bottom = 250.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 895.00006
+offset_top = 286.0
+offset_right = 1023.00006
+offset_bottom = 366.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_om4s6")
@@ -1788,11 +1790,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade12" type="TextureButton" parent="MarginContainer/Control" unique_id=1084234122]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 355.0
-offset_top = 259.0
-offset_right = 483.0
-offset_bottom = 339.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 398.0
+offset_top = 270.0
+offset_right = 526.0
+offset_bottom = 350.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_iul44")
@@ -1903,11 +1905,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade13" type="TextureButton" parent="MarginContainer/Control" unique_id=219483830]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 422.0
-offset_top = 99.0
-offset_right = 550.0
-offset_bottom = 179.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 645.0
+offset_top = 111.0
+offset_right = 773.0
+offset_bottom = 191.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -2018,11 +2020,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade14" type="TextureButton" parent="MarginContainer/Control" unique_id=1386202376]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 425.0
-offset_top = 46.000004
-offset_right = 553.0
-offset_bottom = 126.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 645.0
+offset_top = 69.0
+offset_right = 773.0
+offset_bottom = 149.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -2132,11 +2134,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade15" type="TextureButton" parent="MarginContainer/Control" unique_id=1432921240]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 458.0
-offset_top = 98.0
-offset_right = 586.0
-offset_bottom = 178.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 695.0
+offset_top = 154.0
+offset_right = 823.0
+offset_bottom = 234.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -2246,11 +2248,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade16" type="TextureButton" parent="MarginContainer/Control" unique_id=759640757]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 44.00006
-offset_top = 82.00001
-offset_right = 172.00006
-offset_bottom = 162.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 68.0
+offset_top = 162.0
+offset_right = 196.0
+offset_bottom = 242.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -2265,7 +2267,7 @@ layout_mode = 0
 offset_left = 0.7999921
 offset_top = 16.800007
 offset_right = 900.8
-offset_bottom = 516.8
+offset_bottom = 516.7999
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -2361,11 +2363,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade17" type="TextureButton" parent="MarginContainer/Control" unique_id=59312041]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 460.0
-offset_top = 44.000008
-offset_right = 588.0
-offset_bottom = 124.00077
-scale = Vector2(1.25, 1.25)
+offset_left = 694.0
+offset_top = 68.0
+offset_right = 822.0
+offset_bottom = 148.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -2379,7 +2381,7 @@ z_index = 1
 layout_mode = 0
 offset_top = 16.800007
 offset_right = 900.0
-offset_bottom = 516.8
+offset_bottom = 516.7999
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -2476,11 +2478,11 @@ vertical_alignment = 1
 z_index = -5
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 63.0
-offset_top = 235.0
-offset_right = 191.0
-offset_bottom = 315.00018
-scale = Vector2(1.25, 1.25)
+offset_left = 60.0
+offset_top = 353.99994
+offset_right = 188.0
+offset_bottom = 434.00012
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("AtlasTexture_8sexr")
@@ -2490,14 +2492,14 @@ offset_position = Array[Vector2]([Vector2(0, 0), Vector2(0, -30)])
 bought_texture = SubResource("AtlasTexture_im2lx")
 on_bought_raise_offset_of = [NodePath("../ButtonUpgrade19"), NodePath("."), NodePath("../ButtonUpgrade20"), NodePath("../ButtonUpgrade21"), NodePath("../ButtonUpgrade29")]
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade18" unique_id=679990818 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade18" unique_id=517086428 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
 z_index = 1
 layout_mode = 0
-offset_left = 127.99999
-offset_top = -0.80000496
-offset_right = 1028.0
-offset_bottom = 499.19998
+offset_left = 126.5
+offset_top = -78.499954
+offset_right = 1026.5
+offset_bottom = 421.49994
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -2506,7 +2508,7 @@ upgrade_name_text = NodePath("Control/RichTextLabel")
 upgrade_description_text = NodePath("Control/RichTextLabel2")
 upgrade_cost_text = NodePath("Control/RichTextLabel3")
 
-[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade18/TextureRect" unique_id=191267145]
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade18/TextureRect2" unique_id=1565571480]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2514,7 +2516,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade18/TextureRect/Control" unique_id=638478727]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade18/TextureRect2/Control" unique_id=1482767579]
 custom_minimum_size = Vector2(64.825, 0)
 custom_maximum_size = Vector2(800, -1)
 layout_mode = 1
@@ -2538,7 +2540,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade18/TextureRect/Control" unique_id=1036673824]
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade18/TextureRect2/Control" unique_id=1387662472]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(894.415, -1)
 layout_mode = 1
@@ -2566,7 +2568,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade18/TextureRect/Control" unique_id=1100229898]
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade18/TextureRect2/Control" unique_id=2029013393]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 1
@@ -2593,11 +2595,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade19" type="TextureButton" parent="MarginContainer/Control" unique_id=1643188234]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 61.0
-offset_top = 201.0
-offset_right = 189.0
-offset_bottom = 281.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 58.0
+offset_top = 319.99994
+offset_right = 186.0
+offset_bottom = 400.0007
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("AtlasTexture_o48mn")
@@ -2606,14 +2608,14 @@ script = ExtResource("6_q746k")
 offset_position = Array[Vector2]([Vector2(0, 0), Vector2(0, -18)])
 bought_texture = SubResource("AtlasTexture_y0t3v")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade19" unique_id=508622805 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade19" unique_id=2047800631 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
 z_index = 1
 layout_mode = 0
-offset_left = 92.799995
-offset_top = -50.400005
-offset_right = 992.8
-offset_bottom = 449.6
+offset_left = 128.0
+offset_top = -0.49996376
+offset_right = 1028.0
+offset_bottom = 499.49994
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -2622,7 +2624,7 @@ upgrade_name_text = NodePath("Control/RichTextLabel")
 upgrade_description_text = NodePath("Control/RichTextLabel2")
 upgrade_cost_text = NodePath("Control/RichTextLabel3")
 
-[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade19/TextureRect" unique_id=920389614]
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade19/TextureRect2" unique_id=1239415322]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2630,7 +2632,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade19/TextureRect/Control" unique_id=467410319]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade19/TextureRect2/Control" unique_id=1102309126]
 custom_minimum_size = Vector2(64.825, 0)
 custom_maximum_size = Vector2(800, -1)
 layout_mode = 1
@@ -2654,7 +2656,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade19/TextureRect/Control" unique_id=655222107]
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade19/TextureRect2/Control" unique_id=314645244]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(894.415, -1)
 layout_mode = 1
@@ -2682,7 +2684,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade19/TextureRect/Control" unique_id=1253461317]
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade19/TextureRect2/Control" unique_id=290579694]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 1
@@ -2709,11 +2711,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade20" type="TextureButton" parent="MarginContainer/Control" unique_id=1218159690 node_paths=PackedStringArray("on_bought_raise_offset_of")]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 61.0
-offset_top = 171.0
-offset_right = 189.0
-offset_bottom = 251.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 58.0
+offset_top = 289.99994
+offset_right = 186.0
+offset_bottom = 370.0007
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("AtlasTexture_pcqwb")
@@ -2723,14 +2725,14 @@ offset_position = Array[Vector2]([Vector2(0, 0), Vector2(0, 30), Vector2(0, -18)
 bought_texture = SubResource("AtlasTexture_8npsx")
 on_bought_raise_offset_of = [NodePath(".")]
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade20" unique_id=735628431 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade20" unique_id=2046948458 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
 z_index = 1
 layout_mode = 0
-offset_left = 92.799995
-offset_top = -50.400005
-offset_right = 992.8
-offset_bottom = 449.6
+offset_left = 126.5
+offset_top = -0.49996376
+offset_right = 1026.5
+offset_bottom = 499.49994
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -2739,7 +2741,7 @@ upgrade_name_text = NodePath("Control/RichTextLabel")
 upgrade_description_text = NodePath("Control/RichTextLabel2")
 upgrade_cost_text = NodePath("Control/RichTextLabel3")
 
-[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade20/TextureRect" unique_id=1265351842]
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade20/TextureRect2" unique_id=1774806816]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2747,7 +2749,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade20/TextureRect/Control" unique_id=1103113186]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade20/TextureRect2/Control" unique_id=537152432]
 custom_minimum_size = Vector2(64.825, 0)
 custom_maximum_size = Vector2(800, -1)
 layout_mode = 1
@@ -2771,7 +2773,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade20/TextureRect/Control" unique_id=1082690581]
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade20/TextureRect2/Control" unique_id=534403369]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(894.415, -1)
 layout_mode = 1
@@ -2799,7 +2801,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade20/TextureRect/Control" unique_id=195050784]
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade20/TextureRect2/Control" unique_id=457058121]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 1
@@ -2826,11 +2828,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade21" type="TextureButton" parent="MarginContainer/Control" unique_id=1171973805 node_paths=PackedStringArray("on_bought_raise_offset_of")]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 61.0
-offset_top = 171.0
-offset_right = 189.0
-offset_bottom = 251.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 58.0
+offset_top = 289.99994
+offset_right = 186.0
+offset_bottom = 370.0007
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("AtlasTexture_q746k")
@@ -2840,14 +2842,14 @@ offset_position = Array[Vector2]([Vector2(0, 0), Vector2(0, 40), Vector2(0, -18)
 bought_texture = SubResource("AtlasTexture_qt5nw")
 on_bought_raise_offset_of = [NodePath(".")]
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade21" unique_id=1889558782 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/Control/ButtonUpgrade21" unique_id=1636211651 node_paths=PackedStringArray("upgrade_name_text", "upgrade_description_text", "upgrade_cost_text")]
 visible = false
 z_index = 1
 layout_mode = 0
-offset_left = 92.799995
-offset_top = -50.400005
-offset_right = 992.8
-offset_bottom = 449.6
+offset_left = 126.5
+offset_top = -0.49996376
+offset_right = 1026.5
+offset_bottom = 499.49994
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -2856,7 +2858,7 @@ upgrade_name_text = NodePath("Control/RichTextLabel")
 upgrade_description_text = NodePath("Control/RichTextLabel2")
 upgrade_cost_text = NodePath("Control/RichTextLabel3")
 
-[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade21/TextureRect" unique_id=837543527]
+[node name="Control" type="Control" parent="MarginContainer/Control/ButtonUpgrade21/TextureRect2" unique_id=25487181]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2864,7 +2866,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade21/TextureRect/Control" unique_id=1798832143]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade21/TextureRect2/Control" unique_id=590792653]
 custom_minimum_size = Vector2(64.825, 0)
 custom_maximum_size = Vector2(800, -1)
 layout_mode = 1
@@ -2888,7 +2890,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade21/TextureRect/Control" unique_id=974368541]
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade21/TextureRect2/Control" unique_id=461592687]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(894.415, -1)
 layout_mode = 1
@@ -2916,7 +2918,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade21/TextureRect/Control" unique_id=362072349]
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/Control/ButtonUpgrade21/TextureRect2/Control" unique_id=714952495]
 custom_minimum_size = Vector2(-1, 0)
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 1
@@ -2943,11 +2945,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade29" type="TextureButton" parent="MarginContainer/Control" unique_id=1000566769 node_paths=PackedStringArray("on_bought_raise_offset_of")]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 135.0
-offset_top = 131.00002
-offset_right = 263.0
-offset_bottom = 211.00078
-scale = Vector2(1.25, 1.25)
+offset_left = 141.0
+offset_top = 250.0
+offset_right = 269.0
+offset_bottom = 330.0008
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("AtlasTexture_om4s6")
@@ -2961,10 +2963,10 @@ on_bought_raise_offset_of = [NodePath(".")]
 visible = false
 z_index = 1
 layout_mode = 0
-offset_left = 92.799995
-offset_top = -50.400005
-offset_right = 992.8
-offset_bottom = 449.6
+offset_left = 51.00001
+offset_top = -35.999996
+offset_right = 951.0
+offset_bottom = 464.0
 scale = Vector2(0.1, 0.1)
 texture = SubResource("NoiseTexture2D_23g7n")
 expand_mode = 1
@@ -3060,11 +3062,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade22" type="TextureButton" parent="MarginContainer/Control" unique_id=1783357146]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 92.00003
-offset_top = 95.000015
-offset_right = 220.00003
-offset_bottom = 175.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 145.0
+offset_top = 147.0
+offset_right = 273.0
+offset_bottom = 227.00075
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -3174,11 +3176,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade23" type="TextureButton" parent="MarginContainer/Control" unique_id=2059790633]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 78.00003
-offset_top = 64.00001
-offset_right = 206.00003
-offset_bottom = 144.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 124.0
+offset_top = 103.0
+offset_right = 252.0
+offset_bottom = 183.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -3288,11 +3290,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade24" type="TextureButton" parent="MarginContainer/Control" unique_id=440062907]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 423.99997
-offset_top = 128.0
-offset_right = 552.0
-offset_bottom = 208.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 643.0
+offset_top = 196.0
+offset_right = 771.0
+offset_bottom = 276.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -3402,11 +3404,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade25" type="TextureButton" parent="MarginContainer/Control" unique_id=1626470168]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 459.99997
-offset_top = 128.0
-offset_right = 588.0
-offset_bottom = 208.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 695.0
+offset_top = 196.0
+offset_right = 823.0
+offset_bottom = 276.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -3516,11 +3518,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade26" type="TextureButton" parent="MarginContainer/Control" unique_id=2105931567]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 50.00003
-offset_top = 119.0
-offset_right = 178.00006
-offset_bottom = 199.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 74.0
+offset_top = 218.0
+offset_right = 202.00003
+offset_bottom = 298.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -3630,11 +3632,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade27" type="TextureButton" parent="MarginContainer/Control" unique_id=906273892]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 459.0
-offset_top = 70.00001
-offset_right = 587.0
-offset_bottom = 150.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 693.0
+offset_top = 108.0
+offset_right = 821.0
+offset_bottom = 188.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -3744,11 +3746,11 @@ vertical_alignment = 1
 [node name="ButtonUpgrade28" type="TextureButton" parent="MarginContainer/Control" unique_id=1684199809]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 424.0
-offset_top = 156.0
-offset_right = 552.0
-offset_bottom = 236.00076
-scale = Vector2(1.25, 1.25)
+offset_left = 641.0
+offset_top = 246.0
+offset_right = 769.0
+offset_bottom = 326.00076
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CompressedTexture2D_kwblu")
@@ -3966,14 +3968,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ButtonUpgradeFinished" type="Button" parent="MarginContainer/Control" unique_id=1091547187]
+texture_filter = 2
 custom_minimum_size = Vector2(60, 20)
 layout_mode = 0
-offset_left = 465.0
-offset_top = 325.0
-offset_right = 525.0
-offset_bottom = 345.0
+offset_left = 733.0
+offset_top = 494.00003
+offset_right = 828.0
+offset_bottom = 519.0
+scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.67058825, 0.5686275, 0, 1)
+theme_override_fonts/font = ExtResource("4_n72eg")
+text = "Start day"
 
 [node name="Control" type="Control" parent="MarginContainer/Control" unique_id=1713686124]
 layout_mode = 1

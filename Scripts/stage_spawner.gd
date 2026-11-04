@@ -42,8 +42,8 @@ func reset_windows() -> void:
 	var weird_window_column_1 : int
 	var weird_window_column_2 : int
 	for rows in columns_and_rows.y:
-		weird_window_column_1 = randi_range(0, 10)
-		weird_window_column_2 = randi_range(0, 10)
+		weird_window_column_1 = randi_range(0, 9)
+		weird_window_column_2 = randi_range(0, 9)
 		for columns in columns_and_rows.x:
 			spawned_window = Stats.window_prefab.instantiate()
 			on_reset_windows.connect(spawned_window.delete_window) 
@@ -59,6 +59,6 @@ func reset_windows() -> void:
 			add_child(spawned_window)
 
 func get_weird_window_sprite() -> Texture2D:
-	if randf() <= 0.5:
+	if randf() <= 0.01:
 		return very_weird_window_sprite
 	return weird_window_sprites.pick_random()

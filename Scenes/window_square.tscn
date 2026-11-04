@@ -17,7 +17,7 @@ clean_anim_time = 1.0
 
 [node name="Drawing" parent="." unique_id=609080944 node_paths=PackedStringArray("collision", "window") instance=ExtResource("1_mrasg")]
 z_index = 1
-image_size = Vector2i(512, 832)
+image_size = Vector2i(496, 832)
 brush_size = 60
 collision = NodePath("../Area2D/CollisionShape2D")
 textureForMask = ExtResource("4_a0uui")

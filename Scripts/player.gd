@@ -53,7 +53,7 @@ var camera_offest : Vector2
 @export var sprite : Sprite2D
 
 func _ready() -> void:
-	camera_offest = camera.position
+	#camera_offest = camera.position
 	swipe_modified_cooldown = swipe_base_cooldown / Stats.speed_modifier
 	unpaused_timer = time_to_unpause
 	Stats.on_rotation_speed_changed.connect(update_rot_speed)
@@ -167,7 +167,7 @@ func _process(delta: float) -> void:
 		Stats.check_height(global_position.y, last_checked_height)
 		last_checked_height = global_position.y
 	
-	camera.global_position = (global_position + camera_offest).round()
+	#camera.global_position = (global_position + camera_offest).round()
 
 func start_cleaning_dirty_spot() -> void:
 	linear_velocity *= 0.7

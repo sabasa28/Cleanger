@@ -11,19 +11,18 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_dmca1"]
 font = ExtResource("4_orthm")
-font_size = 15
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_t3gp5"]
 font = ExtResource("4_orthm")
-font_size = 10
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
-[node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "combo_amount_label", "combo_timer_label", "combo_circular_timer", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label", "final_windows_label", "final_spots_label", "final_floor_label", "final_combo_label", "final_coins_label", "windows_rising_text_pool", "floors_rising_text_pool", "end_stats_panel", "end_day_button", "combo_ui", "floors_ui")]
+[node name="InGameUI" type="CanvasLayer" unique_id=1606358968 node_paths=PackedStringArray("timer_label", "combo_amount_label", "combo_circular_timer", "objective_label1", "objective_label2", "objective_label3", "windows_label", "floors_label", "final_windows_label", "final_spots_label", "final_floor_label", "final_combo_label", "final_coins_label", "windows_rising_text_pool", "floors_rising_text_pool", "end_stats_panel", "end_day_button", "combo_ui", "floors_ui")]
 script = ExtResource("1_ey7ub")
-timer_label = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer/Control/TimerLabel")
+timer_label = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer/TimerTitleLabel/Control/TimerLabel")
 combo_amount_label = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control/TextureProgressBar/ComboAmountLabel")
-combo_timer_label = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control/ComboTimerLabel")
 combo_circular_timer = NodePath("GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control/TextureProgressBar")
 combo_timer_base_color = Color(0, 0.74509805, 0, 1)
 combo_timer_half_color = Color(0.7921569, 0.69411767, 0, 1)
@@ -62,14 +61,15 @@ texture = ExtResource("2_dwyif")
 
 [node name="MarginContainer" type="MarginContainer" parent="GameplayUI/RunStatsUI" unique_id=1663680279]
 layout_mode = 0
-offset_right = 640.0
-offset_bottom = 360.0
-theme_override_constants/margin_left = 47
-theme_override_constants/margin_top = 35
-theme_override_constants/margin_right = 194
-theme_override_constants/margin_bottom = 40
+offset_right = 960.0
+offset_bottom = 540.0
+theme_override_constants/margin_left = 83
+theme_override_constants/margin_top = 78
+theme_override_constants/margin_right = 276
+theme_override_constants/margin_bottom = 65
 
 [node name="NinePatchRect" type="NinePatchRect" parent="GameplayUI/RunStatsUI/MarginContainer" unique_id=2093681027]
+self_modulate = Color(0.41568628, 0.74509805, 0.1882353, 1)
 layout_mode = 2
 texture = ExtResource("2_dfbn1")
 
@@ -78,10 +78,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -48.0
-offset_top = 7.0
-offset_right = 48.0
-offset_bottom = 30.0
+offset_left = -71.5
+offset_top = 17.0
+offset_right = 72.5
+offset_bottom = 42.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_orthm")
@@ -96,9 +96,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 22
-theme_override_constants/margin_top = 45
+theme_override_constants/margin_top = 69
 theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 33
+theme_override_constants/margin_bottom = 71
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="GameplayUI/RunStatsUI/MarginContainer/NinePatchRect/MarginContainer" unique_id=179357594]
 layout_mode = 2
@@ -110,6 +110,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_orthm")
+theme_override_font_sizes/font_size = 19
 text = "Another good day at work! Look at everything you acomplished:"
 autowrap_mode = 2
 
@@ -117,6 +118,7 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_orthm")
+theme_override_font_sizes/font_size = 19
 text = "- x Windows cleaned"
 autowrap_mode = 2
 
@@ -124,6 +126,7 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_orthm")
+theme_override_font_sizes/font_size = 19
 text = "- x Spots cleaned"
 autowrap_mode = 2
 
@@ -131,6 +134,7 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_orthm")
+theme_override_font_sizes/font_size = 19
 text = "- x Floors cleaned"
 autowrap_mode = 2
 
@@ -138,6 +142,7 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_orthm")
+theme_override_font_sizes/font_size = 19
 text = "- x Max combo"
 autowrap_mode = 2
 
@@ -146,6 +151,7 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_orthm")
+theme_override_font_sizes/font_size = 19
 text = "An here's the pay for the day:"
 autowrap_mode = 2
 
@@ -154,6 +160,7 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_orthm")
+theme_override_font_sizes/font_size = 19
 text = "XXXX argentinian pesos!"
 autowrap_mode = 2
 
@@ -162,6 +169,7 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_orthm")
+theme_override_font_sizes/font_size = 19
 text = "Now go rest! There's more work to be done tomorrow."
 autowrap_mode = 2
 
@@ -172,13 +180,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -63.70999
-offset_top = -27.23999
-offset_right = -7.569977
-offset_bottom = -6.11499
+offset_left = -95.95499
+offset_top = -34.950012
+offset_right = -12.515015
+offset_bottom = -9.950012
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset_ratio = Vector2(1, 1)
+theme_override_colors/font_color = Color(0.67058825, 0.5686275, 0, 1)
 theme_override_fonts/font = ExtResource("4_orthm")
 text = "End day"
 
@@ -192,7 +201,8 @@ layout_mode = 2
 theme_override_constants/separation = 2
 
 [node name="NinePatchRect3" type="NinePatchRect" parent="GameplayUI/SideUI/VBoxContainer" unique_id=1742635693]
-custom_minimum_size = Vector2(144.465, 77.305)
+self_modulate = Color(0.41568628, 0.74509805, 0.1882353, 1)
+custom_minimum_size = Vector2(195, 77.305)
 layout_mode = 2
 texture = ExtResource("2_dfbn1")
 region_rect = Rect2(0, 0, 32, 32)
@@ -212,7 +222,7 @@ offset_bottom = 40.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 7
 
-[node name="ObjTitleLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/MarginContainer" unique_id=683950442]
+[node name="StatsTitleLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/MarginContainer" unique_id=683950442]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Stats"
@@ -221,15 +231,14 @@ horizontal_alignment = 1
 
 [node name="Windows_UI" type="VBoxContainer" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3" unique_id=1908640505]
 custom_minimum_size = Vector2(169.49, 0)
-custom_maximum_size = Vector2(78.185, 53.3)
+custom_maximum_size = Vector2(78.185, 80.295)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -50.0
-offset_right = 74.185
-offset_bottom = -3.0517578e-05
+offset_left = 10.0
+offset_top = -59.999996
+offset_right = 88.185
 grow_vertical = 0
 alignment = 1
 
@@ -241,10 +250,11 @@ size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 10
-theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
 bbcode_enabled = true
-text = "Windows"
+text = "Windows
+bonus"
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
@@ -260,8 +270,8 @@ size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 14
-theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
 bbcode_enabled = true
 text = "0"
 fit_content = true
@@ -303,7 +313,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -337,7 +347,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -371,7 +381,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -405,7 +415,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -439,7 +449,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -473,7 +483,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -491,9 +501,32 @@ rising_distance = 40.0
 
 [node name="Floors_UI" type="Control" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3" unique_id=1105129168]
 anchors_preset = 0
-offset_left = -18.0
-offset_right = 22.0
+offset_left = 9.0
+offset_right = 49.0
 offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI" unique_id=542902997]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = -14.0
+offset_right = 89.0
+offset_bottom = 29.795044
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/italics_font_size = 14
+text = "x"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI" unique_id=249999471]
 custom_minimum_size = Vector2(39.835, 0)
@@ -504,9 +537,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 61.999985
+offset_left = 73.0
 offset_top = -22.0
-offset_right = 115.82999
+offset_right = 126.82999
 offset_bottom = 38.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -522,8 +555,8 @@ size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 10
-theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
 bbcode_enabled = true
 text = "Floors bonus"
 fit_content = true
@@ -541,8 +574,8 @@ size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 14
-theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
 bbcode_enabled = true
 text = "1"
 fit_content = true
@@ -584,7 +617,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -618,7 +651,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -652,7 +685,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -686,7 +719,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -720,7 +753,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -754,7 +787,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.40784314, 0, 0.42352942, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
 theme_override_font_sizes/normal_font_size = 20
@@ -770,29 +803,9 @@ time_rising = 3.0
 random_offset_limit = 20.0
 rising_distance = 40.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect3/Floors_UI" unique_id=542902997]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 51.0
-offset_top = -8.0
-offset_right = 91.0
-offset_bottom = 35.795044
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_colors/default_color = Color(1.0039686, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 14
-theme_override_font_sizes/italics_font_size = 14
-text = "X"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="NinePatchRect" type="NinePatchRect" parent="GameplayUI/SideUI/VBoxContainer" unique_id=844206946]
-custom_minimum_size = Vector2(144.465, 124.175)
+self_modulate = Color(0.41568628, 0.74509805, 0.1882353, 1)
+custom_minimum_size = Vector2(195, 124.175)
 layout_mode = 2
 texture = ExtResource("2_dfbn1")
 region_rect = Rect2(0, 0, 32, 32)
@@ -803,26 +816,39 @@ patch_margin_bottom = 14
 
 [node name="MarginContainer" type="MarginContainer" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect" unique_id=97674351]
 layout_mode = 1
-offset_right = 66.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 15
+offset_right = 77.0
+offset_bottom = 50.0
+theme_override_constants/margin_left = 21
+theme_override_constants/margin_top = 9
 
 [node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer" unique_id=1148948539]
+custom_maximum_size = Vector2(56.455, 66.185)
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Timer"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Time left"
 label_settings = SubResource("LabelSettings_dmca1")
 horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="Control" type="Control" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer" unique_id=363559231]
-layout_mode = 2
+[node name="Control" type="Control" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer/TimerTitleLabel" unique_id=363559231]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.0
+offset_right = 77.0
+offset_bottom = 19.0
+grow_horizontal = 2
 
-[node name="TimerLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer/Control" unique_id=1779320711]
+[node name="TimerLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/MarginContainer/TimerTitleLabel/Control" unique_id=1779320711]
 layout_mode = 0
 offset_left = -8.0
 offset_top = 53.0
 offset_right = 52.0
 offset_bottom = 74.000015
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Timer"
 label_settings = SubResource("LabelSettings_t3gp5")
 horizontal_alignment = 1
@@ -832,15 +858,17 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -68.0
-offset_right = -1.999939
-offset_bottom = 40.0
+offset_left = -82.714935
+offset_right = 0.2850647
+offset_bottom = 19.0
 grow_horizontal = 0
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 29
 
 [node name="TimerTitleLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI" unique_id=1560435504]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Combo"
 label_settings = SubResource("LabelSettings_dmca1")
 horizontal_alignment = 1
@@ -848,22 +876,16 @@ horizontal_alignment = 1
 [node name="Control" type="Control" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI" unique_id=1006008327]
 layout_mode = 2
 
-[node name="ComboTimerLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control" unique_id=1894074982]
-layout_mode = 0
-offset_left = -9.00003
-offset_top = 101.0
-offset_right = 50.99997
-offset_bottom = 122.000015
-text = "Timer"
-label_settings = SubResource("LabelSettings_t3gp5")
-horizontal_alignment = 1
-
 [node name="TextureProgressBar" type="TextureProgressBar" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect/Combo_UI/Control" unique_id=551243353]
-layout_mode = 0
-offset_left = -9.00003
-offset_top = 32.0
-offset_right = 54.99997
-offset_bottom = 96.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.285034
+offset_top = 33.0
+offset_right = 31.714966
+offset_bottom = 97.0
+grow_horizontal = 2
 max_value = 1.0
 step = 0.01
 value = 1.0
@@ -877,11 +899,13 @@ offset_left = 1.9699707
 offset_top = 22.999994
 offset_right = 61.96997
 offset_bottom = 44.000023
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 label_settings = SubResource("LabelSettings_t3gp5")
 horizontal_alignment = 1
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="GameplayUI/SideUI/VBoxContainer" unique_id=1202373938]
-custom_minimum_size = Vector2(144.465, 150)
+self_modulate = Color(0.41568628, 0.74509805, 0.1882353, 1)
+custom_minimum_size = Vector2(195, 150)
 layout_mode = 2
 texture = ExtResource("2_dfbn1")
 region_rect = Rect2(0, 0, 32, 32)
@@ -904,6 +928,7 @@ theme_override_constants/margin_top = 10
 [node name="ObjTitleLabel" type="Label" parent="GameplayUI/SideUI/VBoxContainer/NinePatchRect2/MarginContainer" unique_id=1064810086]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Objective"
 label_settings = SubResource("LabelSettings_dmca1")
 horizontal_alignment = 1
@@ -931,8 +956,8 @@ size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 10
-theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
 bbcode_enabled = true
 text = "objective"
 fit_content = true
@@ -948,8 +973,8 @@ size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 10
-theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
 bbcode_enabled = true
 text = "objective"
 fit_content = true
@@ -965,8 +990,8 @@ size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_orthm")
 theme_override_fonts/italics_font = ExtResource("3_t3gp5")
-theme_override_font_sizes/normal_font_size = 10
-theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
 bbcode_enabled = true
 text = "objective"
 fit_content = true
