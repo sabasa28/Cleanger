@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://bhovki8ny8op2"]
 
 [ext_resource type="Script" uid="uid://b7wrcersv4fck" path="res://Scripts/water_bomb.gd" id="1_hly8g"]
+[ext_resource type="Shader" uid="uid://d4fbii6bdmx7j" path="res://Scripts/shaders/custom_aa.gdshader" id="2_dblei"]
 [ext_resource type="Texture2D" uid="uid://csiax56tl0wao" path="res://Assets/Sprites/bombitas.png" id="2_hly8g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pd3hx"]
+shader = ExtResource("2_dblei")
 
 [sub_resource type="Animation" id="Animation_hly8g"]
 resource_name = "Flying"
@@ -50,6 +54,8 @@ dist_to_limit_before_exploding = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1773508112]
 z_index = 7
+texture_filter = 2
+material = SubResource("ShaderMaterial_pd3hx")
 scale = Vector2(8, 8)
 texture = ExtResource("2_hly8g")
 region_enabled = true

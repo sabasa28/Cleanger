@@ -1,0 +1,4 @@
+Opción, pixel art no pixel perfect con este antialiasing:
+https://www.reddit.com/r/godot/comments/1hw5l30/fast_antialiasing_for_pixel_art/
+Opción shader para rotación no pixel perfect (otras opciones googlear rotsprite shader):
+https://godotshaders.com/shader/rotsprite-like-algorithm-for-cleaner-pixel-art-rotation/

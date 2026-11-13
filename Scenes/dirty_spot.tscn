@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://4miicpvealls"]
 
 [ext_resource type="Script" uid="uid://72ek2s18hya7" path="res://Scripts/dirty_spot.gd" id="1_2joo6"]
+[ext_resource type="Shader" uid="uid://d4fbii6bdmx7j" path="res://Scripts/shaders/custom_aa.gdshader" id="2_1tmk4"]
 [ext_resource type="Texture2D" uid="uid://dbe5abgtjw0ff" path="res://Assets/Sprites/mancha_3.png" id="2_2egfs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ff18"]
+shader = ExtResource("2_1tmk4")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8yxx"]
 radius = 13.341664
@@ -13,6 +17,8 @@ sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=430201969]
 z_index = 2
+texture_filter = 2
+material = SubResource("ShaderMaterial_7ff18")
 texture = ExtResource("2_2egfs")
 region_rect = Rect2(35, 134, 28, 28)
 

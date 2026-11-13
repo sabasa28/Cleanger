@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://d2ehrtgiri56e" path="res://Scripts/pelican.gd" id="1_m72nr"]
 [ext_resource type="Texture2D" uid="uid://62fe08mfdnso" path="res://Assets/Sprites/pelican.png" id="2_3q41l"]
+[ext_resource type="Shader" uid="uid://d4fbii6bdmx7j" path="res://Scripts/shaders/custom_aa.gdshader" id="2_7ff18"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bdm6k"]
 radius = 97.84
 height = 445.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uveg6"]
+shader = ExtResource("2_7ff18")
 
 [sub_resource type="Animation" id="Animation_7ff18"]
 resource_name = "Flying"
@@ -131,6 +135,8 @@ shape = SubResource("CapsuleShape2D_bdm6k")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1807812791]
 z_index = 4
+texture_filter = 2
+material = SubResource("ShaderMaterial_uveg6")
 position = Vector2(-225, -275)
 scale = Vector2(4, 4)
 texture = ExtResource("2_3q41l")

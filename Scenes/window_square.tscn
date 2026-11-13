@@ -3,8 +3,18 @@
 [ext_resource type="Script" uid="uid://h1asw5c5is2j" path="res://Scripts/window.gd" id="1_a0uui"]
 [ext_resource type="PackedScene" uid="uid://jfghx83mtrou" path="res://Scenes/drawing.tscn" id="1_mrasg"]
 [ext_resource type="Texture2D" uid="uid://dej2q60pxukgx" path="res://Assets/Sprites/window_1.png" id="3_a0uui"]
+[ext_resource type="Shader" uid="uid://d4fbii6bdmx7j" path="res://Scripts/shaders/custom_aa.gdshader" id="3_v5mwd"]
 [ext_resource type="Texture2D" uid="uid://ct1ji7owao41e" path="res://Assets/Sprites/dirt_1.png" id="4_a0uui"]
 [ext_resource type="Texture2D" uid="uid://c4v8etg45c8vd" path="res://Assets/Sprites/window_anim.png" id="5_xknmi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cjgvm"]
+shader = ExtResource("3_v5mwd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqsxi"]
+shader = ExtResource("3_v5mwd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b6mhp"]
+shader = ExtResource("3_v5mwd")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okk06"]
 
@@ -17,6 +27,7 @@ clean_anim_time = 1.0
 
 [node name="Drawing" parent="." unique_id=609080944 node_paths=PackedStringArray("collision", "window") instance=ExtResource("1_mrasg")]
 z_index = 1
+material = SubResource("ShaderMaterial_cjgvm")
 image_size = Vector2i(496, 832)
 brush_size = 60
 collision = NodePath("../Area2D/CollisionShape2D")
@@ -27,11 +38,15 @@ window = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="Drawing" unique_id=2093804713]
 z_as_relative = false
+texture_filter = 2
+material = SubResource("ShaderMaterial_gqsxi")
 scale = Vector2(8, 8)
 texture = ExtResource("3_a0uui")
 
 [node name="Sprite2DAnimation" type="Sprite2D" parent="Drawing" unique_id=1155299013]
 visible = false
+texture_filter = 2
+material = SubResource("ShaderMaterial_b6mhp")
 scale = Vector2(8, 8)
 texture = ExtResource("5_xknmi")
 hframes = 8

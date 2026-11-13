@@ -55,7 +55,6 @@ func reset_windows() -> void:
 			var current_window_num = rows * columns_and_rows.x + columns
 			spawned_window.window_num = current_window_num
 			windows_state[current_window_num] = false
-			print("window pos ", spawned_window.global_position)
 			add_child(spawned_window)
 
 func get_weird_window_sprite() -> Texture2D:
