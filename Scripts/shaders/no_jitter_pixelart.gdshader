@@ -13,8 +13,10 @@ vec4 texturePointSmooth(sampler2D tex, vec2 uv) {
 }
 
 void fragment() {
+	float a = COLOR.a;
 	vec4 Texture = texturePointSmooth(TEXTURE, UV);
 	COLOR = Texture.rgba;
+	COLOR.a = a;
 }
 
 //void light() {

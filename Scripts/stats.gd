@@ -87,9 +87,10 @@ var stun_resistance : float = 0.0
 
 #map stuff
 var current_map : int = 0
-const h_limit : Array[Vector2] = [Vector2(-1650.0,1650.0)] #x left, y right
-const windows_amount : Array[Vector2i] = [Vector2i(6,10)] #x width, y height
-const window_size : Vector2i = Vector2i(512,832)
+var h_limit : Vector2 = Vector2(-1650.0,1650.0) #x left, y right
+const windows_amount : Array[Vector2i] = [Vector2i(10,20)] #x width, y height
+const window_size : Vector2i = Vector2i(496,832) #si se modifica hay que ver que sea divisible por los superpixelsperside en drawing
+var limits_calculated : bool = false #reset to false whenever we change map ah por que hablaba en ingles
 
 #prefabs
 var water_bomb_prefab = preload("res://Scenes/water_bomb.tscn")
@@ -327,7 +328,14 @@ func debug_force_end_run() -> void:
 	gameplay_controller.end_cleaning_phase()
 
 func get_map_h_limits() -> Vector2:
-	return h_limit[current_map]
+	if !limits_calculated:
+		h_limit.y = (windows_amount[current_map].x / 2.0) * window_size.x
+		h_limit.x = -h_limit.y
+		limits_calculated = true
+	return h_limit
 
-func get_map_window_size() -> Vector2i:
+func get_map_height() -> float:
+	return -(windows_amount[current_map].y * window_size.y)
+
+func get_map_windows_amount() -> Vector2i:
 	return windows_amount[current_map]

@@ -18,7 +18,6 @@ var base_cleaned : bool = false #base == window minus the spots
 func _ready() -> void:
 	if has_spot:
 		spot_pos_offset = window_ref.image_size / 4.0
-		var spawned_spot
 		spot = Stats.spot_prefab.instantiate()
 		var versorX = 1.0 if randi() % 2 else -1.0
 		var versorY = 1.0 if randi() % 2 else -1.0

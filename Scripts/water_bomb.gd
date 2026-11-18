@@ -10,6 +10,9 @@ var h_limits : Vector2
 @export var dist_to_limit_before_exploding : float
 var exploded : bool = false
 
+func _ready() -> void:
+	Stats.on_run_ended.connect(disappear)
+
 func _process(delta: float) -> void:
 	if exploded:
 		return
@@ -50,4 +53,7 @@ func explode() -> void:
 			will_instaclean = true
 	spawned_explotion.set_data(Stats.explotion_origin.super_water_bomb if is_super_bomb else Stats.explotion_origin.water_bomb, will_instaclean)
 	add_sibling(spawned_explotion)
+	queue_free()
+
+func disappear() -> void: #for when the run ended, no explotion
 	queue_free()

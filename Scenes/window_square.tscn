@@ -5,13 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://dej2q60pxukgx" path="res://Assets/Sprites/window_1.png" id="3_a0uui"]
 [ext_resource type="Shader" uid="uid://d4fbii6bdmx7j" path="res://Scripts/shaders/custom_aa.gdshader" id="3_v5mwd"]
 [ext_resource type="Texture2D" uid="uid://ct1ji7owao41e" path="res://Assets/Sprites/dirt_1.png" id="4_a0uui"]
+[ext_resource type="Shader" uid="uid://bn7wrkmbkcmng" path="res://Scripts/shaders/no_jitter_pixelart.gdshader" id="4_o6n2p"]
 [ext_resource type="Texture2D" uid="uid://c4v8etg45c8vd" path="res://Assets/Sprites/window_anim.png" id="5_xknmi"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cjgvm"]
-shader = ExtResource("3_v5mwd")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gqsxi"]
-shader = ExtResource("3_v5mwd")
+shader = ExtResource("4_o6n2p")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b6mhp"]
 shader = ExtResource("3_v5mwd")
@@ -27,9 +25,6 @@ clean_anim_time = 1.0
 
 [node name="Drawing" parent="." unique_id=609080944 node_paths=PackedStringArray("collision", "window") instance=ExtResource("1_mrasg")]
 z_index = 1
-material = SubResource("ShaderMaterial_cjgvm")
-image_size = Vector2i(496, 832)
-brush_size = 60
 collision = NodePath("../Area2D/CollisionShape2D")
 textureForMask = ExtResource("4_a0uui")
 amount_of_window_before_fullclean = 0.9

@@ -1,7 +1,6 @@
 extends Sprite2D
 
-@export var image_size := Vector2i(128,170)
-@export var brush_size := 60
+var image_size : Vector2i
 @export var collision : CollisionShape2D
 var body_inside : Array[Node2D]
 var image : Image
@@ -9,13 +8,12 @@ var initialImage : Image
 @export var textureForMask : Texture2D
 var imageToPutOver : Image
 var imageToPutOverMask : Image
-var super_pixels_interval : Vector2i
+var super_pixels_interval : Vector2i 
 var super_pixels_state : Array[bool]
 var super_pixels_cleaned : int
 var min_super_pixels_to_clear : int
 @export var amount_of_window_before_fullclean : float
-@export var super_pixels_per_side : int
-var half_super_pixels_per_side : int
+var super_pixels_per_side : Vector2i = Vector2i(31,52)
 var cleaned = false
 @export var window : WindowParent
 
@@ -31,10 +29,9 @@ func _ready() -> void:
 	for i in aux_limits.size():
 		aux_limits[i] = limit.new()
 	super_pixels_cleaned = 0
-	min_super_pixels_to_clear = (super_pixels_per_side * super_pixels_per_side) * Stats.necessary_cleanlyness #optimizable, puede estar en stats en vez de en cada ventana
-	super_pixels_state.resize(super_pixels_per_side * super_pixels_per_side)
+	min_super_pixels_to_clear = (super_pixels_per_side.x * super_pixels_per_side.y) * Stats.necessary_cleanlyness #optimizable, puede estar en stats en vez de en cada ventana
+	super_pixels_state.resize(super_pixels_per_side.x * super_pixels_per_side.y)
 	super_pixels_interval = image_size / super_pixels_per_side
-	half_super_pixels_per_side = super_pixels_per_side / 2
 	texture = ImageTexture.create_from_image(Image.create_empty(image_size.x,image_size.y,false, Image.FORMAT_RGBA8))
 	imageToPutOver = textureForMask.get_image()
 	imageToPutOver.resize(image_size.x, image_size.y, 0) #usar 0 interpolation porque sino se destruye la calidad
@@ -81,6 +78,7 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 	var curr_mediatrix1 : Vector2
 	var curr_mediatrix2 : Vector2
 	var curr_mediatrix3 : Vector2
+	
 	
 	if !body.first_frame_cleaning and pos != last_pos:
 		var side_checker_dir = (pos - last_pos).normalized()
@@ -161,9 +159,9 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 		#image.fill_rect(Rect2i(pos, super_pixels_interval), Color.YELLOW)
 		#image.fill_rect(Rect2i(last_pos, super_pixels_interval), Color.GREEN)
 		
-	for columna in super_pixels_per_side:
-		for fila in super_pixels_per_side:
-			var super_pixel_num = columna * super_pixels_per_side + fila
+	for columna in super_pixels_per_side.y:
+		for fila in super_pixels_per_side.x:
+			var super_pixel_num = columna * super_pixels_per_side.x + fila
 			if super_pixels_state[super_pixel_num] == true:
 				continue
 			if is_point_in_front(Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y),up, up_limit) && \
@@ -193,9 +191,6 @@ func _paint_texture(pos: Vector2, body : Node2D) -> void:
 		if cleaned:
 			break
 		
-	#image.fill_rect(Rect2i(pos.x,pos.y,brush_size,brush_size), Color.LIGHT_BLUE)
-	#image.fill_rect(Rect2i(pos.x,pos.y ,brush_size,brush_size), Color.LIGHT_BLUE)
-	#image.fill_rect(Rect2i(pos + Vector2(up.normalized().x, -up.normalized().y) * 100, Vector2(brush_size,brush_size)), Color.LIGHT_BLUE)
 	texture.update(image)
 
 func is_point_in_front(point : Vector2, dir : Vector2, orig : Vector2) -> bool:
@@ -212,9 +207,9 @@ func try_clean_window() -> bool:
 
 func clean_from_distance(point : Vector2, range : float) -> void:
 	var pos : Vector2
-	for columna in super_pixels_per_side:
-		for fila in super_pixels_per_side:
-			var super_pixel_num = columna * super_pixels_per_side + fila
+	for columna in super_pixels_per_side.y:
+		for fila in super_pixels_per_side.x:
+			var super_pixel_num = columna * super_pixels_per_side.x + fila
 			if super_pixels_state[super_pixel_num] == true:
 				continue
 			pos = Vector2(fila * super_pixels_interval.x, columna * super_pixels_interval.y)

@@ -30,7 +30,8 @@ func on_window_cleaned(window_num : int) -> void:
 		Stats.add_floor_cleaned(floor)
 
 func reset_windows() -> void:
-	columns_and_rows = Stats.get_map_window_size()
+	window_spawn_origin.x = Stats.get_map_h_limits().x
+	columns_and_rows = Stats.get_map_windows_amount()
 	on_reset_windows.emit()
 	windows_state.clear()
 	floors_state.clear()
@@ -48,7 +49,7 @@ func reset_windows() -> void:
 			spawned_window = Stats.window_prefab.instantiate()
 			on_reset_windows.connect(spawned_window.delete_window) 
 			spawned_window.has_spot = randi() % 2
-			spawned_window.global_position = window_spawn_origin + Vector2 (window_interval.x * columns, -window_interval.y * rows)
+			spawned_window.global_position = window_spawn_origin + Vector2 (window_interval.x * columns + window_interval.x / 2.0, -window_interval.y * rows)
 			spawned_window.stage_manager = self
 			if columns == weird_window_column_1 || columns == weird_window_column_2:
 				spawned_window.change_clean_sprite(get_weird_window_sprite())

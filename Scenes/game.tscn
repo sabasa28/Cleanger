@@ -32,20 +32,27 @@ process_callback = 0
 limit_enabled = false
 limit_left = -2750
 limit_right = 2500
+position_smoothing_enabled = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1917489261]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1722525244]
+[node name="CollisionShape2DFloor" type="CollisionShape2D" parent="StaticBody2D" unique_id=1722525244]
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1276741651]
+[node name="CollisionShape2DRoof" type="CollisionShape2D" parent="StaticBody2D" unique_id=2038054864]
+position = Vector2(0, -2690)
+rotation = 3.1415927
+scale = Vector2(10, 10)
+shape = SubResource("WorldBoundaryShape2D_ebmjs")
+
+[node name="CollisionShape2DL" type="CollisionShape2D" parent="StaticBody2D" unique_id=1276741651]
 position = Vector2(-1650, 43)
 rotation = 1.5707964
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=112647250]
+[node name="CollisionShape2DR" type="CollisionShape2D" parent="StaticBody2D" unique_id=112647250]
 position = Vector2(1650, 0)
 rotation = -1.5707964
 scale = Vector2(10, 10)
@@ -53,11 +60,15 @@ shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
 [node name="stage_spawner" parent="." unique_id=1041670152 instance=ExtResource("3_wrm1d")]
 
-[node name="GameplayController" parent="." unique_id=216072137 node_paths=PackedStringArray("stage_spawner", "player", "upgrades_ui") instance=ExtResource("4_3dryh")]
+[node name="GameplayController" parent="." unique_id=216072137 node_paths=PackedStringArray("stage_spawner", "player", "upgrades_ui", "collision_limit_L", "collision_limit_R", "collision_limit_Roof") instance=ExtResource("4_3dryh")]
 stage_spawner = NodePath("../stage_spawner")
 run_time = 35.0
 player = NodePath("../Player")
 upgrades_ui = NodePath("../upgrades_ui")
+collision_limit_L = NodePath("../StaticBody2D/CollisionShape2DL")
+collision_limit_R = NodePath("../StaticBody2D/CollisionShape2DR")
+collision_limit_Roof = NodePath("../StaticBody2D/CollisionShape2DRoof")
+collision_limits_offset = 300.0
 
 [node name="upgrades_ui" parent="." unique_id=820732258 instance=ExtResource("4_wowpa")]
 visible = false

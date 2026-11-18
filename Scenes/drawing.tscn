@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://jfghx83mtrou"]
 
 [ext_resource type="Script" uid="uid://cj2rf2lb4tlkd" path="res://Scripts/drawing.gd" id="1_711xb"]
-[ext_resource type="Shader" uid="uid://d4fbii6bdmx7j" path="res://Scripts/shaders/custom_aa.gdshader" id="1_p42fn"]
+[ext_resource type="Shader" uid="uid://bn7wrkmbkcmng" path="res://Scripts/shaders/no_jitter_pixelart.gdshader" id="1_p42fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d38ss"]
 shader = ExtResource("1_p42fn")
@@ -10,4 +10,3 @@ shader = ExtResource("1_p42fn")
 texture_filter = 2
 material = SubResource("ShaderMaterial_d38ss")
 script = ExtResource("1_711xb")
-brush_size = 30

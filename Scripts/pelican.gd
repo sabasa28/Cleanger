@@ -16,6 +16,7 @@ var fading_out : bool = false
 
 func _ready() -> void:
 	sprite.modulate.a = 0.0
+	Stats.on_run_ended.connect(disappear)
 
 func initialize(going_right : bool, new_distance_before_despawn: float, new_is_water_pelican : bool, new_is_peristent_pelican : bool) -> void:
 	if going_right:
@@ -67,3 +68,6 @@ func _on_area_entered(area: Area2D) -> void:
 				add_sibling(spawned_explotion)
 				spawned_explotion.set_data(Stats.explotion_origin.regular_explotion)
 		queue_free()
+
+func disappear() -> void: #for when the run ended, no explotion
+	queue_free()

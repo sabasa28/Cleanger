@@ -25,11 +25,18 @@ var water_pelican_chance : float = 0.0
 var left_limit : float
 var right_limit : float
 var map_length : float
+@export var collision_limit_L : Node2D
+@export var collision_limit_R : Node2D
+@export var collision_limit_Roof : Node2D
+@export var collision_limits_offset : float
 
 func _ready() -> void:
 	var map_limits = Stats.get_map_h_limits()
 	left_limit = map_limits.x
 	right_limit = map_limits.y
+	collision_limit_L.global_position.x = left_limit - collision_limits_offset
+	collision_limit_R.global_position.x = right_limit + collision_limits_offset
+	collision_limit_Roof.global_position.y = Stats.get_map_height() - collision_limits_offset
 	InGameUi.on_day_end.connect(end_day)
 	map_length = right_limit - left_limit
 	Stats.gameplay_controller = self
@@ -37,6 +44,7 @@ func _ready() -> void:
 	timer_end = run_time
 	combo_timer_speed = Stats.combo_time_lowering_speed
 	upgrades_ui.on_upgrades_finished.connect(start_cleaning_phase)
+	stage_spawner.reset_windows()
 	start_cleaning_phase()
 	max_time_between_pelican_spawn = Stats.max_time_pelican_spawn
 	time_until_next_pelican_spawn = randf_range(min_time_between_pelican_spawn, max_time_between_pelican_spawn)
@@ -52,7 +60,6 @@ func start_cleaning_phase() -> void:
 	current_timer = 0.0
 	InGameUi.set_timer_text((int)(timer_end - current_timer))#por la conversion pierdo tiempo visualmente?
 	stop_combo_timer()
-	stage_spawner.reset_windows()
 	Stats.start_run()
 
 func end_cleaning_phase() -> void:
@@ -92,7 +99,7 @@ func _process(delta: float) -> void:
 			var is_water_pelican : bool = randf() < water_pelican_chance
 			spawned_pelican.global_position = spawn_pos
 			add_child(spawned_pelican)
-			spawned_pelican.initialize(going_right, map_length + pelican_offset_to_limits * 2, is_water_pelican, Stats.persistent_pelicans_enabled)
+			spawned_pelican.initialize(going_right, map_length + pelican_offset_to_limits, is_water_pelican, Stats.persistent_pelicans_enabled)
 			pelican_spawn_timer = 0.0
 			time_until_next_pelican_spawn = randf_range(min_time_between_pelican_spawn, max_time_between_pelican_spawn)
 
