@@ -16,7 +16,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if exploded:
 		return
-	
 	timer += delta
 	if global_position.x < h_limits.x || global_position.x > h_limits.y || timer >= explotion_time:
 		explode()

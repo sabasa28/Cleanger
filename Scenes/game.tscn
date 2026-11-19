@@ -34,6 +34,22 @@ limit_left = -2750
 limit_right = 2500
 position_smoothing_enabled = true
 
+[node name="LightLight" type="ColorRect" parent="Player/Camera2D" unique_id=1668575895]
+z_index = 3000
+offset_left = -2500.0
+offset_top = -2000.0
+offset_right = 3500.0
+offset_bottom = 2000.0
+color = Color(0.750307, 0.6484081, 0.07016479, 0.13900001)
+
+[node name="DarkLight" type="ColorRect" parent="Player/Camera2D" unique_id=2081615573]
+z_index = 3000
+offset_left = -2500.0
+offset_top = -2000.0
+offset_right = 3500.0
+offset_bottom = 2000.0
+color = Color(0.750307, 0.6484081, 0.07016479, 0.13900001)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1917489261]
 
 [node name="CollisionShape2DFloor" type="CollisionShape2D" parent="StaticBody2D" unique_id=1722525244]
@@ -60,7 +76,7 @@ shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
 [node name="stage_spawner" parent="." unique_id=1041670152 instance=ExtResource("3_wrm1d")]
 
-[node name="GameplayController" parent="." unique_id=216072137 node_paths=PackedStringArray("stage_spawner", "player", "upgrades_ui", "collision_limit_L", "collision_limit_R", "collision_limit_Roof") instance=ExtResource("4_3dryh")]
+[node name="GameplayController" parent="." unique_id=216072137 node_paths=PackedStringArray("stage_spawner", "player", "upgrades_ui", "collision_limit_L", "collision_limit_R", "collision_limit_Roof", "building_visual", "atmosphere_light_light_panel", "atmosphere_dark_light_panel") instance=ExtResource("4_3dryh")]
 stage_spawner = NodePath("../stage_spawner")
 run_time = 35.0
 player = NodePath("../Player")
@@ -69,6 +85,12 @@ collision_limit_L = NodePath("../StaticBody2D/CollisionShape2DL")
 collision_limit_R = NodePath("../StaticBody2D/CollisionShape2DR")
 collision_limit_Roof = NodePath("../StaticBody2D/CollisionShape2DRoof")
 collision_limits_offset = 300.0
+building_visual = NodePath("../TextureRectBuilding")
+building_offset_to_windows = 300.0
+atmosphere_light_light_panel = NodePath("../Player/Camera2D/LightLight")
+atmosphere_dark_light_panel = NodePath("../Player/Camera2D/DarkLight")
+initial_alpha = 0.2
+final_alpha = 0.5
 
 [node name="upgrades_ui" parent="." unique_id=820732258 instance=ExtResource("4_wowpa")]
 visible = false
@@ -104,7 +126,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("5_wowpa")
 centered = false
 
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=1154585771]
+[node name="TextureRectBuilding" type="TextureRect" parent="." unique_id=1154585771]
 self_modulate = Color(0.55461633, 0.47814637, 0.4609738, 1)
 z_index = -1247
 anchors_preset = 15
@@ -113,7 +135,6 @@ anchor_bottom = 1.0
 offset_left = -1629.75
 offset_top = -7983.0
 offset_right = 1635.6699
-offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_i6g32")
@@ -125,23 +146,24 @@ z_index = -1248
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -6567.0
+offset_left = -25000.0
 offset_top = -48048.0
-offset_right = 6494.6797
-offset_bottom = -48.0
+offset_right = 25000.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_i6g32")
 stretch_mode = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1576440179]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=2017806653]
-visible = false
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=2007339347]
+self_modulate = Color(0.2514636, 0.27253658, 0.3010664, 1)
+z_index = -1248
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -25000.0
+offset_right = 25000.0
+offset_bottom = 4800.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 0)
+texture = ExtResource("6_i6g32")
+stretch_mode = 1

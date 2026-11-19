@@ -1,12 +1,55 @@
 [gd_scene format=3 uid="uid://g8wpn202bavb"]
 
 [ext_resource type="Script" uid="uid://cgqxoft07lot0" path="res://Scripts/stage_spawner.gd" id="1_dwc7r"]
-[ext_resource type="Texture2D" uid="uid://cw3cb6agskpum" path="res://Assets/Sprites/gorrito 1.png" id="2_afsgv"]
-[ext_resource type="Texture2D" uid="uid://b2kr3l7b0h6u0" path="res://Assets/Sprites/Circle64x64.png" id="3_l5x46"]
+[ext_resource type="Texture2D" uid="uid://bsi2nfmjd60ab" path="res://Assets/Sprites/windows.png" id="2_vrkg4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v158k"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(77, 0, 62, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l0tm"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(155, 0, 62, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4fw4"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(233, 0, 62, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldgsr"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(311, 0, 62, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5yvi"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(-1, 120, 62, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfjv2"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(77, 120, 62, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1phco"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(155, 120, 62, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb51f"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(233, 120, 62, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnt18"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(311, 120, 62, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewbju"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(467, 120, 62, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rku1e"]
+atlas = ExtResource("2_vrkg4")
+region = Rect2(389, 0, 62, 104)
 
 [node name="stage_spawner" type="Node2D" unique_id=1041670152]
 script = ExtResource("1_dwc7r")
 window_interval = Vector2(512, 512)
 window_spawn_origin = Vector2(-1280, -512)
-weird_window_sprites = Array[Texture2D]([ExtResource("2_afsgv")])
-very_weird_window_sprite = ExtResource("3_l5x46")
+weird_window_sprites = Array[Texture2D]([SubResource("AtlasTexture_v158k"), SubResource("AtlasTexture_1l0tm"), SubResource("AtlasTexture_h4fw4"), SubResource("AtlasTexture_ldgsr"), SubResource("AtlasTexture_o5yvi"), SubResource("AtlasTexture_rfjv2"), SubResource("AtlasTexture_1phco"), SubResource("AtlasTexture_nb51f"), SubResource("AtlasTexture_nnt18"), SubResource("AtlasTexture_ewbju")])
+very_weird_window_sprite = SubResource("AtlasTexture_rku1e")

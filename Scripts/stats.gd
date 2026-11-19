@@ -334,7 +334,7 @@ func get_map_h_limits() -> Vector2:
 		limits_calculated = true
 	return h_limit
 
-func get_map_height() -> float:
+func get_map_highest_point() -> float:
 	return -(windows_amount[current_map].y * window_size.y)
 
 func get_map_windows_amount() -> Vector2i:
